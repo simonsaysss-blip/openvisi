@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenVisi Report - example.com</title>
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; color: #101418; background: #f6f7f9; }
+      main { max-width: 960px; margin: 0 auto; padding: 40px 20px; }
+      section { margin: 24px 0; }
+      .hero, .panel { background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 24px; }
+      .score { font-size: 56px; line-height: 1; font-weight: 700; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+      .metric { background: #fff; border: 1px solid #e4e7ec; border-radius: 8px; padding: 16px; }
+      .metric strong { display: block; font-size: 28px; margin-top: 8px; }
+      li { margin-bottom: 12px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <h1>AI Visibility Audit Report</h1>
+        <p>https://example.com/</p>
+        <div class="score">34/100</div>
+      </section>
+      <section class="grid">
+        <div class="metric">Entity<strong>45/100</strong></div>
+        <div class="metric">Technical<strong>12/100</strong></div>
+        <div class="metric">Schema<strong>10/100</strong></div>
+        <div class="metric">Content<strong>54/100</strong></div>
+        <div class="metric">Citation<strong>48/100</strong></div>
+        <div class="metric">Prompt<strong>50/100</strong></div>
+      </section>
+      <section class="panel">
+        <h2>Top Issues</h2>
+        <ol><li><strong>Organization-level schema is missing</strong><br>Without Organization or LocalBusiness schema, LLMs have fewer explicit entity signals.</li><li><strong>sitemap.xml was not found</strong><br>Sitemaps help AI and search crawlers discover canonical pages.</li><li><strong>No key schema.org types were detected</strong><br>Structured data gives AI systems explicit facts about the site entity and content.</li><li><strong>Entity schema is missing</strong><br>Organization or LocalBusiness schema is the strongest machine-readable entity anchor.</li><li><strong>Homepage meta description is missing or too thin</strong><br>AI systems need concise brand descriptions to identify what the organization does.</li><li><strong>Business type is not explicit</strong><br>LLMs need a category label before they can compare or recommend a site.</li><li><strong>Service description is weak</strong><br>AI answer engines need compact explanations of what the site offers.</li><li><strong>Target audience is unclear</strong><br>LLMs need audience labels to decide when a recommendation is relevant.</li><li><strong>robots.txt was not found</strong><br>Robots directives help crawlers understand access policy.</li><li><strong>Canonical URL coverage is low</strong><br>Canonical links reduce ambiguity when AI crawlers consolidate pages.</li></ol>
+      </section>
+      <section class="panel">
+        <h2>Recommended Fixes</h2>
+        <ol><li><strong>Organization-level schema is missing</strong><br>Add Organization or LocalBusiness JSON-LD with name, URL, logo, sameAs, and contact.</li><li><strong>sitemap.xml was not found</strong><br>Publish an XML sitemap with canonical URLs for important pages.</li><li><strong>Improve key schema.org types were detected</strong><br>Add relevant JSON-LD such as Organization, Service, Product, FAQPage, or Article.</li><li><strong>Improve schema is missing</strong><br>Add Organization or LocalBusiness schema to the homepage.</li><li><strong>meta description is missing or too thin</strong><br>Write a direct description with brand, business type, audience, location, and services.</li><li><strong>Business type is not explicit</strong><br>State the business type clearly, such as open-source toolkit, school, SaaS, or platform.</li><li><strong>Service description is weak</strong><br>Add a short service overview and dedicated service pages.</li><li><strong>Target audience is unclear</strong><br>Add explicit audience copy such as developers, maintainers, marketers, or parents.</li><li><strong>robots.txt was not found</strong><br>Publish a clear robots.txt and include a Sitemap directive.</li><li><strong>Canonical URL coverage is low</strong><br>Add canonical links to important indexable pages.</li></ol>
+      </section>
+    </main>
+  </body>
+</html>

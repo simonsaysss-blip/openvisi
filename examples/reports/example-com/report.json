@@ -1,0 +1,866 @@
+{
+  "projectName": "OpenVisi AI Visibility Audit",
+  "generatedAt": "2026-05-25T01:46:03.934Z",
+  "target": {
+    "inputUrl": "https://example.com",
+    "normalizedUrl": "https://example.com/",
+    "domain": "example.com"
+  },
+  "scores": {
+    "aiVisibility": 34,
+    "entityClarity": {
+      "score": 45,
+      "weight": 0.25,
+      "evidence": [
+        "Brand/title signal found: Example Domain",
+        "Homepage H1 found: Example Domain",
+        "Contact information or contact page discovered."
+      ]
+    },
+    "technicalDiscoverability": {
+      "score": 12,
+      "weight": 0.2,
+      "evidence": [
+        "1 of 7 crawled pages returned 2xx status.",
+        "0% coverage for canonical url coverage is low.",
+        "0% coverage for meta description coverage is low.",
+        "0% coverage for open graph coverage is low.",
+        "0% coverage for json-ld coverage is low."
+      ]
+    },
+    "structuredData": {
+      "score": 10,
+      "weight": 0.2,
+      "evidence": [
+        "0% of crawled pages include JSON-LD."
+      ]
+    },
+    "contentChunkability": {
+      "score": 54,
+      "weight": 0.15,
+      "evidence": [
+        "100% of pages include an H1.",
+        "0% of pages include H2 sections.",
+        "0 pages have at least 800 visible text characters.",
+        "FAQ-like content discovered.",
+        "0 pages include definition-style explanatory paragraphs.",
+        "No severe text-to-visual ratio warning detected."
+      ]
+    },
+    "citationReadiness": {
+      "score": 48,
+      "weight": 0.1,
+      "evidence": [
+        "7 pages include external references.",
+        "About/contact trust pages are available."
+      ]
+    },
+    "promptSimulation": {
+      "score": 50,
+      "weight": 0.1,
+      "evidence": [
+        "Provider adapters are scaffolded, but no API-backed prompt simulation ran."
+      ]
+    }
+  },
+  "analyzers": {
+    "entity": {
+      "score": 45,
+      "issues": [
+        {
+          "id": "thin-meta-description",
+          "category": "entityClarity",
+          "severity": "medium",
+          "title": "Homepage meta description is missing or too thin",
+          "description": "AI systems need concise brand descriptions to identify what the organization does.",
+          "evidence": [
+            "Write a direct description with brand, business type, audience, location, and services."
+          ]
+        },
+        {
+          "id": "unclear-business-type",
+          "category": "entityClarity",
+          "severity": "medium",
+          "title": "Business type is not explicit",
+          "description": "LLMs need a category label before they can compare or recommend a site.",
+          "evidence": [
+            "State the business type clearly, such as open-source toolkit, school, SaaS, or platform."
+          ]
+        },
+        {
+          "id": "unclear-service-description",
+          "category": "entityClarity",
+          "severity": "medium",
+          "title": "Service description is weak",
+          "description": "AI answer engines need compact explanations of what the site offers.",
+          "evidence": [
+            "Add a short service overview and dedicated service pages."
+          ]
+        },
+        {
+          "id": "weak-location-signal",
+          "category": "entityClarity",
+          "severity": "low",
+          "title": "Location or service area is unclear",
+          "description": "Local and vertical AI discovery benefits from explicit geography or service scope.",
+          "evidence": [
+            "Add city, region, country, or service-area details where relevant."
+          ]
+        },
+        {
+          "id": "weak-audience-signal",
+          "category": "entityClarity",
+          "severity": "medium",
+          "title": "Target audience is unclear",
+          "description": "LLMs need audience labels to decide when a recommendation is relevant.",
+          "evidence": [
+            "Add explicit audience copy such as developers, maintainers, marketers, or parents."
+          ]
+        },
+        {
+          "id": "missing-organization-schema",
+          "category": "entityClarity",
+          "severity": "high",
+          "title": "Organization-level schema is missing",
+          "description": "Without Organization or LocalBusiness schema, LLMs have fewer explicit entity signals.",
+          "evidence": [
+            "Add Organization or LocalBusiness JSON-LD with name, URL, logo, sameAs, and contact."
+          ]
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "fix-thin-meta-description",
+          "category": "entityClarity",
+          "priority": "medium",
+          "title": "meta description is missing or too thin",
+          "description": "Write a direct description with brand, business type, audience, location, and services."
+        },
+        {
+          "id": "fix-unclear-business-type",
+          "category": "entityClarity",
+          "priority": "medium",
+          "title": "Business type is not explicit",
+          "description": "State the business type clearly, such as open-source toolkit, school, SaaS, or platform."
+        },
+        {
+          "id": "fix-unclear-service-description",
+          "category": "entityClarity",
+          "priority": "medium",
+          "title": "Service description is weak",
+          "description": "Add a short service overview and dedicated service pages."
+        },
+        {
+          "id": "fix-weak-location-signal",
+          "category": "entityClarity",
+          "priority": "low",
+          "title": "Location or service area is unclear",
+          "description": "Add city, region, country, or service-area details where relevant."
+        },
+        {
+          "id": "fix-weak-audience-signal",
+          "category": "entityClarity",
+          "priority": "medium",
+          "title": "Target audience is unclear",
+          "description": "Add explicit audience copy such as developers, maintainers, marketers, or parents."
+        },
+        {
+          "id": "fix-missing-organization-schema",
+          "category": "entityClarity",
+          "priority": "high",
+          "title": "Organization-level schema is missing",
+          "description": "Add Organization or LocalBusiness JSON-LD with name, URL, logo, sameAs, and contact."
+        }
+      ],
+      "evidence": [
+        "Brand/title signal found: Example Domain",
+        "Homepage H1 found: Example Domain",
+        "Contact information or contact page discovered."
+      ]
+    },
+    "technical": {
+      "score": 12,
+      "issues": [
+        {
+          "id": "missing-robots",
+          "category": "technicalDiscoverability",
+          "severity": "medium",
+          "title": "robots.txt was not found",
+          "description": "Robots directives help crawlers understand access policy.",
+          "evidence": [
+            "Publish a clear robots.txt and include a Sitemap directive."
+          ]
+        },
+        {
+          "id": "missing-sitemap",
+          "category": "technicalDiscoverability",
+          "severity": "high",
+          "title": "sitemap.xml was not found",
+          "description": "Sitemaps help AI and search crawlers discover canonical pages.",
+          "evidence": [
+            "Publish an XML sitemap with canonical URLs for important pages."
+          ]
+        },
+        {
+          "id": "missing-llms-txt",
+          "category": "technicalDiscoverability",
+          "severity": "low",
+          "title": "llms.txt was not found",
+          "description": "llms.txt is an emerging convention for AI-readable site guidance.",
+          "evidence": [
+            "Add /llms.txt with concise site, product, documentation, and contact guidance."
+          ]
+        },
+        {
+          "id": "low-canonical-coverage",
+          "category": "technicalDiscoverability",
+          "severity": "medium",
+          "title": "Canonical URL coverage is low",
+          "description": "Canonical links reduce ambiguity when AI crawlers consolidate pages.",
+          "evidence": [
+            "Add canonical links to important indexable pages."
+          ]
+        },
+        {
+          "id": "low-meta-description-coverage",
+          "category": "technicalDiscoverability",
+          "severity": "medium",
+          "title": "Meta description coverage is low",
+          "description": "Meta descriptions give AI systems concise page summaries.",
+          "evidence": [
+            "Add direct, non-duplicative meta descriptions to important pages."
+          ]
+        },
+        {
+          "id": "low-open-graph-coverage",
+          "category": "technicalDiscoverability",
+          "severity": "medium",
+          "title": "Open Graph coverage is low",
+          "description": "Open Graph metadata reinforces shareable title, description, and image context.",
+          "evidence": [
+            "Add og:title, og:description, og:url, and og:image to public pages."
+          ]
+        },
+        {
+          "id": "low-jsonld-coverage",
+          "category": "technicalDiscoverability",
+          "severity": "medium",
+          "title": "JSON-LD coverage is low",
+          "description": "JSON-LD provides explicit facts that are easier for machines to parse.",
+          "evidence": [
+            "Add JSON-LD to the homepage and high-value informational pages."
+          ]
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "fix-missing-robots",
+          "category": "technicalDiscoverability",
+          "priority": "medium",
+          "title": "robots.txt was not found",
+          "description": "Publish a clear robots.txt and include a Sitemap directive."
+        },
+        {
+          "id": "fix-missing-sitemap",
+          "category": "technicalDiscoverability",
+          "priority": "high",
+          "title": "sitemap.xml was not found",
+          "description": "Publish an XML sitemap with canonical URLs for important pages."
+        },
+        {
+          "id": "fix-missing-llms-txt",
+          "category": "technicalDiscoverability",
+          "priority": "low",
+          "title": "llms.txt was not found",
+          "description": "Add /llms.txt with concise site, product, documentation, and contact guidance."
+        },
+        {
+          "id": "fix-low-canonical-coverage",
+          "category": "technicalDiscoverability",
+          "priority": "medium",
+          "title": "Canonical URL coverage is low",
+          "description": "Add canonical links to important indexable pages."
+        },
+        {
+          "id": "fix-low-meta-description-coverage",
+          "category": "technicalDiscoverability",
+          "priority": "medium",
+          "title": "Meta description coverage is low",
+          "description": "Add direct, non-duplicative meta descriptions to important pages."
+        },
+        {
+          "id": "fix-low-open-graph-coverage",
+          "category": "technicalDiscoverability",
+          "priority": "medium",
+          "title": "Open Graph coverage is low",
+          "description": "Add og:title, og:description, og:url, and og:image to public pages."
+        },
+        {
+          "id": "fix-low-jsonld-coverage",
+          "category": "technicalDiscoverability",
+          "priority": "medium",
+          "title": "JSON-LD coverage is low",
+          "description": "Add JSON-LD to the homepage and high-value informational pages."
+        }
+      ],
+      "evidence": [
+        "1 of 7 crawled pages returned 2xx status.",
+        "0% coverage for canonical url coverage is low.",
+        "0% coverage for meta description coverage is low.",
+        "0% coverage for open graph coverage is low.",
+        "0% coverage for json-ld coverage is low."
+      ]
+    },
+    "structuredData": {
+      "score": 10,
+      "issues": [
+        {
+          "id": "no-key-schema-types",
+          "category": "structuredData",
+          "severity": "high",
+          "title": "No key schema.org types were detected",
+          "description": "Structured data gives AI systems explicit facts about the site entity and content.",
+          "evidence": [
+            "Add relevant JSON-LD such as Organization, Service, Product, FAQPage, or Article."
+          ]
+        },
+        {
+          "id": "missing-entity-schema",
+          "category": "structuredData",
+          "severity": "high",
+          "title": "Entity schema is missing",
+          "description": "Organization or LocalBusiness schema is the strongest machine-readable entity anchor.",
+          "evidence": [
+            "Add Organization or LocalBusiness schema to the homepage."
+          ]
+        },
+        {
+          "id": "missing-faq-schema",
+          "category": "structuredData",
+          "severity": "medium",
+          "title": "FAQPage schema was not detected",
+          "description": "FAQPage schema helps expose direct questions and answers for AI retrieval.",
+          "evidence": [
+            "Add FAQPage JSON-LD to pages that already contain real user questions and answers."
+          ]
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "fix-no-key-schema-types",
+          "category": "structuredData",
+          "priority": "high",
+          "title": "Improve key schema.org types were detected",
+          "description": "Add relevant JSON-LD such as Organization, Service, Product, FAQPage, or Article."
+        },
+        {
+          "id": "fix-missing-entity-schema",
+          "category": "structuredData",
+          "priority": "high",
+          "title": "Improve schema is missing",
+          "description": "Add Organization or LocalBusiness schema to the homepage."
+        },
+        {
+          "id": "fix-missing-faq-schema",
+          "category": "structuredData",
+          "priority": "medium",
+          "title": "FAQPage schema was not detected",
+          "description": "Add FAQPage JSON-LD to pages that already contain real user questions and answers."
+        }
+      ],
+      "evidence": [
+        "0% of crawled pages include JSON-LD."
+      ]
+    },
+    "content": {
+      "score": 54,
+      "issues": [
+        {
+          "id": "text-poor-pages",
+          "category": "contentChunkability",
+          "severity": "medium",
+          "title": "Some pages appear text-poor",
+          "description": "Highly visual pages with little text are harder for AI systems to summarize and cite.",
+          "evidence": [
+            "Add concise explanatory copy, headings, and answer-ready paragraphs to thin pages.",
+            "https://example.com/",
+            "https://example.com/about",
+            "https://example.com/about-us"
+          ]
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "fix-text-poor-pages",
+          "category": "contentChunkability",
+          "priority": "medium",
+          "title": "Improve pages appear text-poor",
+          "description": "Add concise explanatory copy, headings, and answer-ready paragraphs to thin pages."
+        }
+      ],
+      "evidence": [
+        "100% of pages include an H1.",
+        "0% of pages include H2 sections.",
+        "0 pages have at least 800 visible text characters.",
+        "FAQ-like content discovered.",
+        "0 pages include definition-style explanatory paragraphs.",
+        "No severe text-to-visual ratio warning detected."
+      ]
+    },
+    "citationReadiness": {
+      "score": 48,
+      "issues": [
+        {
+          "id": "missing-freshness-signals",
+          "category": "citationReadiness",
+          "severity": "medium",
+          "title": "Author, reviewer, or last-updated signals are weak",
+          "description": "AI answer engines prefer content with attribution and freshness markers for factual claims.",
+          "evidence": [
+            "Add author/reviewer names and last-updated dates to important informational pages."
+          ]
+        },
+        {
+          "id": "weak-factual-claims",
+          "category": "citationReadiness",
+          "severity": "low",
+          "title": "Clear factual claims are limited",
+          "description": "Citation-ready pages usually make specific, verifiable claims.",
+          "evidence": [
+            "Add factual statements with dates, numbers, qualifications, and supporting context."
+          ]
+        },
+        {
+          "id": "missing-evidence-pages",
+          "category": "citationReadiness",
+          "severity": "low",
+          "title": "Evidence pages were not discovered",
+          "description": "Dedicated resources or case pages make factual claims easier to verify and cite.",
+          "evidence": [
+            "Create resource, case study, research, or documentation pages for important claims."
+          ]
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "fix-missing-freshness-signals",
+          "category": "citationReadiness",
+          "priority": "medium",
+          "title": "Author, reviewer, or last-updated signals are weak",
+          "description": "Add author/reviewer names and last-updated dates to important informational pages."
+        },
+        {
+          "id": "fix-weak-factual-claims",
+          "category": "citationReadiness",
+          "priority": "low",
+          "title": "Improve factual claims are limited",
+          "description": "Add factual statements with dates, numbers, qualifications, and supporting context."
+        },
+        {
+          "id": "fix-missing-evidence-pages",
+          "category": "citationReadiness",
+          "priority": "low",
+          "title": "Evidence pages were not discovered",
+          "description": "Create resource, case study, research, or documentation pages for important claims."
+        }
+      ],
+      "evidence": [
+        "7 pages include external references.",
+        "About/contact trust pages are available."
+      ]
+    },
+    "promptSimulation": {
+      "score": 50,
+      "issues": [
+        {
+          "id": "prompt-simulation-not-run",
+          "category": "promptSimulation",
+          "severity": "low",
+          "title": "Prompt simulation was not run",
+          "description": "No provider API key was used in this MVP scan, so LLM answer consistency was not measured.",
+          "evidence": [
+            "Configure a BYOK provider adapter in a later phase to compare LLM answers against crawl evidence."
+          ]
+        }
+      ],
+      "recommendations": [
+        {
+          "id": "fix-prompt-simulation-not-run",
+          "category": "promptSimulation",
+          "priority": "low",
+          "title": "Add BYOK prompt simulation",
+          "description": "Configure provider adapters to compare LLM interpretation against crawl evidence."
+        }
+      ],
+      "evidence": [
+        "Provider adapters are scaffolded, but no API-backed prompt simulation ran."
+      ]
+    }
+  },
+  "issues": [
+    {
+      "id": "missing-organization-schema",
+      "category": "entityClarity",
+      "severity": "high",
+      "title": "Organization-level schema is missing",
+      "description": "Without Organization or LocalBusiness schema, LLMs have fewer explicit entity signals.",
+      "evidence": [
+        "Add Organization or LocalBusiness JSON-LD with name, URL, logo, sameAs, and contact."
+      ]
+    },
+    {
+      "id": "missing-sitemap",
+      "category": "technicalDiscoverability",
+      "severity": "high",
+      "title": "sitemap.xml was not found",
+      "description": "Sitemaps help AI and search crawlers discover canonical pages.",
+      "evidence": [
+        "Publish an XML sitemap with canonical URLs for important pages."
+      ]
+    },
+    {
+      "id": "no-key-schema-types",
+      "category": "structuredData",
+      "severity": "high",
+      "title": "No key schema.org types were detected",
+      "description": "Structured data gives AI systems explicit facts about the site entity and content.",
+      "evidence": [
+        "Add relevant JSON-LD such as Organization, Service, Product, FAQPage, or Article."
+      ]
+    },
+    {
+      "id": "missing-entity-schema",
+      "category": "structuredData",
+      "severity": "high",
+      "title": "Entity schema is missing",
+      "description": "Organization or LocalBusiness schema is the strongest machine-readable entity anchor.",
+      "evidence": [
+        "Add Organization or LocalBusiness schema to the homepage."
+      ]
+    },
+    {
+      "id": "thin-meta-description",
+      "category": "entityClarity",
+      "severity": "medium",
+      "title": "Homepage meta description is missing or too thin",
+      "description": "AI systems need concise brand descriptions to identify what the organization does.",
+      "evidence": [
+        "Write a direct description with brand, business type, audience, location, and services."
+      ]
+    },
+    {
+      "id": "unclear-business-type",
+      "category": "entityClarity",
+      "severity": "medium",
+      "title": "Business type is not explicit",
+      "description": "LLMs need a category label before they can compare or recommend a site.",
+      "evidence": [
+        "State the business type clearly, such as open-source toolkit, school, SaaS, or platform."
+      ]
+    },
+    {
+      "id": "unclear-service-description",
+      "category": "entityClarity",
+      "severity": "medium",
+      "title": "Service description is weak",
+      "description": "AI answer engines need compact explanations of what the site offers.",
+      "evidence": [
+        "Add a short service overview and dedicated service pages."
+      ]
+    },
+    {
+      "id": "weak-audience-signal",
+      "category": "entityClarity",
+      "severity": "medium",
+      "title": "Target audience is unclear",
+      "description": "LLMs need audience labels to decide when a recommendation is relevant.",
+      "evidence": [
+        "Add explicit audience copy such as developers, maintainers, marketers, or parents."
+      ]
+    },
+    {
+      "id": "missing-robots",
+      "category": "technicalDiscoverability",
+      "severity": "medium",
+      "title": "robots.txt was not found",
+      "description": "Robots directives help crawlers understand access policy.",
+      "evidence": [
+        "Publish a clear robots.txt and include a Sitemap directive."
+      ]
+    },
+    {
+      "id": "low-canonical-coverage",
+      "category": "technicalDiscoverability",
+      "severity": "medium",
+      "title": "Canonical URL coverage is low",
+      "description": "Canonical links reduce ambiguity when AI crawlers consolidate pages.",
+      "evidence": [
+        "Add canonical links to important indexable pages."
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "fix-missing-organization-schema",
+      "category": "entityClarity",
+      "priority": "high",
+      "title": "Organization-level schema is missing",
+      "description": "Add Organization or LocalBusiness JSON-LD with name, URL, logo, sameAs, and contact."
+    },
+    {
+      "id": "fix-missing-sitemap",
+      "category": "technicalDiscoverability",
+      "priority": "high",
+      "title": "sitemap.xml was not found",
+      "description": "Publish an XML sitemap with canonical URLs for important pages."
+    },
+    {
+      "id": "fix-no-key-schema-types",
+      "category": "structuredData",
+      "priority": "high",
+      "title": "Improve key schema.org types were detected",
+      "description": "Add relevant JSON-LD such as Organization, Service, Product, FAQPage, or Article."
+    },
+    {
+      "id": "fix-missing-entity-schema",
+      "category": "structuredData",
+      "priority": "high",
+      "title": "Improve schema is missing",
+      "description": "Add Organization or LocalBusiness schema to the homepage."
+    },
+    {
+      "id": "fix-thin-meta-description",
+      "category": "entityClarity",
+      "priority": "medium",
+      "title": "meta description is missing or too thin",
+      "description": "Write a direct description with brand, business type, audience, location, and services."
+    },
+    {
+      "id": "fix-unclear-business-type",
+      "category": "entityClarity",
+      "priority": "medium",
+      "title": "Business type is not explicit",
+      "description": "State the business type clearly, such as open-source toolkit, school, SaaS, or platform."
+    },
+    {
+      "id": "fix-unclear-service-description",
+      "category": "entityClarity",
+      "priority": "medium",
+      "title": "Service description is weak",
+      "description": "Add a short service overview and dedicated service pages."
+    },
+    {
+      "id": "fix-weak-audience-signal",
+      "category": "entityClarity",
+      "priority": "medium",
+      "title": "Target audience is unclear",
+      "description": "Add explicit audience copy such as developers, maintainers, marketers, or parents."
+    },
+    {
+      "id": "fix-missing-robots",
+      "category": "technicalDiscoverability",
+      "priority": "medium",
+      "title": "robots.txt was not found",
+      "description": "Publish a clear robots.txt and include a Sitemap directive."
+    },
+    {
+      "id": "fix-low-canonical-coverage",
+      "category": "technicalDiscoverability",
+      "priority": "medium",
+      "title": "Canonical URL coverage is low",
+      "description": "Add canonical links to important indexable pages."
+    }
+  ],
+  "crawl": {
+    "inputUrl": "https://example.com",
+    "normalizedUrl": "https://example.com/",
+    "origin": "https://example.com",
+    "domain": "example.com",
+    "crawledAt": "2026-05-25T01:46:01.692Z",
+    "maxPages": 30,
+    "respectRobots": true,
+    "assets": {
+      "robotsTxt": {
+        "url": "https://example.com/robots.txt",
+        "statusCode": 404,
+        "found": false,
+        "contentType": "text/html",
+        "bodyPreview": null,
+        "error": "HTTP 404"
+      },
+      "sitemapXml": {
+        "url": "https://example.com/sitemap.xml",
+        "statusCode": 404,
+        "found": false,
+        "contentType": "text/html",
+        "bodyPreview": null,
+        "error": "HTTP 404"
+      },
+      "llmsTxt": {
+        "url": "https://example.com/llms.txt",
+        "statusCode": 404,
+        "found": false,
+        "contentType": "text/html",
+        "bodyPreview": null,
+        "error": "HTTP 404"
+      }
+    },
+    "pages": [
+      {
+        "url": "https://example.com/",
+        "statusCode": 200,
+        "title": "Example Domain",
+        "metaDescription": null,
+        "h1": [
+          "Example Domain"
+        ],
+        "h2": [],
+        "h3": [],
+        "canonical": null,
+        "openGraph": {},
+        "schemaJsonLd": [],
+        "visibleText": "Example DomainThis domain is for use in documentation examples without needing permission. Avoid use in operations.Learn more",
+        "imageCount": 0,
+        "internalLinks": [],
+        "externalLinks": [
+          "https://iana.org/domains/example"
+        ],
+        "discoveredFrom": "homepage",
+        "error": null
+      },
+      {
+        "url": "https://example.com/about",
+        "statusCode": 404,
+        "title": "Example Domain",
+        "metaDescription": null,
+        "h1": [
+          "Example Domain"
+        ],
+        "h2": [],
+        "h3": [],
+        "canonical": null,
+        "openGraph": {},
+        "schemaJsonLd": [],
+        "visibleText": "Example DomainThis domain is for use in documentation examples without needing permission. Avoid use in operations.Learn more",
+        "imageCount": 0,
+        "internalLinks": [],
+        "externalLinks": [
+          "https://iana.org/domains/example"
+        ],
+        "discoveredFrom": "discovery",
+        "error": null
+      },
+      {
+        "url": "https://example.com/about-us",
+        "statusCode": 404,
+        "title": "Example Domain",
+        "metaDescription": null,
+        "h1": [
+          "Example Domain"
+        ],
+        "h2": [],
+        "h3": [],
+        "canonical": null,
+        "openGraph": {},
+        "schemaJsonLd": [],
+        "visibleText": "Example DomainThis domain is for use in documentation examples without needing permission. Avoid use in operations.Learn more",
+        "imageCount": 0,
+        "internalLinks": [],
+        "externalLinks": [
+          "https://iana.org/domains/example"
+        ],
+        "discoveredFrom": "discovery",
+        "error": null
+      },
+      {
+        "url": "https://example.com/contact",
+        "statusCode": 404,
+        "title": "Example Domain",
+        "metaDescription": null,
+        "h1": [
+          "Example Domain"
+        ],
+        "h2": [],
+        "h3": [],
+        "canonical": null,
+        "openGraph": {},
+        "schemaJsonLd": [],
+        "visibleText": "Example DomainThis domain is for use in documentation examples without needing permission. Avoid use in operations.Learn more",
+        "imageCount": 0,
+        "internalLinks": [],
+        "externalLinks": [
+          "https://iana.org/domains/example"
+        ],
+        "discoveredFrom": "discovery",
+        "error": null
+      },
+      {
+        "url": "https://example.com/services",
+        "statusCode": 404,
+        "title": "Example Domain",
+        "metaDescription": null,
+        "h1": [
+          "Example Domain"
+        ],
+        "h2": [],
+        "h3": [],
+        "canonical": null,
+        "openGraph": {},
+        "schemaJsonLd": [],
+        "visibleText": "Example DomainThis domain is for use in documentation examples without needing permission. Avoid use in operations.Learn more",
+        "imageCount": 0,
+        "internalLinks": [],
+        "externalLinks": [
+          "https://iana.org/domains/example"
+        ],
+        "discoveredFrom": "discovery",
+        "error": null
+      },
+      {
+        "url": "https://example.com/products",
+        "statusCode": 404,
+        "title": "Example Domain",
+        "metaDescription": null,
+        "h1": [
+          "Example Domain"
+        ],
+        "h2": [],
+        "h3": [],
+        "canonical": null,
+        "openGraph": {},
+        "schemaJsonLd": [],
+        "visibleText": "Example DomainThis domain is for use in documentation examples without needing permission. Avoid use in operations.Learn more",
+        "imageCount": 0,
+        "internalLinks": [],
+        "externalLinks": [
+          "https://iana.org/domains/example"
+        ],
+        "discoveredFrom": "discovery",
+        "error": null
+      },
+      {
+        "url": "https://example.com/faq",
+        "statusCode": 404,
+        "title": "Example Domain",
+        "metaDescription": null,
+        "h1": [
+          "Example Domain"
+        ],
+        "h2": [],
+        "h3": [],
+        "canonical": null,
+        "openGraph": {},
+        "schemaJsonLd": [],
+        "visibleText": "Example DomainThis domain is for use in documentation examples without needing permission. Avoid use in operations.Learn more",
+        "imageCount": 0,
+        "internalLinks": [],
+        "externalLinks": [
+          "https://iana.org/domains/example"
+        ],
+        "discoveredFrom": "discovery",
+        "error": null
+      }
+    ],
+    "skippedUrls": []
+  }
+}

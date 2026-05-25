@@ -1,0 +1,18 @@
+{
+  "name": "openvisi",
+  "version": "0.1.0",
+  "description": "Open-source AI visibility analytics for the LLM search era.",
+  "type": "module",
+  "bin": {
+    "openvisi": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --target node22 --dts --clean",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@openvisi/core": "0.1.0",
+    "@openvisi/crawler": "0.1.0",
+    "@openvisi/report": "0.1.0"
+  }
+}

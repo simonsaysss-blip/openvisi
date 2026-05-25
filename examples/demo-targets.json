@@ -1,0 +1,4 @@
+{
+  "targets": ["https://mavisenglish.com/", "https://www.hubspot.com/", "https://www.ahrefs.com/"],
+  "note": "Examples are demo targets only. OpenVisi does not hardcode domain-specific logic."
+}
