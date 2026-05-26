@@ -5,8 +5,13 @@
   "description": "Open-source AI visibility analytics for the LLM search era.",
   "type": "module",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "packages/core",
+    "packages/crawler",
+    "packages/report",
+    "packages/analyzer",
+    "packages/providers",
+    "apps/cli",
+    "apps/web"
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",

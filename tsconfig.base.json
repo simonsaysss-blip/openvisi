@@ -11,6 +11,14 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@openvisi/analyzer": ["packages/analyzer/src/index.ts"],
+      "@openvisi/core": ["packages/core/src/index.ts"],
+      "@openvisi/crawler": ["packages/crawler/src/index.ts"],
+      "@openvisi/providers": ["packages/providers/src/index.ts"],
+      "@openvisi/report": ["packages/report/src/index.ts"]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "allowJs": false

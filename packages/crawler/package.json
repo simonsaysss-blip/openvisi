@@ -2,7 +2,24 @@
   "name": "@openvisi/crawler",
   "version": "0.1.0",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --target node22 --dts --clean --external package.json"
+  },
+  "dependencies": {
+    "@openvisi/core": "0.1.0",
+    "cheerio": "^1.0.0",
+    "fast-xml-parser": "^5.8.0",
+    "robots-parser": "^3.0.1"
   }
 }
