@@ -10,6 +10,7 @@ import type {
   ScoreDetail,
   VisibilityIssue
 } from "./types.js";
+import { createCanonicalMetricsSnapshot } from "./canonical-metrics.js";
 
 const weights: Record<ScoreCategory, number> = {
   entityClarity: 0.25,
@@ -55,32 +56,39 @@ export function createAudit(crawl: CrawlResult): AuditResult {
       promptSimulation.score * weights.promptSimulation
   );
 
+  const scores = {
+    aiVisibility,
+    entityClarity: detail(entity, weights.entityClarity),
+    technicalDiscoverability: detail(technical, weights.technicalDiscoverability),
+    structuredData: detail(structuredData, weights.structuredData),
+    contentChunkability: detail(content, weights.contentChunkability),
+    citationReadiness: detail(citationReadiness, weights.citationReadiness),
+    promptSimulation: detail(promptSimulation, weights.promptSimulation)
+  };
+
+  const analyzers = {
+    entity,
+    technical,
+    structuredData,
+    content,
+    citationReadiness,
+    promptSimulation
+  };
+
+  const methodologyVersion = "0.1";
+
   return {
     projectName: "OpenVisi AI Visibility Audit",
-    methodologyVersion: "0.1",
+    methodologyVersion,
     generatedAt: new Date().toISOString(),
     target: {
       inputUrl: crawl.inputUrl,
       normalizedUrl: crawl.normalizedUrl,
       domain: crawl.domain
     },
-    scores: {
-      aiVisibility,
-      entityClarity: detail(entity, weights.entityClarity),
-      technicalDiscoverability: detail(technical, weights.technicalDiscoverability),
-      structuredData: detail(structuredData, weights.structuredData),
-      contentChunkability: detail(content, weights.contentChunkability),
-      citationReadiness: detail(citationReadiness, weights.citationReadiness),
-      promptSimulation: detail(promptSimulation, weights.promptSimulation)
-    },
-    analyzers: {
-      entity,
-      technical,
-      structuredData,
-      content,
-      citationReadiness,
-      promptSimulation
-    },
+    scores,
+    canonicalMetrics: createCanonicalMetricsSnapshot({ methodologyVersion, scores, analyzers }),
+    analyzers,
     issues,
     recommendations,
     crawl
@@ -147,7 +155,9 @@ export function analyzeEntity(crawl: CrawlResult): AnalyzerResult {
       "medium",
       "Business type is not explicit",
       "LLMs need a category label before they can compare or recommend a site.",
-      ["State the business type clearly, such as open-source toolkit, school, product, or platform."]
+      [
+        "State the business type clearly, such as open-source toolkit, school, product, or platform."
+      ]
     );
   }
 
@@ -271,9 +281,13 @@ export function analyzeTechnical(crawl: CrawlResult): AnalyzerResult {
     );
   }
 
-  const successfulPages = crawl.pages.filter((page) => page.statusCode >= 200 && page.statusCode < 300);
+  const successfulPages = crawl.pages.filter(
+    (page) => page.statusCode >= 200 && page.statusCode < 300
+  );
   score += ratio(successfulPages.length, crawl.pages.length) * 12;
-  evidence.push(`${successfulPages.length} of ${crawl.pages.length} crawled pages returned 2xx status.`);
+  evidence.push(
+    `${successfulPages.length} of ${crawl.pages.length} crawled pages returned 2xx status.`
+  );
 
   score += coverageScore(
     crawl,
@@ -395,11 +409,17 @@ export function analyzeContent(crawl: CrawlResult): AnalyzerResult {
   const evidence: string[] = [];
   let score = 15;
 
-  const h1Coverage = ratio(crawl.pages.filter((page) => page.h1.length > 0).length, crawl.pages.length);
+  const h1Coverage = ratio(
+    crawl.pages.filter((page) => page.h1.length > 0).length,
+    crawl.pages.length
+  );
   score += h1Coverage * 15;
   evidence.push(`${Math.round(h1Coverage * 100)}% of pages include an H1.`);
 
-  const h2Coverage = ratio(crawl.pages.filter((page) => page.h2.length > 0).length, crawl.pages.length);
+  const h2Coverage = ratio(
+    crawl.pages.filter((page) => page.h2.length > 0).length,
+    crawl.pages.length
+  );
   score += h2Coverage * 15;
   evidence.push(`${Math.round(h2Coverage * 100)}% of pages include H2 sections.`);
 
@@ -478,7 +498,9 @@ export function analyzeCitationReadiness(crawl: CrawlResult): AnalyzerResult {
   const allText = getAllVisibleText(crawl.pages);
   let score = 15;
 
-  const authorSignals = /last updated|updated on|reviewed by|author|written by|editorial/i.test(allText);
+  const authorSignals = /last updated|updated on|reviewed by|author|written by|editorial/i.test(
+    allText
+  );
   if (authorSignals) {
     score += 18;
     evidence.push("Author, reviewer, or last-updated signals found.");
@@ -540,7 +562,11 @@ export function analyzeCitationReadiness(crawl: CrawlResult): AnalyzerResult {
     );
   }
 
-  if (/award|certified|license|licensed|review|testimonial|case study|customer|registration/i.test(allText)) {
+  if (
+    /award|certified|license|licensed|review|testimonial|case study|customer|registration/i.test(
+      allText
+    )
+  ) {
     score += 13;
     evidence.push("Trust signals detected in visible content.");
   }
@@ -729,7 +755,9 @@ function hasLikelyPage(pages: PageData[], needles: string[]): boolean {
 function hasContactSignal(pages: PageData[]): boolean {
   return (
     hasLikelyPage(pages, ["contact"]) ||
-    pages.some((page) => /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|\+?\d[\d\s().-]{7,}\d/i.test(page.visibleText))
+    pages.some((page) =>
+      /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}|\+?\d[\d\s().-]{7,}\d/i.test(page.visibleText)
+    )
   );
 }
 

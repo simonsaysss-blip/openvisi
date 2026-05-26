@@ -15,3 +15,7 @@ Rules:
 - avoid private or sensitive data
 - avoid claims of ranking prediction or citation guarantees
 - separate raw runtime reports from curated examples
+
+Preview:
+
+- [AI Visibility Benchmark Preview](ai-visibility-benchmark-preview/README.md)

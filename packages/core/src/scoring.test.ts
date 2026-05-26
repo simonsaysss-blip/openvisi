@@ -43,6 +43,11 @@ describe("createAudit", () => {
     const audit = createAudit(crawl);
 
     expect(audit.scores.aiVisibility).toBeGreaterThan(0);
+    expect(audit.canonicalMetrics.metrics.aiVisibilityScore).toBe(audit.scores.aiVisibility);
+    expect(audit.canonicalMetrics.metrics.entityClarity).toBeGreaterThan(0);
+    expect(audit.canonicalMetrics.metrics.answerShare).toBeNull();
+    expect(audit.canonicalMetrics.details.answerPresence.status).toBe("diagnostic-proxy");
+    expect(audit.canonicalMetrics.details.competitorDisplacement.status).toBe("not-measured");
     expect(audit.issues.length).toBeGreaterThan(0);
     expect(audit.recommendations.length).toBeGreaterThan(0);
   });

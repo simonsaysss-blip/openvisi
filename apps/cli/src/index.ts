@@ -60,6 +60,13 @@ function printSummary(audit: ReturnType<typeof createAudit>, reportPath: string)
   console.log(`Content Chunkability Score: ${audit.scores.contentChunkability.score}/100`);
   console.log(`Citation Readiness Score: ${audit.scores.citationReadiness.score}/100`);
   console.log("");
+  console.log("Canonical Metrics Snapshot:");
+  console.log(JSON.stringify(audit.canonicalMetrics.metrics, null, 2));
+  console.log("");
+  console.log(
+    `Canonical measurement mode: ${audit.canonicalMetrics.measurementMode} (answer-level fields may be null until provider-backed prompt packs are run)`
+  );
+  console.log("");
   console.log("Top 10 Diagnostic Signals:");
   for (const [index, issue] of audit.issues.entries()) {
     console.log(`${index + 1}. [${issue.severity}] ${issue.title}`);

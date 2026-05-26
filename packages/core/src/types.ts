@@ -1,3 +1,5 @@
+import type { CanonicalMetricsSnapshot } from "./schema/metrics.js";
+
 export type JsonPrimitive = string | number | boolean | null;
 export type JsonValue = JsonPrimitive | JsonValue[] | { [key: string]: JsonValue };
 
@@ -126,6 +128,7 @@ export interface AuditResult {
     citationReadiness: ScoreDetail;
     promptSimulation: ScoreDetail;
   };
+  canonicalMetrics: CanonicalMetricsSnapshot;
   analyzers: {
     entity: AnalyzerResult;
     technical: AnalyzerResult;

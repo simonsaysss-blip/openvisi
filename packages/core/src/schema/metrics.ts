@@ -17,7 +17,9 @@ export type OpenVisiMetricName =
 
 export type OpenVisiMetricLayer = "presence" | "accuracy" | "citation" | "competitive";
 
-export type OpenVisiMetrics = Record<OpenVisiMetricName, number>;
+export type OpenVisiMetricValue = number | null;
+export type OpenVisiMetrics = Record<OpenVisiMetricName, OpenVisiMetricValue>;
+export type CanonicalMetricStatus = "measured" | "diagnostic-proxy" | "not-measured";
 
 export interface MetricDefinition {
   name: OpenVisiMetricName;
@@ -25,6 +27,24 @@ export interface MetricDefinition {
   layer: OpenVisiMetricLayer;
   scale: "0-1" | "0-100";
   description: string;
+}
+
+export interface CanonicalMetricDetail {
+  value: OpenVisiMetricValue;
+  status: CanonicalMetricStatus;
+  layer: OpenVisiMetricLayer;
+  scale: "0-1" | "0-100";
+  evidence: string[];
+  note: string;
+}
+
+export interface CanonicalMetricsSnapshot {
+  methodologyVersion: string;
+  measurementMode: "crawl-diagnostic-v0.1";
+  definition: string;
+  metrics: OpenVisiMetrics;
+  details: Record<OpenVisiMetricName, CanonicalMetricDetail>;
+  limitations: string[];
 }
 
 export const metricDefinitions: Record<OpenVisiMetricName, MetricDefinition> = {

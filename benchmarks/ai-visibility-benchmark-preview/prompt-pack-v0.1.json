@@ -1,0 +1,72 @@
+{
+  "id": "openvisi-ai-visibility-benchmark-preview-v0.1",
+  "title": "The OpenVisi AI Visibility Benchmark Preview Prompt Pack",
+  "methodologyVersion": "0.1",
+  "status": "preview",
+  "description": "Prompt categories for a future reproducible AI Visibility benchmark. This file does not contain collected answer data.",
+  "categories": [
+    {
+      "id": "category-discovery",
+      "label": "Category discovery prompts",
+      "primaryMetrics": ["answerPresence", "answerShare", "categoryShare"],
+      "promptTemplates": [
+        "What are the leading {category} tools for {audience}?",
+        "Which {category} products should a {buyerType} evaluate?"
+      ]
+    },
+    {
+      "id": "alternative-comparison",
+      "label": "Alternative/comparison prompts",
+      "primaryMetrics": [
+        "competitorDisplacement",
+        "alternativeRecommendationRate",
+        "comparisonVisibility"
+      ],
+      "promptTemplates": [
+        "What are the best alternatives to {targetEntity}?",
+        "Compare {targetEntity} with other {category} options."
+      ]
+    },
+    {
+      "id": "problem-solution",
+      "label": "Problem-solution prompts",
+      "primaryMetrics": ["answerPresence", "narrativeAccuracy", "entityClarity"],
+      "promptTemplates": [
+        "How can a team solve {problem}?",
+        "Which products help with {problem} for {audience}?"
+      ]
+    },
+    {
+      "id": "brand-specific",
+      "label": "Brand-specific prompts",
+      "primaryMetrics": ["entityClarity", "narrativeAccuracy", "citationCoverage"],
+      "promptTemplates": [
+        "What is {targetEntity}?",
+        "What does {targetEntity} do, and who is it for?"
+      ]
+    },
+    {
+      "id": "integration",
+      "label": "Integration prompts",
+      "primaryMetrics": ["answerPresence", "citationCoverage", "aiCitationSignals"],
+      "promptTemplates": [
+        "Does {targetEntity} integrate with {integrationName}?",
+        "Which {category} tools integrate with {integrationName}?"
+      ]
+    },
+    {
+      "id": "buyer-intent",
+      "label": "Buyer-intent prompts",
+      "primaryMetrics": ["answerShare", "competitorDisplacement", "machineReadableTrust"],
+      "promptTemplates": [
+        "Which {category} product should I choose for {buyerNeed}?",
+        "What should a {buyerType} consider before choosing {targetEntity}?"
+      ]
+    }
+  ],
+  "limitations": [
+    "This preview prompt pack does not include collected AI-generated answers.",
+    "Future benchmark runs must record model, surface, date, prompt pack version, and methodology version.",
+    "Results should be interpreted directionally in early versions."
+  ]
+}

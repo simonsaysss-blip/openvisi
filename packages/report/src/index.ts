@@ -43,6 +43,15 @@ export function renderMarkdownReport(audit: AuditResult): string {
 
 This report is a heuristic diagnostic snapshot of public machine-readable visibility signals. It does not predict rankings, citations, or answer inclusion in any specific LLM-powered product.
 
+## Canonical Metrics Snapshot
+
+Measurement mode: ${audit.canonicalMetrics.measurementMode}
+
+${renderCanonicalMetrics(audit)}
+
+Limitations:
+${renderEvidence(audit.canonicalMetrics.limitations)}
+
 ## Scores
 
 ${scoreLine("Entity Clarity", audit.scores.entityClarity)}
@@ -116,7 +125,8 @@ export function renderHtmlReport(audit: AuditResult): string {
     {
       label: "Entity Clarity Score",
       score: audit.scores.entityClarity.score,
-      description: "How clearly the site identifies the organization, audience, location, and offer."
+      description:
+        "How clearly the site identifies the organization, audience, location, and offer."
     },
     {
       label: "Technical Discoverability Score",
@@ -419,6 +429,16 @@ export function renderHtmlReport(audit: AuditResult): string {
       </section>
 
       <section class="panel">
+        <h2>Canonical Metrics Snapshot</h2>
+        <p>
+          These fields use the OpenVisi canonical vocabulary. Values marked as diagnostic proxies
+          are derived from crawl evidence; fields marked not measured require provider-backed
+          prompt packs.
+        </p>
+        ${renderHtmlCanonicalMetrics(audit)}
+      </section>
+
+      <section class="panel">
         <h2>Top Diagnostic Signals</h2>
         ${renderHtmlIssues(audit.issues)}
       </section>
@@ -456,6 +476,15 @@ export function renderHtmlReport(audit: AuditResult): string {
 
 function scoreLine(label: string, detail: ScoreDetail): string {
   return `- ${label}: ${detail.score}/100 (weight ${Math.round(detail.weight * 100)}%)`;
+}
+
+function renderCanonicalMetrics(audit: AuditResult): string {
+  return Object.entries(audit.canonicalMetrics.details)
+    .map(([name, detail]) => {
+      const value = detail.value === null ? "not measured" : String(detail.value);
+      return `- \`${name}\`: ${value} (${detail.status}) - ${detail.note}`;
+    })
+    .join("\n");
 }
 
 function renderIssues(issues: VisibilityIssue[]): string {
@@ -619,6 +648,38 @@ function renderCrawlSummary(audit: AuditResult): string {
         </tbody>
       </table>
     </div>`;
+}
+
+function renderHtmlCanonicalMetrics(audit: AuditResult): string {
+  return `<div style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+          <th>Status</th>
+          <th>Layer</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${Object.entries(audit.canonicalMetrics.details).map(renderCanonicalMetricRow).join("")}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+function renderCanonicalMetricRow([name, detail]: [
+  string,
+  AuditResult["canonicalMetrics"]["details"][keyof AuditResult["canonicalMetrics"]["details"]]
+]): string {
+  return `<tr>
+    <td class="url">${escapeHtml(name)}</td>
+    <td>${detail.value === null ? "not measured" : escapeHtml(String(detail.value))}</td>
+    <td>${escapeHtml(detail.status)}</td>
+    <td>${escapeHtml(detail.layer)}</td>
+    <td>${escapeHtml(detail.note)}</td>
+  </tr>`;
 }
 
 function renderPageRow(page: AuditResult["crawl"]["pages"][number]): string {
