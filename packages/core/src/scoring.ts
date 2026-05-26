@@ -1,5 +1,6 @@
 import type {
   AnalyzerResult,
+  AnalyzerMaturity,
   AuditResult,
   CrawlResult,
   JsonValue,
@@ -56,6 +57,7 @@ export function createAudit(crawl: CrawlResult): AuditResult {
 
   return {
     projectName: "OpenVisi AI Visibility Audit",
+    methodologyVersion: "0.1",
     generatedAt: new Date().toISOString(),
     target: {
       inputUrl: crawl.inputUrl,
@@ -145,7 +147,7 @@ export function analyzeEntity(crawl: CrawlResult): AnalyzerResult {
       "medium",
       "Business type is not explicit",
       "LLMs need a category label before they can compare or recommend a site.",
-      ["State the business type clearly, such as open-source toolkit, school, SaaS, or platform."]
+      ["State the business type clearly, such as open-source toolkit, school, product, or platform."]
     );
   }
 
@@ -219,7 +221,7 @@ export function analyzeEntity(crawl: CrawlResult): AnalyzerResult {
     );
   }
 
-  return collector.result(score, evidence);
+  return collector.result(score, evidence, "heuristic");
 }
 
 export function analyzeTechnical(crawl: CrawlResult): AnalyzerResult {
@@ -321,7 +323,7 @@ export function analyzeTechnical(crawl: CrawlResult): AnalyzerResult {
     "Add JSON-LD to the homepage and high-value informational pages."
   );
 
-  return collector.result(score, evidence);
+  return collector.result(score, evidence, "heuristic");
 }
 
 export function analyzeStructuredData(crawl: CrawlResult): AnalyzerResult {
@@ -385,7 +387,7 @@ export function analyzeStructuredData(crawl: CrawlResult): AnalyzerResult {
     );
   }
 
-  return collector.result(score, evidence);
+  return collector.result(score, evidence, "heuristic");
 }
 
 export function analyzeContent(crawl: CrawlResult): AnalyzerResult {
@@ -467,7 +469,7 @@ export function analyzeContent(crawl: CrawlResult): AnalyzerResult {
     evidence.push("No severe text-to-visual ratio warning detected.");
   }
 
-  return collector.result(score, evidence);
+  return collector.result(score, evidence, "heuristic");
 }
 
 export function analyzeCitationReadiness(crawl: CrawlResult): AnalyzerResult {
@@ -543,12 +545,20 @@ export function analyzeCitationReadiness(crawl: CrawlResult): AnalyzerResult {
     evidence.push("Trust signals detected in visible content.");
   }
 
-  return collector.result(score, evidence);
+  return collector.result(score, evidence, "heuristic");
 }
 
 function analyzePromptSimulation(): AnalyzerResult {
   return {
     score: 50,
+    maturity: "experimental",
+    detectedSignals: ["Provider adapter scaffolding is present."],
+    missingSignals: ["Provider-backed prompt simulation was not run."],
+    interpretation:
+      "Prompt simulation is experimental in methodology version 0.1 and does not affect claims about real LLM answer behavior.",
+    suggestedStructuralImprovements: [
+      "Keep provider-backed interpretation checks optional and explicitly separated from crawl-only diagnostics."
+    ],
     issues: [
       {
         id: "prompt-simulation-not-run",
@@ -605,15 +615,47 @@ function createCollector() {
         description: fixEvidence[0] ?? description
       });
     },
-    result(score: number, evidence: string[]): AnalyzerResult {
+    result(score: number, evidence: string[], maturity: AnalyzerMaturity): AnalyzerResult {
+      const clampedScore = clampScore(score);
       return {
-        score: clampScore(score),
+        score: clampedScore,
+        maturity,
+        detectedSignals: evidence,
+        missingSignals: issues.map((issue) => issue.title),
+        interpretation: interpretAnalyzerScore(clampedScore, maturity, issues.length),
+        suggestedStructuralImprovements: recommendations.map(
+          (recommendation) => recommendation.description
+        ),
         issues,
         recommendations,
         evidence
       };
     }
   };
+}
+
+function interpretAnalyzerScore(
+  score: number,
+  maturity: AnalyzerMaturity,
+  issueCount: number
+): string {
+  const maturityNote =
+    maturity === "experimental"
+      ? "This analyzer is experimental and should be read as an early signal."
+      : maturity === "heuristic"
+        ? "This analyzer is heuristic and should be read directionally."
+        : "This analyzer is considered stable for the current methodology version.";
+
+  if (score >= 80) {
+    return `${maturityNote} Detected signals are strong, with ${issueCount} diagnostic gap(s) surfaced.`;
+  }
+  if (score >= 60) {
+    return `${maturityNote} Detected signals are useful, but ${issueCount} diagnostic gap(s) remain.`;
+  }
+  if (score >= 40) {
+    return `${maturityNote} Detected signals are partial, and ${issueCount} diagnostic gap(s) should be reviewed.`;
+  }
+  return `${maturityNote} Detected signals are weak or limited, with ${issueCount} diagnostic gap(s) surfaced.`;
 }
 
 function coverageScore(

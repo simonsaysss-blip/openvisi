@@ -19,8 +19,9 @@
   <body>
     <main>
       <section class="hero">
-        <h1>AI Visibility Audit Report</h1>
+        <h1>Machine-Readable Visibility Diagnostic Report</h1>
         <p>https://example.com/</p>
+        <p>Methodology version 0.1</p>
         <div class="score">34/100</div>
       </section>
       <section class="grid">
@@ -32,12 +33,81 @@
         <div class="metric">Prompt<strong>50/100</strong></div>
       </section>
       <section class="panel">
-        <h2>Top Issues</h2>
+        <h2>Analyzer Explainability</h2>
+        <article>
+    <h3>Entity Clarity</h3>
+    <p><strong>Score:</strong> 45/100 · <strong>Maturity:</strong> heuristic</p>
+    <p>This analyzer is heuristic and should be read directionally. Detected signals are partial, and 6 diagnostic gap(s) should be reviewed.</p>
+    <h4>Detected signals</h4>
+    <ul><li>Brand/title signal found: Example Domain</li><li>Homepage H1 found: Example Domain</li><li>Contact information or contact page discovered.</li></ul>
+    <h4>Missing signals</h4>
+    <ul><li>Homepage meta description is missing or too thin</li><li>Business type is not explicit</li><li>Service description is weak</li><li>Location or service area is unclear</li><li>Target audience is unclear</li><li>Organization-level schema is missing</li></ul>
+    <h4>Suggested structural improvements</h4>
+    <ul><li>Write a direct description with brand, business type, audience, location, and services.</li><li>State the business type clearly, such as open-source toolkit, school, product, or platform.</li><li>Add a short service overview and dedicated service pages.</li><li>Add city, region, country, or service-area details where relevant.</li><li>Add explicit audience copy such as developers, maintainers, marketers, or parents.</li><li>Add Organization or LocalBusiness JSON-LD with name, URL, logo, sameAs, and contact.</li></ul>
+  </article>
+        <article>
+    <h3>Technical Discoverability</h3>
+    <p><strong>Score:</strong> 12/100 · <strong>Maturity:</strong> heuristic</p>
+    <p>This analyzer is heuristic and should be read directionally. Detected signals are weak or limited, with 7 diagnostic gap(s) surfaced.</p>
+    <h4>Detected signals</h4>
+    <ul><li>1 of 7 crawled pages returned 2xx status.</li><li>0% coverage for canonical url coverage is low.</li><li>0% coverage for meta description coverage is low.</li><li>0% coverage for open graph coverage is low.</li><li>0% coverage for json-ld coverage is low.</li></ul>
+    <h4>Missing signals</h4>
+    <ul><li>robots.txt was not found</li><li>sitemap.xml was not found</li><li>llms.txt was not found</li><li>Canonical URL coverage is low</li><li>Meta description coverage is low</li><li>Open Graph coverage is low</li><li>JSON-LD coverage is low</li></ul>
+    <h4>Suggested structural improvements</h4>
+    <ul><li>Publish a clear robots.txt and include a Sitemap directive.</li><li>Publish an XML sitemap with canonical URLs for important pages.</li><li>Add /llms.txt with concise site, product, documentation, and contact guidance.</li><li>Add canonical links to important indexable pages.</li><li>Add direct, non-duplicative meta descriptions to important pages.</li><li>Add og:title, og:description, og:url, and og:image to public pages.</li><li>Add JSON-LD to the homepage and high-value informational pages.</li></ul>
+  </article>
+        <article>
+    <h3>Structured Data</h3>
+    <p><strong>Score:</strong> 10/100 · <strong>Maturity:</strong> heuristic</p>
+    <p>This analyzer is heuristic and should be read directionally. Detected signals are weak or limited, with 3 diagnostic gap(s) surfaced.</p>
+    <h4>Detected signals</h4>
+    <ul><li>0% of crawled pages include JSON-LD.</li></ul>
+    <h4>Missing signals</h4>
+    <ul><li>No key schema.org types were detected</li><li>Entity schema is missing</li><li>FAQPage schema was not detected</li></ul>
+    <h4>Suggested structural improvements</h4>
+    <ul><li>Add relevant JSON-LD such as Organization, Service, Product, FAQPage, or Article.</li><li>Add Organization or LocalBusiness schema to the homepage.</li><li>Add FAQPage JSON-LD to pages that already contain real user questions and answers.</li></ul>
+  </article>
+        <article>
+    <h3>Content Chunkability</h3>
+    <p><strong>Score:</strong> 54/100 · <strong>Maturity:</strong> heuristic</p>
+    <p>This analyzer is heuristic and should be read directionally. Detected signals are partial, and 1 diagnostic gap(s) should be reviewed.</p>
+    <h4>Detected signals</h4>
+    <ul><li>100% of pages include an H1.</li><li>0% of pages include H2 sections.</li><li>0 pages have at least 800 visible text characters.</li><li>FAQ-like content discovered.</li><li>0 pages include definition-style explanatory paragraphs.</li><li>No severe text-to-visual ratio warning detected.</li></ul>
+    <h4>Missing signals</h4>
+    <ul><li>Some pages appear text-poor</li></ul>
+    <h4>Suggested structural improvements</h4>
+    <ul><li>Add concise explanatory copy, headings, and answer-ready paragraphs to thin pages.</li></ul>
+  </article>
+        <article>
+    <h3>Citation Readiness</h3>
+    <p><strong>Score:</strong> 48/100 · <strong>Maturity:</strong> heuristic</p>
+    <p>This analyzer is heuristic and should be read directionally. Detected signals are partial, and 3 diagnostic gap(s) should be reviewed.</p>
+    <h4>Detected signals</h4>
+    <ul><li>7 pages include external references.</li><li>About/contact trust pages are available.</li></ul>
+    <h4>Missing signals</h4>
+    <ul><li>Author, reviewer, or last-updated signals are weak</li><li>Clear factual claims are limited</li><li>Evidence pages were not discovered</li></ul>
+    <h4>Suggested structural improvements</h4>
+    <ul><li>Add author/reviewer names and last-updated dates to important informational pages.</li><li>Add factual statements with dates, numbers, qualifications, and supporting context.</li><li>Create resource, case study, research, or documentation pages for important claims.</li></ul>
+  </article>
+        <article>
+    <h3>Prompt Simulation</h3>
+    <p><strong>Score:</strong> 50/100 · <strong>Maturity:</strong> experimental</p>
+    <p>Prompt simulation is experimental in methodology version 0.1 and does not affect claims about real LLM answer behavior.</p>
+    <h4>Detected signals</h4>
+    <ul><li>Provider adapter scaffolding is present.</li></ul>
+    <h4>Missing signals</h4>
+    <ul><li>Provider-backed prompt simulation was not run.</li></ul>
+    <h4>Suggested structural improvements</h4>
+    <ul><li>Keep provider-backed interpretation checks optional and explicitly separated from crawl-only diagnostics.</li></ul>
+  </article>
+      </section>
+      <section class="panel">
+        <h2>Priority Diagnostic Signals</h2>
         <ol><li><strong>Organization-level schema is missing</strong><br>Without Organization or LocalBusiness schema, LLMs have fewer explicit entity signals.</li><li><strong>sitemap.xml was not found</strong><br>Sitemaps help AI and search crawlers discover canonical pages.</li><li><strong>No key schema.org types were detected</strong><br>Structured data gives AI systems explicit facts about the site entity and content.</li><li><strong>Entity schema is missing</strong><br>Organization or LocalBusiness schema is the strongest machine-readable entity anchor.</li><li><strong>Homepage meta description is missing or too thin</strong><br>AI systems need concise brand descriptions to identify what the organization does.</li><li><strong>Business type is not explicit</strong><br>LLMs need a category label before they can compare or recommend a site.</li><li><strong>Service description is weak</strong><br>AI answer engines need compact explanations of what the site offers.</li><li><strong>Target audience is unclear</strong><br>LLMs need audience labels to decide when a recommendation is relevant.</li><li><strong>robots.txt was not found</strong><br>Robots directives help crawlers understand access policy.</li><li><strong>Canonical URL coverage is low</strong><br>Canonical links reduce ambiguity when AI crawlers consolidate pages.</li></ol>
       </section>
       <section class="panel">
-        <h2>Recommended Fixes</h2>
-        <ol><li><strong>Organization-level schema is missing</strong><br>Add Organization or LocalBusiness JSON-LD with name, URL, logo, sameAs, and contact.</li><li><strong>sitemap.xml was not found</strong><br>Publish an XML sitemap with canonical URLs for important pages.</li><li><strong>Improve key schema.org types were detected</strong><br>Add relevant JSON-LD such as Organization, Service, Product, FAQPage, or Article.</li><li><strong>Improve schema is missing</strong><br>Add Organization or LocalBusiness schema to the homepage.</li><li><strong>meta description is missing or too thin</strong><br>Write a direct description with brand, business type, audience, location, and services.</li><li><strong>Business type is not explicit</strong><br>State the business type clearly, such as open-source toolkit, school, SaaS, or platform.</li><li><strong>Service description is weak</strong><br>Add a short service overview and dedicated service pages.</li><li><strong>Target audience is unclear</strong><br>Add explicit audience copy such as developers, maintainers, marketers, or parents.</li><li><strong>robots.txt was not found</strong><br>Publish a clear robots.txt and include a Sitemap directive.</li><li><strong>Canonical URL coverage is low</strong><br>Add canonical links to important indexable pages.</li></ol>
+        <h2>Suggested Structural Improvements</h2>
+        <ol><li><strong>Organization-level schema is missing</strong><br>Add Organization or LocalBusiness JSON-LD with name, URL, logo, sameAs, and contact.</li><li><strong>sitemap.xml was not found</strong><br>Publish an XML sitemap with canonical URLs for important pages.</li><li><strong>Improve key schema.org types were detected</strong><br>Add relevant JSON-LD such as Organization, Service, Product, FAQPage, or Article.</li><li><strong>Improve schema is missing</strong><br>Add Organization or LocalBusiness schema to the homepage.</li><li><strong>meta description is missing or too thin</strong><br>Write a direct description with brand, business type, audience, location, and services.</li><li><strong>Business type is not explicit</strong><br>State the business type clearly, such as open-source toolkit, school, product, or platform.</li><li><strong>Service description is weak</strong><br>Add a short service overview and dedicated service pages.</li><li><strong>Target audience is unclear</strong><br>Add explicit audience copy such as developers, maintainers, marketers, or parents.</li><li><strong>robots.txt was not found</strong><br>Publish a clear robots.txt and include a Sitemap directive.</li><li><strong>Canonical URL coverage is low</strong><br>Add canonical links to important indexable pages.</li></ol>
       </section>
     </main>
   </body>

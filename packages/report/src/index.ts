@@ -29,16 +29,19 @@ export async function writeReports(
 }
 
 export function renderMarkdownReport(audit: AuditResult): string {
-  return `# AI Visibility Audit Report
+  return `# Machine-Readable Visibility Diagnostic Report
 
-## Summary
+## Snapshot Summary
 
 - Target: ${audit.target.normalizedUrl}
 - Domain: ${audit.target.domain}
 - Generated at: ${audit.generatedAt}
+- Methodology version: ${audit.methodologyVersion}
 - Crawled pages: ${audit.crawl.pages.length}
 - Robots respected: ${audit.crawl.respectRobots ? "yes" : "no"}
 - AI Visibility Score: ${audit.scores.aiVisibility}/100
+
+This report is a heuristic diagnostic snapshot of public machine-readable visibility signals. It does not predict rankings, citations, or answer inclusion in any specific LLM-powered product.
 
 ## Scores
 
@@ -61,15 +64,17 @@ ${renderAnalyzer("Content Analyzer", audit.analyzers.content)}
 
 ${renderAnalyzer("Citation Readiness Analyzer", audit.analyzers.citationReadiness)}
 
-## Critical Issues
+${renderAnalyzer("Prompt Simulation Analyzer", audit.analyzers.promptSimulation)}
+
+## Priority Diagnostic Signals
 
 ${renderIssues(audit.issues)}
 
-## Recommended Fixes
+## Suggested Structural Improvements
 
 ${renderRecommendations(audit.recommendations)}
 
-## Entity Understanding
+## Entity Clarity Evidence
 
 ${renderEvidence(audit.scores.entityClarity.evidence)}
 
@@ -77,7 +82,7 @@ ${renderEvidence(audit.scores.entityClarity.evidence)}
 
 ${renderEvidence(audit.scores.structuredData.evidence)}
 
-## Content Readability for LLMs
+## Content Structure Evidence
 
 ${renderEvidence(audit.scores.contentChunkability.evidence)}
 
@@ -85,16 +90,16 @@ ${renderEvidence(audit.scores.contentChunkability.evidence)}
 
 ${renderEvidence(audit.scores.citationReadiness.evidence)}
 
-## Prompt Simulation Results
+## Prompt Simulation Placeholder
 
 ${renderEvidence(audit.scores.promptSimulation.evidence)}
 
-## Next Actions
+## Suggested Follow-up Analysis
 
-1. Fix high-severity entity and discoverability issues first.
-2. Add schema.org JSON-LD for the organization and key content types.
-3. Expand thin pages into clear, chunkable, answer-ready sections.
-4. Add citations, freshness markers, and trust signals to factual content.
+1. Review high-severity entity and discoverability signals first.
+2. Add explicit schema.org JSON-LD for the organization and key content types where appropriate.
+3. Expand thin pages with clear, chunkable, crawlable explanations.
+4. Add attribution, freshness markers, and evidence pages for factual claims.
 `;
 }
 
@@ -133,8 +138,9 @@ export function renderHtmlReport(audit: AuditResult): string {
   <body>
     <main>
       <section class="hero">
-        <h1>AI Visibility Audit Report</h1>
+        <h1>Machine-Readable Visibility Diagnostic Report</h1>
         <p>${escapeHtml(audit.target.normalizedUrl)}</p>
+        <p>Methodology version ${escapeHtml(audit.methodologyVersion)}</p>
         <div class="score">${audit.scores.aiVisibility}/100</div>
       </section>
       <section class="grid">
@@ -146,11 +152,20 @@ export function renderHtmlReport(audit: AuditResult): string {
         ${metric("Prompt", audit.scores.promptSimulation.score)}
       </section>
       <section class="panel">
-        <h2>Top Issues</h2>
+        <h2>Analyzer Explainability</h2>
+        ${renderHtmlAnalyzer("Entity Clarity", audit.analyzers.entity)}
+        ${renderHtmlAnalyzer("Technical Discoverability", audit.analyzers.technical)}
+        ${renderHtmlAnalyzer("Structured Data", audit.analyzers.structuredData)}
+        ${renderHtmlAnalyzer("Content Chunkability", audit.analyzers.content)}
+        ${renderHtmlAnalyzer("Citation Readiness", audit.analyzers.citationReadiness)}
+        ${renderHtmlAnalyzer("Prompt Simulation", audit.analyzers.promptSimulation)}
+      </section>
+      <section class="panel">
+        <h2>Priority Diagnostic Signals</h2>
         <ol>${issueItems}</ol>
       </section>
       <section class="panel">
-        <h2>Recommended Fixes</h2>
+        <h2>Suggested Structural Improvements</h2>
         <ol>${fixItems}</ol>
       </section>
     </main>
@@ -164,7 +179,7 @@ function scoreLine(label: string, detail: ScoreDetail): string {
 }
 
 function renderIssues(issues: VisibilityIssue[]): string {
-  if (issues.length === 0) return "No major issues detected.";
+  if (issues.length === 0) return "No major diagnostic signals detected.";
   return issues
     .map(
       (issue, index) =>
@@ -174,7 +189,7 @@ function renderIssues(issues: VisibilityIssue[]): string {
 }
 
 function renderRecommendations(recommendations: RecommendedFix[]): string {
-  if (recommendations.length === 0) return "No recommendations generated.";
+  if (recommendations.length === 0) return "No structural improvements generated.";
   return recommendations
     .map((fix, index) => `${index + 1}. **[${fix.priority}] ${fix.title}**\n   ${fix.description}`)
     .join("\n");
@@ -189,12 +204,41 @@ function renderAnalyzer(label: string, analyzer: AuditResult["analyzers"]["entit
   return `### ${label}
 
 - Score: ${analyzer.score}/100
+- Maturity: ${analyzer.maturity}
 - Issues: ${analyzer.issues.length}
 - Recommendations: ${analyzer.recommendations.length}
 
-Evidence:
-${renderEvidence(analyzer.evidence)}
+Interpretation:
+${analyzer.interpretation}
+
+Detected signals:
+${renderEvidence(analyzer.detectedSignals)}
+
+Missing signals:
+${renderEvidence(analyzer.missingSignals)}
+
+Suggested structural improvements:
+${renderEvidence(analyzer.suggestedStructuralImprovements)}
 `;
+}
+
+function renderHtmlAnalyzer(label: string, analyzer: AuditResult["analyzers"]["entity"]): string {
+  return `<article>
+    <h3>${escapeHtml(label)}</h3>
+    <p><strong>Score:</strong> ${analyzer.score}/100 · <strong>Maturity:</strong> ${escapeHtml(analyzer.maturity)}</p>
+    <p>${escapeHtml(analyzer.interpretation)}</p>
+    <h4>Detected signals</h4>
+    ${htmlList(analyzer.detectedSignals)}
+    <h4>Missing signals</h4>
+    ${htmlList(analyzer.missingSignals)}
+    <h4>Suggested structural improvements</h4>
+    ${htmlList(analyzer.suggestedStructuralImprovements)}
+  </article>`;
+}
+
+function htmlList(items: string[]): string {
+  if (items.length === 0) return "<p>No signals recorded.</p>";
+  return `<ul>${items.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
 }
 
 function metric(label: string, score: number): string {

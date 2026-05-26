@@ -1,7 +1,6 @@
 # Architecture
 
-OpenVisi is a CLI-first monorepo designed to become dashboard-ready without
-requiring a SaaS backend in the MVP.
+OpenVisi is a CLI-first monorepo for collecting website crawl evidence, evaluating machine-readable visibility signals, and writing local reports.
 
 ## Runtime flow
 
@@ -9,12 +8,12 @@ requiring a SaaS backend in the MVP.
 2. `packages/crawler` fetches robots, sitemap, llms.txt, and up to 30 pages.
 3. `packages/core` computes explainable scores from crawl evidence.
 4. `packages/report` writes `report.md`, `report.json`, and `report.html`.
-5. `apps/web` is reserved for a future local or hosted dashboard.
+5. `apps/web` is a minimal scaffold reserved for later local report viewing experiments.
 
 ## Principles
 
 - Respect `robots.txt` by default.
-- No black-hat SEO features.
-- No fake ranking claims.
+- No ranking manipulation features.
+- No claims of predicting proprietary AI product behavior.
 - Every score must be traceable to evidence.
 - Provider calls are BYOK-only and optional.

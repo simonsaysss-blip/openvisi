@@ -1,11 +1,11 @@
 # Roadmap
 
-OpenVisi is an early-stage open-source toolkit. The roadmap is focused on credibility, repeatability, and practical developer experience before any hosted or commercial workflow.
+OpenVisi is an early-stage open-source toolkit. The roadmap is focused on credibility, repeatability, methodology hardening, and practical developer experience.
 
 ## Phase 1: CLI MVP
 
 - Crawl a target URL.
-- Analyze AI visibility signals.
+- Analyze machine-readable AI visibility signals.
 - Generate Markdown, JSON, and HTML reports.
 - Keep output explainable and evidence-backed.
 
@@ -13,7 +13,7 @@ OpenVisi is an early-stage open-source toolkit. The roadmap is focused on credib
 
 - Document scoring logic and limitations.
 - Add repeatable fixtures.
-- Add benchmark examples.
+- Add exploratory benchmark snapshots.
 - Improve analyzer explainability.
 - Add regression tests for scoring behavior.
 
@@ -30,11 +30,11 @@ OpenVisi is an early-stage open-source toolkit. The roadmap is focused on credib
 - Improve contributor workflow.
 - Publish more public examples.
 - Explore integrations with documentation and analytics workflows.
-- Consider hosted workflows later, without treating the current project as SaaS-ready.
+- Keep possible future application areas separate from the OSS diagnostic core.
 
 ## Non-Goals for the Current Stage
 
 - No ranking guarantees.
 - No claims of manipulating AI search systems.
 - No dependency on private LLM APIs for the core MVP.
-- No aggressive SaaS or enterprise positioning before the OSS core is stable.
+- No hosted-product positioning before the OSS methodology is stable.

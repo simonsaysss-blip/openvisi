@@ -1,0 +1,15 @@
+{
+  "name": "faq-heavy-site",
+  "purpose": "Representative fixture for a site with direct question-answer structure and FAQPage schema.",
+  "expectedSignals": {
+    "entityClarity": "moderate",
+    "technicalDiscoverability": "moderate",
+    "structuredData": "moderate",
+    "contentChunkability": "high",
+    "citationReadiness": "moderate"
+  },
+  "notes": [
+    "Designed for future FAQ and content chunkability tests.",
+    "Uses synthetic public-safe content."
+  ]
+}

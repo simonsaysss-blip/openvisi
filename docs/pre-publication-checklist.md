@@ -67,7 +67,7 @@ openvisi
 Suggested description:
 
 ```text
-Open-source AI visibility analytics infrastructure for the LLM search era.
+Open-source AI-readable visibility diagnostics for the LLM search era.
 ```
 
 Suggested topics:
@@ -77,7 +77,6 @@ ai-search
 llm
 visibility
 analytics
-seo
 typescript
 cli
 open-source

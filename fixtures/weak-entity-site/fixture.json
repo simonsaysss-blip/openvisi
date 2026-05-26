@@ -1,0 +1,15 @@
+{
+  "name": "weak-entity-site",
+  "purpose": "Representative fixture for a site with vague identity, thin copy, missing metadata, and weak machine-readable structure.",
+  "expectedSignals": {
+    "entityClarity": "low",
+    "technicalDiscoverability": "low",
+    "structuredData": "low",
+    "contentChunkability": "low",
+    "citationReadiness": "low"
+  },
+  "notes": [
+    "Designed to support future false-positive and weak-signal tests.",
+    "Uses synthetic public-safe content."
+  ]
+}

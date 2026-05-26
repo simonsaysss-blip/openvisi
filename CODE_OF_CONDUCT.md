@@ -16,7 +16,7 @@ OpenVisi follows a practical contributor standard: be respectful, be specific, a
 - Publishing private information without permission.
 - Repeated off-topic promotion or spam.
 - Misrepresenting OpenVisi as a guaranteed ranking or manipulation tool.
-- Pressuring maintainers to accept unrelated commercial priorities.
+- Pressuring maintainers to accept unrelated roadmap priorities.
 
 ## Enforcement
 

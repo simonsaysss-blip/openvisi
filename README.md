@@ -1,10 +1,10 @@
 # OpenVisi
 
-OpenVisi is an open-source AI visibility analytics toolkit that helps teams understand how readable, citeable, and recommendable their websites are for AI search engines and LLM-powered discovery.
+OpenVisi is an open-source AI visibility analysis toolkit that helps teams understand how readable, citeable, and machine-readable their websites are for AI search and LLM-powered discovery.
 
-**Open-source AI visibility analytics infrastructure for the LLM search era.**
+**Open-source AI-readable visibility diagnostics for the LLM search era.**
 
-OpenVisi is not a traditional SEO keyword tracker, content farm, agency automation tool, or guaranteed AI ranking optimizer. It is an early-stage developer toolkit for inspecting the public signals that may help LLM-powered discovery systems understand a website.
+OpenVisi is not a search keyword tracker, content farm, agency automation tool, or ranking tool. It is an early-stage developer toolkit for inspecting public machine-readable visibility signals that may help LLM-powered discovery systems understand a website.
 
 ## What OpenVisi Does Today
 
@@ -14,7 +14,7 @@ The current MVP provides a CLI that:
 - checks technical, structured data, content, entity, and citation-readiness signals
 - computes a directional AI Visibility Score
 - writes Markdown, JSON, and HTML reports
-- surfaces issues, evidence, and recommended fixes
+- surfaces diagnostic issues, evidence, and suggested structural improvements
 
 The scoring model is heuristic and diagnostic. It does not claim to predict rankings, citations, recommendations, or answer inclusion inside ChatGPT, Claude, Gemini, Perplexity, or any other specific AI product.
 
@@ -22,9 +22,9 @@ The scoring model is heuristic and diagnostic. It does not claim to predict rank
 
 - Open-source maintainers improving project websites and documentation
 - Developers building AI search, content intelligence, or documentation workflows
-- SaaS and product teams preparing public documentation for LLM-powered discovery
+- product and documentation teams preparing public websites for LLM-powered discovery
 - Education teams that need clearer entity, service, and trust signals
-- Small teams that want transparent diagnostics instead of black-box SEO claims
+- Small teams that want transparent diagnostics instead of black-box visibility claims
 
 ## Analyzer Categories
 
@@ -35,7 +35,7 @@ OpenVisi currently reports these categories:
 - **Structured Data**: schema.org type coverage and page-level JSON-LD usage
 - **Content Chunkability**: H1/H2 structure, FAQ presence, definition-style paragraphs, readable text, and text-to-visual ratio warnings
 - **Citation Readiness**: author or freshness signals, external references, factual claims, evidence pages, and trust signals
-- **Prompt Simulation**: currently scaffolded as a non-API placeholder; provider-backed simulation is not part of the MVP
+- **Prompt Simulation**: currently scaffolded as a non-API placeholder; provider-backed interpretation checks are not part of the MVP
 
 See [docs/methodology.md](docs/methodology.md) for the current methodology and limitations.
 
@@ -59,7 +59,7 @@ reports/example-com/report.html
 
 ## Demo Report
 
-A curated example report is committed under:
+A curated exploratory benchmark snapshot is committed under:
 
 - [examples/reports/example-com/report.md](examples/reports/example-com/report.md)
 - [examples/reports/example-com/report.json](examples/reports/example-com/report.json)
@@ -86,7 +86,7 @@ Top 10 Issues:
 2. [high] sitemap.xml was not found
 3. [high] No key schema.org types were detected
 
-Top 10 Recommended Fixes:
+Top 10 Suggested Improvements:
 1. [high] Add Organization or LocalBusiness JSON-LD with name, URL, logo, sameAs, and contact.
 2. [high] Publish an XML sitemap with canonical URLs for important pages.
 3. [high] Add relevant JSON-LD such as Organization, Service, Product, FAQPage, or Article.
@@ -118,7 +118,7 @@ flowchart LR
 ```text
 apps/
   cli/        Command-line scanner
-  web/        Dashboard-ready Next.js scaffold
+  web/        Minimal web scaffold reserved for later report viewing experiments
 packages/
   core/       Shared types, scoring, and current analyzer implementation
   crawler/    Website crawler and HTML extractor
@@ -129,7 +129,11 @@ docs/
   architecture.md
   methodology.md
   roadmap.md
-  commercial-roadmap.md
+  future-applications.md
+benchmarks/
+  exploratory/  Methodology-oriented benchmark scaffolds without collected data
+fixtures/
+  */            Synthetic examples for future analyzer validation
 examples/
   reports/    Curated demo reports
 ```
@@ -152,8 +156,12 @@ CI uses the same npm-first workflow with `npm ci`.
 - OpenVisi does not call ChatGPT, Claude, Gemini, Perplexity, or other LLM providers in the MVP.
 - The AI Visibility Score is an early diagnostic signal, not a definitive ranking model.
 - The crawler is intentionally lightweight and may not fully represent JavaScript-heavy sites.
-- Prompt simulation is currently represented as a placeholder score because provider-backed evaluation is not implemented.
+- Prompt simulation is currently represented as a placeholder score because provider-backed interpretation checks are not implemented.
 - The package is not claimed as published; use the repository scripts for local development.
+
+## Future Methodology Directions
+
+OpenVisi's methodology work is expected to focus on repeatable benchmark datasets, explainable scoring notes, comparative snapshots, fixture validation, and rule-level methodology hardening. These are research and diagnostics foundations, not claims of real-time AI ranking tracking or citation guarantees.
 
 ## Roadmap
 

@@ -1,8 +1,8 @@
 # Contributing to OpenVisi
 
 OpenVisi is CLI-first, OSS-first, and report-first. Contributions should keep
-scores explainable, avoid black-hat SEO tactics, and respect `robots.txt` by
-default.
+scores explainable, avoid ranking manipulation tactics, and respect `robots.txt`
+by default.
 
 ## Local setup
 

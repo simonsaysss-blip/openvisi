@@ -60,12 +60,12 @@ function printSummary(audit: ReturnType<typeof createAudit>, reportPath: string)
   console.log(`Content Chunkability Score: ${audit.scores.contentChunkability.score}/100`);
   console.log(`Citation Readiness Score: ${audit.scores.citationReadiness.score}/100`);
   console.log("");
-  console.log("Top 10 Issues:");
+  console.log("Top 10 Diagnostic Signals:");
   for (const [index, issue] of audit.issues.entries()) {
     console.log(`${index + 1}. [${issue.severity}] ${issue.title}`);
   }
   console.log("");
-  console.log("Top 10 Recommended Fixes:");
+  console.log("Top 10 Suggested Structural Improvements:");
   for (const [index, fix] of audit.recommendations.entries()) {
     console.log(`${index + 1}. [${fix.priority}] ${fix.description}`);
   }

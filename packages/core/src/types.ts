@@ -10,6 +10,7 @@ export type ScoreCategory =
   | "promptSimulation";
 
 export type IssueSeverity = "critical" | "high" | "medium" | "low";
+export type AnalyzerMaturity = "stable" | "experimental" | "heuristic";
 
 export interface PageData {
   url: string;
@@ -95,6 +96,11 @@ export interface PromptSimulationResult {
 
 export interface AnalyzerResult {
   score: number;
+  maturity: AnalyzerMaturity;
+  detectedSignals: string[];
+  missingSignals: string[];
+  interpretation: string;
+  suggestedStructuralImprovements: string[];
   issues: VisibilityIssue[];
   recommendations: RecommendedFix[];
   evidence: string[];
@@ -104,6 +110,7 @@ export interface AnalyzerResult {
 
 export interface AuditResult {
   projectName: string;
+  methodologyVersion: string;
   generatedAt: string;
   target: {
     inputUrl: string;

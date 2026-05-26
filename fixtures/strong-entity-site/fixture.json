@@ -1,0 +1,15 @@
+{
+  "name": "strong-entity-site",
+  "purpose": "Representative fixture for a site with explicit entity, metadata, schema, audience, contact, and freshness signals.",
+  "expectedSignals": {
+    "entityClarity": "high",
+    "technicalDiscoverability": "moderate",
+    "structuredData": "high",
+    "contentChunkability": "moderate",
+    "citationReadiness": "moderate"
+  },
+  "notes": [
+    "Designed for future analyzer validation, not full crawler replay.",
+    "Uses synthetic public-safe content."
+  ]
+}
