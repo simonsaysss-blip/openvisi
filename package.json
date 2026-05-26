@@ -4,7 +4,6 @@
   "private": true,
   "description": "Open-source AI visibility analytics for the LLM search era.",
   "type": "module",
-  "packageManager": "npm@11.12.1",
   "workspaces": [
     "apps/*",
     "packages/*"
