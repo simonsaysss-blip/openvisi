@@ -12,12 +12,25 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      COREPACK_ENABLE_PROJECT_SPEC: "0"
+      NEXT_TELEMETRY_DISABLED: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+      - name: Debug package manager metadata
+        run: |
+          pwd
+          git rev-parse HEAD
+          find . -name package.json -not -path "./node_modules/*" -print -exec grep -H '"packageManager"' {} \; || true
+          grep -R 'yarn@npm@11.12.1' . \
+            --exclude-dir=node_modules \
+            --exclude-dir=.git \
+            --exclude-dir=.next \
+            --exclude-dir=dist || true
       - run: corepack disable || true
       - run: npm --version
       - run: npm ci
