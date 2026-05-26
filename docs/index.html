@@ -163,6 +163,25 @@
         color: var(--muted);
         font-size: 0.9rem;
       }
+
+      .featured {
+        margin-top: 18px;
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--surface);
+      }
+
+      .featured strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+
+      .featured p {
+        margin-bottom: 12px;
+        font-size: 0.98rem;
+      }
     </style>
   </head>
   <body>
@@ -200,6 +219,15 @@ node ./apps/cli/dist/index.js scan https://example.com</code></pre>
 
           <div class="note">
             Static GitHub Pages landing. The demo is a report snapshot, not a hosted scanner.
+          </div>
+
+          <div class="featured">
+            <strong>New scan note: Popular does not mean AI-readable</strong>
+            <p>
+              OpenVisi scanned Google, YouTube, Facebook, Instagram, ChatGPT, and Wikipedia with the
+              crawl-diagnostic v0.1 measurement layer.
+            </p>
+            <a class="button" href="./articles/popular-websites-ai-readable.html">Read the scan</a>
           </div>
         </section>
       </div>

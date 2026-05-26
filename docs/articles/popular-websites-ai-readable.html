@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Popular Does Not Mean AI-readable | OpenVisi</title>
+    <meta
+      name="description"
+      content="OpenVisi scanned popular websites and found that popularity and AI-readable source structure are different measurement surfaces."
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f5f7fa;
+        --surface: #ffffff;
+        --surface-muted: #f8fafc;
+        --text: #101418;
+        --muted: #5d6675;
+        --border: #d8dee8;
+        --accent: #2563eb;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b0f14;
+          --surface: #111820;
+          --surface-muted: #151e28;
+          --text: #e5e7eb;
+          --muted: #9aa4b2;
+          --border: #263241;
+          --accent: #60a5fa;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--bg);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.65;
+      }
+
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 36px 20px 64px;
+      }
+
+      nav {
+        margin-bottom: 36px;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      .back {
+        color: var(--muted);
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      h1 {
+        max-width: 780px;
+        margin: 0 0 18px;
+        font-size: clamp(2.3rem, 7vw, 4.6rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-top: 40px;
+        font-size: 1.35rem;
+        line-height: 1.25;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      .lede {
+        max-width: 760px;
+        color: var(--text);
+        font-size: 1.18rem;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 24px 0;
+      }
+
+      .pill {
+        display: inline-flex;
+        padding: 5px 9px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        color: var(--muted);
+        background: var(--surface);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .note,
+      table,
+      pre {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .note {
+        padding: 16px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        margin: 24px 0;
+      }
+
+      table {
+        width: 100%;
+        min-width: 760px;
+        border-collapse: collapse;
+        font-size: 0.92rem;
+      }
+
+      th,
+      td {
+        padding: 10px 9px;
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--text);
+        background: var(--surface-muted);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+      }
+
+      td {
+        color: var(--muted);
+      }
+
+      code {
+        color: var(--text);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      }
+
+      pre {
+        overflow-x: auto;
+        padding: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav>
+        <a class="back" href="../">OpenVisi</a>
+      </nav>
+
+      <article>
+        <h1>Popular Does Not Mean AI-readable</h1>
+        <p class="lede">
+          On May 26, 2026, we used OpenVisi to run a small crawl-diagnostic scan across a sample of
+          globally popular websites. The useful finding was not the score order. It was that
+          popularity and AI-readable source structure are different measurement surfaces.
+        </p>
+
+        <div class="meta">
+          <span class="pill">OpenVisi scan</span>
+          <span class="pill">crawl-diagnostic-v0.1</span>
+          <span class="pill">May 26, 2026</span>
+        </div>
+
+        <div class="note">
+          <p>
+            This is not a live LLM benchmark and not a traffic ranking. OpenVisi did not run
+            provider-backed answer scans. It inspected crawl-visible public source layers and mapped
+            the evidence into canonical AI Visibility vocabulary.
+          </p>
+        </div>
+
+        <h2>What OpenVisi Measured</h2>
+        <p>
+          The scan measured Entity Clarity, Citation Coverage proxy, Machine-readable Trust proxy,
+          AI Citation Signals proxy, crawlable pages, and missing structural signals. Fields such as
+          <code>answerShare</code>, <code>competitorDisplacement</code>,
+          <code>officialSourceCitationRate</code>, and <code>comparisonVisibility</code> remained
+          <code>null</code> because they require provider-backed answer collection and prompt packs.
+        </p>
+
+        <h2>Scan Setup</h2>
+        <pre><code>npm run cli -- scan &lt;url&gt; --max-pages 2 --timeout-ms 10000 -o /private/tmp/openvisi-hot-scans</code></pre>
+        <p>
+          Targets: Google, YouTube, Facebook, Instagram, ChatGPT, and Wikipedia. The target set was
+          selected from public high-traffic website ranking context, including Similarweb's global
+          top websites page.
+        </p>
+
+        <h2>Results Snapshot</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Domain</th>
+                <th>AI Visibility Score</th>
+                <th>Answer Presence Proxy</th>
+                <th>Entity Clarity</th>
+                <th>Citation Coverage Proxy</th>
+                <th>Machine-readable Trust Proxy</th>
+                <th>AI Citation Signals Proxy</th>
+                <th>Crawled Pages</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>wikipedia.org</td>
+                <td>49</td>
+                <td>0.57</td>
+                <td>0.67</td>
+                <td>0.75</td>
+                <td>0.42</td>
+                <td>0.42</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>google.com</td>
+                <td>45</td>
+                <td>0.53</td>
+                <td>0.45</td>
+                <td>0.62</td>
+                <td>0.36</td>
+                <td>0.46</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>youtube.com</td>
+                <td>44</td>
+                <td>0.52</td>
+                <td>0.45</td>
+                <td>0.62</td>
+                <td>0.36</td>
+                <td>0.45</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>facebook.com</td>
+                <td>26</td>
+                <td>0.30</td>
+                <td>0.15</td>
+                <td>0.15</td>
+                <td>0.13</td>
+                <td>0.25</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>instagram.com</td>
+                <td>26</td>
+                <td>0.30</td>
+                <td>0.15</td>
+                <td>0.15</td>
+                <td>0.13</td>
+                <td>0.25</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>chatgpt.com</td>
+                <td>20</td>
+                <td>0.21</td>
+                <td>0.15</td>
+                <td>0.15</td>
+                <td>0.13</td>
+                <td>0.16</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>The Pattern</h2>
+        <p>
+          A site can be massively popular and still expose a thin crawl-visible source layer on its
+          public homepage. For humans, brand recognition fills the gap. For machines, the source
+          layer still needs explicit structure: titles, headings, entity definitions, schema,
+          canonical pages, documentation depth, and citation-ready source material.
+        </p>
+
+        <h2>Wikipedia Looked Different</h2>
+        <p>
+          Wikipedia had the strongest Entity Clarity and Citation Coverage proxy in this small
+          sample. Wikipedia's public surface is built around structured explanation, dense internal
+          linking, and citeable text. It is not just a brand destination. It is a source layer.
+        </p>
+
+        <h2>What This Does Not Prove</h2>
+        <p>
+          This post does not prove which website appears most often in AI answers, which website is
+          cited most often by a specific AI product, or how proprietary AI systems internally
+          interpret these entities. Those questions require provider-backed prompt packs, answer
+          collection, source classification, and repeatable benchmark methodology.
+        </p>
+
+        <h2>The Takeaway</h2>
+        <p>
+          Popular websites are not automatically AI-readable. AI-readable Structure is a separate
+          surface. It has to be measured with its own vocabulary, schema, methodology, and report
+          format. That is the layer OpenVisi is building.
+        </p>
+
+        <h2>Links</h2>
+        <ul>
+          <li>
+            Source post:
+            <a
+              href="https://github.com/simonsaysss-blip/openvisi/blob/main/posts/openvisi-scan-popular-websites-2026-05-26.md"
+              >Markdown on GitHub</a
+            >
+          </li>
+          <li>
+            Target-selection context:
+            <a href="https://www.similarweb.com/top-websites/">Similarweb Top Websites</a>
+          </li>
+          <li>
+            Project:
+            <a href="https://github.com/simonsaysss-blip/openvisi">OpenVisi on GitHub</a>
+          </li>
+        </ul>
+      </article>
+    </main>
+  </body>
+</html>

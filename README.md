@@ -79,6 +79,13 @@ directional methodology outputs, not as predictions for proprietary AI products.
 - [Limitations](docs/methodology/limitations.md)
 - [Demo Report Template](examples/demo-report.md)
 
+## Latest Scan Note
+
+- [Popular Does Not Mean AI-readable](docs/articles/popular-websites-ai-readable.html)
+  explains what OpenVisi found when scanning Google, YouTube, Facebook,
+  Instagram, ChatGPT, and Wikipedia with the crawl-diagnostic v0.1 measurement
+  layer.
+
 ## Current MVP Features
 
 - CLI scanner for public websites
