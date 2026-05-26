@@ -1,4 +1,7 @@
-# Benchmarks
+# The OpenVisi AI Visibility Benchmark
+
+Measuring Answer Presence, Entity Clarity, Citation Coverage, and Competitor
+Displacement across LLM-powered search surfaces.
 
 OpenVisi benchmark folders are scaffolds for future exploratory methodology work.
 

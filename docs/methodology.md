@@ -1,5 +1,8 @@
 # OpenVisi Methodology
 
+AI Visibility is the measurable presence, accuracy, citation quality, and
+competitive position of an entity across AI-generated answers.
+
 OpenVisi evaluates public website signals that may affect how clearly a site can be read, summarized, cited, and interpreted by LLM-powered discovery systems.
 
 The current methodology is intentionally conservative. The score is an early diagnostic signal for machine-readable visibility structure, not a definitive ranking model.
