@@ -8,6 +8,10 @@ import {
   normalizeInputUrl,
   stripTrailingSlash
 } from "./url.js";
+export * from "./diagnostics.js";
+export * from "./extractors.js";
+export * from "./snapshotAdapter.js";
+export * from "./structureTrustInputs.js";
 
 export interface CrawlOptions {
   maxPages?: number;

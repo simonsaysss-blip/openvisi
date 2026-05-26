@@ -1,6 +1,19 @@
 {
   "name": "@openvisi/report",
   "version": "0.1.0",
+  "description": "Report utilities for OpenVisi AI Visibility diagnostics.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonsaysss-blip/openvisi.git",
+    "directory": "packages/report"
+  },
+  "keywords": [
+    "ai-visibility",
+    "llm-search",
+    "ai-search",
+    "reports"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

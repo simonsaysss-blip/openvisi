@@ -1,0 +1,26 @@
+name: Release Check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  release-check:
+    runs-on: ubuntu-latest
+    env:
+      COREPACK_ENABLE_PROJECT_SPEC: "0"
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: corepack disable || true
+      - run: npm --version
+      - run: npm ci
+      - run: npm run release:check

@@ -1,0 +1,29 @@
+{
+  "brandName": "ExampleAI",
+  "domain": "example.ai",
+  "category": "AI Visibility diagnostics",
+  "competitors": [
+    {
+      "name": "Reference Competitor",
+      "domain": "competitor.example",
+      "aliases": ["Reference"]
+    }
+  ],
+  "providers": [
+    {
+      "provider": "mock",
+      "model": "mock-v0",
+      "enabled": true
+    }
+  ],
+  "outputDir": "openvisi-report",
+  "includeExperimentalMetrics": false,
+  "promptPackInput": {
+    "audience": "technical teams evaluating AI Visibility infrastructure",
+    "problems": [
+      "understanding how AI-generated answers describe an entity",
+      "reviewing machine-readable trust signals"
+    ],
+    "integrations": ["GitHub", "documentation sites"]
+  }
+}

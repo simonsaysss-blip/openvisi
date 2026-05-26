@@ -1,0 +1,5 @@
+[
+  "measurement-inputs.json is an input artifact and does not compute metrics.",
+  "measurement-inputs.json does not include aiVisibilityScore.",
+  "Measurement inputs include mock evaluator signals and are not real LLM evidence."
+]

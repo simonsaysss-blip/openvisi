@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "0.1",
+  "project": "OpenVisi",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "stage": "dry-run",
+  "artifacts": [
+    {
+      "id": "scan-plan",
+      "type": "scan-plan",
+      "path": "scan-plan.json",
+      "description": "This referenced file is intentionally missing.",
+      "generated": true,
+      "requiredFor": ["scan"],
+      "stage": "stage-1c"
+    },
+    {
+      "id": "prompt-pack",
+      "type": "prompt-pack",
+      "path": "prompt-pack.json",
+      "description": "Prompt pack fixture.",
+      "generated": true,
+      "requiredFor": ["scan"],
+      "stage": "stage-1c"
+    },
+    {
+      "id": "config.normalized",
+      "type": "config",
+      "path": "config.normalized.json",
+      "description": "Normalized config fixture.",
+      "generated": true,
+      "requiredFor": ["scan"],
+      "stage": "stage-1c"
+    },
+    {
+      "id": "warnings",
+      "type": "warnings",
+      "path": "warnings.json",
+      "description": "Warnings fixture.",
+      "generated": true,
+      "requiredFor": ["scan"],
+      "stage": "stage-1c"
+    },
+    {
+      "id": "artifact-manifest",
+      "type": "unknown",
+      "path": "artifact-manifest.json",
+      "description": "Manifest fixture.",
+      "generated": true,
+      "requiredFor": ["scan"],
+      "stage": "stage-2c"
+    }
+  ],
+  "warnings": []
+}

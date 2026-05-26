@@ -1,6 +1,19 @@
 {
   "name": "@openvisi/crawler",
   "version": "0.1.0",
+  "description": "Static crawler and canonical snapshot adapters for OpenVisi AI Visibility diagnostics.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonsaysss-blip/openvisi.git",
+    "directory": "packages/crawler"
+  },
+  "keywords": [
+    "ai-visibility",
+    "llm-search",
+    "ai-search",
+    "crawler"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

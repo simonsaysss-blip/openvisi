@@ -1,0 +1,5 @@
+[
+  "Dry-run mode does not crawl pages.",
+  "Dry-run mode does not call LLM providers.",
+  "Metrics are not computed in Stage 1C."
+]

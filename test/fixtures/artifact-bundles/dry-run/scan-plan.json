@@ -1,0 +1,19 @@
+{
+  "brandName": "OpenVisi",
+  "domain": "openvisi.dev",
+  "category": "AI Visibility diagnostics",
+  "providers": [
+    {
+      "provider": "mock",
+      "model": "mock-v0",
+      "enabled": true
+    }
+  ],
+  "outputDir": "openvisi-report",
+  "includeExperimentalMetrics": false,
+  "promptCount": 2,
+  "promptIntents": ["category_discovery", "brand_specific"],
+  "competitorCount": 1,
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "nextStage": "Implement crawler and evaluator to produce full OpenVisiScanResult."
+}

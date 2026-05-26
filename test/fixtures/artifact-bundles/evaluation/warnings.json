@@ -1,0 +1,6 @@
+[
+  "Stage 3B evaluation uses the deterministic mock provider only.",
+  "answers.json contains mock LLMAnswer objects and is not real LLM output.",
+  "answer-signal-inputs.json is an input artifact, not final metrics.",
+  "Evaluation does not compute metrics, citations, or scan results."
+]

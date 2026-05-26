@@ -1,0 +1,55 @@
+name: Feature request
+description: Suggest a focused OpenVisi improvement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What concrete workflow or limitation should this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed feature
+      description: Describe the smallest useful change.
+    validations:
+      required: true
+  - type: dropdown
+    id: artifact-stage
+    attributes:
+      label: Affected artifact stage
+      options:
+        - dry-run
+        - static-crawl
+        - evaluation
+        - measurement-inputs
+        - metrics-draft
+        - metrics-review
+        - metrics-finalization
+        - debug-report
+        - documentation
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: fit
+    attributes:
+      label: Why this belongs in OpenVisi
+      description: Explain how it supports AI Visibility measurement infrastructure.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Scope check
+      options:
+        - label: This does not require treating mock evidence as real LLM evidence.
+        - label: This does not require generating final metrics without a finalization guard.
+        - label: This does not require API keys or provider SDKs in the mock demo pipeline.

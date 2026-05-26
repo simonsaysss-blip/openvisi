@@ -137,6 +137,16 @@ describe("golden artifact bundle fixtures", () => {
     expect(bundle.decision.allowedToGenerateScanResult).toBe(false);
   });
 
+  it("validates the debug-report fixture manifest shape", async () => {
+    const manifest = await readManifest("debug-report");
+    const files = await readdir(path.join(fixtureRoot, "debug-report"));
+
+    expect(validateArtifactManifestShape(manifest)).toEqual([]);
+    expect(files).toContain("debug-report.md");
+    expect(files).toContain("artifact-manifest.json");
+    expect(files).toContain("warnings.json");
+  });
+
   it("uses only relative fixture artifact paths", async () => {
     const manifests = [
       await readManifest("dry-run"),
@@ -145,7 +155,8 @@ describe("golden artifact bundle fixtures", () => {
       await readManifest("measurement-inputs"),
       await readManifest("metrics-draft"),
       await readManifest("metrics-review"),
-      await readManifest("metrics-finalization")
+      await readManifest("metrics-finalization"),
+      await readManifest("debug-report")
     ];
 
     for (const manifest of manifests) {
@@ -275,6 +286,29 @@ describe("golden artifact bundle fixtures", () => {
     }
   });
 
+  it("keeps debug-report fixtures free of raw, source, final result, and final report artifacts", async () => {
+    const manifest = await readManifest("debug-report");
+    const files = await readdir(path.join(fixtureRoot, "debug-report"));
+    const manifestPaths = manifest.artifacts.map((artifact) => artifact.path);
+
+    for (const forbiddenPath of [
+      "metrics.json",
+      "scan-result.json",
+      "report.md",
+      "report.html",
+      "citations.json",
+      "answers.json",
+      "crawled-pages.json",
+      "measurement-inputs.json",
+      "metrics-draft.json",
+      "metrics-review.json",
+      "metrics-finalization.json"
+    ]) {
+      expect(files).not.toContain(forbiddenPath);
+      expect(manifestPaths).not.toContain(forbiddenPath);
+    }
+  });
+
   it("matches required dry-run artifacts to fixture bundle contents", async () => {
     await expectRequiredArtifactsPresent("dry-run");
   });
@@ -301,6 +335,10 @@ describe("golden artifact bundle fixtures", () => {
 
   it("matches required metrics-finalization artifacts to fixture bundle contents", async () => {
     await expectRequiredArtifactsPresent("metrics-finalization");
+  });
+
+  it("matches required debug-report artifacts to fixture bundle contents", async () => {
+    await expectRequiredArtifactsPresent("debug-report");
   });
 
   it("rejects the absolute-path negative fixture", async () => {

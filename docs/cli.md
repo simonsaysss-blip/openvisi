@@ -331,22 +331,63 @@ openvisi artifacts inspect --output openvisi-measurement --stage measurement-inp
 openvisi artifacts inspect --output openvisi-metrics-draft --stage metrics-draft
 openvisi artifacts inspect --output openvisi-metrics-review --stage metrics-review
 openvisi artifacts inspect --output openvisi-metrics-finalization --stage metrics-finalization
+openvisi artifacts inspect --output openvisi-debug-report --stage debug-report
 ```
 
 Options:
 
 - `--output <path>`: artifact bundle directory, defaulting to `openvisi-report`
-- `--stage <stage>`: expected bundle stage: `dry-run`, `static-crawl`, `evaluation`, `measurement-inputs`, `metrics-draft`, `metrics-review`, `metrics-finalization`, `full-scan`, `report`, or `unknown`
+- `--stage <stage>`: expected bundle stage: `dry-run`, `static-crawl`, `evaluation`, `measurement-inputs`, `metrics-draft`, `metrics-review`, `metrics-finalization`, `debug-report`, `full-scan`, `report`, or `unknown`
 
 The command reads `artifact-manifest.json`, checks whether referenced artifact files exist, and prints a concise validation summary. It exits non-zero when error-level validation issues are found.
 
 The artifact contracts live in `packages/core`; the CLI only provides filesystem reading, writing, and inspection.
 
-## What Stage 4C Does Not Do
+## Create Artifact Debug Report
+
+```bash
+npx openvisi debug report \
+  --dry-run-output openvisi-report \
+  --crawl-output openvisi-crawl \
+  --eval-output openvisi-eval \
+  --measurement-output openvisi-measurement \
+  --metrics-draft-output openvisi-metrics-draft \
+  --metrics-review-output openvisi-metrics-review \
+  --metrics-finalization-output openvisi-metrics-finalization \
+  --output openvisi-debug-report
+```
+
+Defaults:
+
+- `--dry-run-output openvisi-report`
+- `--crawl-output openvisi-crawl`
+- `--eval-output openvisi-eval`
+- `--measurement-output openvisi-measurement`
+- `--metrics-draft-output openvisi-metrics-draft`
+- `--metrics-review-output openvisi-metrics-review`
+- `--metrics-finalization-output openvisi-metrics-finalization`
+- `--output openvisi-debug-report`
+
+The command expects valid source bundles for every stage from dry-run through metrics-finalization.
+
+Output files:
+
+```text
+openvisi-debug-report/
+  debug-report.md
+  artifact-manifest.json
+  warnings.json
+```
+
+`debug-report.md` is a human-readable artifact pipeline summary. It is not a final AI Visibility report, does not compute final AI Visibility Score, and does not generate `metrics.json`, `scan-result.json`, `report.md`, or `report.html`.
+
+The command reads summary artifacts only. It does not load raw `answers.json` or raw `crawled-pages.json`.
+
+## What Stage 5A Does Not Do
 
 - It does not use Playwright or Puppeteer.
 - It does not render JavaScript-heavy pages with a browser.
 - It does not call real LLM providers.
 - It does not create `metrics.json`, `citations.json`, or `scan-result.json`.
 - It does not generate real answers, citations, metrics, or crawled page content.
-- It does not generate `report.md` or `report.html` from an artifact bundle.
+- It does not generate final `report.md` or `report.html` from an artifact bundle.

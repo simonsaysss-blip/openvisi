@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "0.1",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "status": "review",
+  "sourceArtifacts": {
+    "metricsDraft": "metrics-draft.json"
+  },
+  "evidenceMode": "mock",
+  "readiness": {
+    "readyForFinalMetrics": false,
+    "readyForAiVisibilityScore": false,
+    "productionReady": false
+  },
+  "metricReviews": {
+    "answerPresence": {
+      "draftAvailable": true,
+      "draftValueAvailable": true,
+      "eligibleForFinalization": false,
+      "decision": "blocked",
+      "reason": "Derived from mock evaluator evidence.",
+      "blockingReasons": ["mock_evaluator_evidence"]
+    },
+    "answerShare": {
+      "draftAvailable": true,
+      "draftValueAvailable": true,
+      "eligibleForFinalization": false,
+      "decision": "blocked",
+      "reason": "Derived from mock evaluator evidence.",
+      "blockingReasons": ["mock_evaluator_evidence"]
+    },
+    "entityClarity": {
+      "draftAvailable": true,
+      "draftValueAvailable": true,
+      "eligibleForFinalization": false,
+      "decision": "blocked",
+      "reason": "Derived from mock evaluator evidence.",
+      "blockingReasons": ["mock_evaluator_evidence"]
+    },
+    "citationCoverage": {
+      "draftAvailable": true,
+      "draftValueAvailable": true,
+      "eligibleForFinalization": false,
+      "decision": "blocked",
+      "reason": "Derived from mock evaluator evidence.",
+      "blockingReasons": ["mock_evaluator_evidence"]
+    },
+    "competitorDisplacement": {
+      "draftAvailable": true,
+      "draftValueAvailable": true,
+      "eligibleForFinalization": false,
+      "decision": "blocked",
+      "reason": "Derived from mock evaluator evidence.",
+      "blockingReasons": ["mock_evaluator_evidence"]
+    },
+    "aiReadableStructure": {
+      "draftAvailable": true,
+      "draftValueAvailable": true,
+      "eligibleForFinalization": true,
+      "decision": "review_required",
+      "reason": "Crawler-derived draft value is available and requires review before final metrics composition.",
+      "blockingReasons": []
+    },
+    "machineReadableTrust": {
+      "draftAvailable": true,
+      "draftValueAvailable": true,
+      "eligibleForFinalization": true,
+      "decision": "review_required",
+      "reason": "Crawler-derived draft value is available and requires review before final metrics composition.",
+      "blockingReasons": []
+    },
+    "aiCitationSignals": {
+      "draftAvailable": true,
+      "draftValueAvailable": true,
+      "eligibleForFinalization": true,
+      "decision": "review_required",
+      "reason": "Crawler-derived draft value is available and requires review before final metrics composition.",
+      "blockingReasons": []
+    },
+    "narrativeAccuracy": {
+      "draftAvailable": true,
+      "draftValueAvailable": false,
+      "eligibleForFinalization": false,
+      "decision": "blocked",
+      "reason": "Derived from mock evaluator evidence.",
+      "blockingReasons": [
+        "unavailable_metric",
+        "missing_metric_value",
+        "narrative_accuracy_unavailable",
+        "mock_evaluator_evidence"
+      ]
+    }
+  },
+  "blockingReasons": [
+    {
+      "code": "mock_evaluator_evidence",
+      "severity": "high",
+      "message": "Mock evaluator evidence is not real LLM evidence."
+    },
+    {
+      "code": "final_score_excluded",
+      "severity": "high",
+      "message": "Final AI Visibility Score is excluded from draft and review stages."
+    },
+    {
+      "code": "unavailable_metric",
+      "severity": "medium",
+      "message": "One or more draft metrics are unavailable."
+    },
+    {
+      "code": "missing_metric_value",
+      "severity": "medium",
+      "message": "One or more draft metrics do not have a value."
+    },
+    {
+      "code": "narrative_accuracy_unavailable",
+      "severity": "high",
+      "message": "narrativeAccuracy requires real LLM evidence or human review."
+    }
+  ],
+  "recommendedNextActions": [
+    "Run evaluator against real provider adapters before final scoring.",
+    "Add real LLM evidence or human review before finalizing narrativeAccuracy.",
+    "Keep aiVisibilityScore excluded until final metrics readiness gates pass."
+  ],
+  "limitations": [
+    "This artifact reviews draft metrics only.",
+    "It does not produce final metrics.",
+    "It does not compute aiVisibilityScore."
+  ]
+}

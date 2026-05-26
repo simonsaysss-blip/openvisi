@@ -1,0 +1,21 @@
+{
+  "domain": "openvisi.dev",
+  "seedUrl": "https://openvisi.dev/",
+  "pageCount": 2,
+  "renderMode": "static",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "diagnosticsSummary": {
+    "pagesWithJsonLd": 2,
+    "pagesWithOrganizationSchema": 1,
+    "pagesWithProductSchema": 0,
+    "pagesWithFAQSchema": 1,
+    "pagesWithAuthorMetadata": 1,
+    "pagesWithLastModifiedMetadata": 1,
+    "pagesWithCanonical": 2,
+    "httpsPages": 2,
+    "pagesWithClearH1": 2,
+    "pagesWithDocsLikeStructure": 2,
+    "pagesWithFAQSection": 1,
+    "pagesWithComparisonSignals": 0
+  }
+}

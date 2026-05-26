@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "0.1",
+  "project": "OpenVisi",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "stage": "measurement-inputs",
+  "artifacts": [
+    {
+      "id": "measurement-inputs",
+      "type": "measurement-inputs",
+      "path": "measurement-inputs.json",
+      "description": "Composed measurement input bundle for future metrics composition.",
+      "generated": true,
+      "requiredFor": ["metrics"],
+      "stage": "stage-3d"
+    },
+    {
+      "id": "warnings",
+      "type": "warnings",
+      "path": "warnings.json",
+      "description": "Warnings produced by the measurement input composition command.",
+      "generated": true,
+      "requiredFor": ["metrics"],
+      "stage": "stage-3d"
+    },
+    {
+      "id": "artifact-manifest",
+      "type": "unknown",
+      "path": "artifact-manifest.json",
+      "description": "Manifest of generated OpenVisi artifacts in this fixture bundle.",
+      "generated": true,
+      "requiredFor": ["metrics"],
+      "stage": "stage-2c"
+    }
+  ],
+  "warnings": [
+    "measurement-inputs.json is an input artifact and does not compute metrics.",
+    "measurement-inputs.json does not include aiVisibilityScore.",
+    "Measurement inputs include mock evaluator signals and are not real LLM evidence."
+  ]
+}

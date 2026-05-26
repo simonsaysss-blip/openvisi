@@ -95,6 +95,14 @@ describe("artifact bundle reader", () => {
     ).resolves.toMatchObject({ valid: true });
   });
 
+  it("validates the debug-report golden fixture", async () => {
+    await expect(
+      validateArtifactBundle(path.join(fixtureRoot, "debug-report"), {
+        expectedStage: "debug-report"
+      })
+    ).resolves.toMatchObject({ valid: true });
+  });
+
   it("fails validation for the missing-file negative fixture", async () => {
     const validation = await validateArtifactBundle(path.join(fixtureRoot, "invalid-missing-file"), {
       expectedStage: "dry-run"

@@ -117,3 +117,15 @@ Final metrics must not be produced when:
 - `allowedToComputeAiVisibilityScore` is `false`
 
 Under mock evaluator evidence, the finalization guard blocks final metrics and final `aiVisibilityScore`.
+
+## Debug Report
+
+Stage 5A adds `debug-report.md` as a human-readable artifact pipeline summary.
+
+Downstream modules may use it for diagnostics and OSS demos, but should not treat it as a typed data source for final metrics.
+
+`debug-report.md` is not a final AI Visibility report.
+
+It does not replace `metrics.json`, `scan-result.json`, or final report generation.
+
+It should preserve the same finalization guard constraints: when `metrics-finalization.json` is blocked, final metrics must not be produced.

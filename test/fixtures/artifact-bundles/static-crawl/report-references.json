@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "0.1",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "references": [
+    {
+      "section": "AI-readable Structure",
+      "artifactId": "structure-trust-inputs",
+      "path": "structure-trust-inputs.json",
+      "description": "Crawler-derived input signals for AI-readable Structure diagnostics."
+    },
+    {
+      "section": "Machine-readable Trust",
+      "artifactId": "structure-trust-inputs",
+      "path": "structure-trust-inputs.json",
+      "description": "Crawler-derived input signals for Machine-readable Trust diagnostics."
+    },
+    {
+      "section": "AI Citation Signals",
+      "artifactId": "structure-trust-inputs",
+      "path": "structure-trust-inputs.json",
+      "description": "Crawler-derived source structure inputs for future AI Citation Signals analysis."
+    },
+    {
+      "section": "Source Gaps",
+      "artifactId": "structure-trust-inputs",
+      "path": "structure-trust-inputs.json",
+      "description": "Crawler-derived source gap candidates for downstream diagnostic interpretation."
+    },
+    {
+      "section": "Raw Crawled Pages",
+      "artifactId": "crawled-pages",
+      "path": "crawled-pages.json",
+      "description": "Canonical CrawledPageSnapshot[] used as source evidence."
+    },
+    {
+      "section": "Crawler Summary",
+      "artifactId": "crawler-summary",
+      "path": "crawler-summary.json",
+      "description": "Aggregated crawler diagnostics used as source evidence."
+    }
+  ]
+}

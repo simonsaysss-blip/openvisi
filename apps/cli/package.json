@@ -1,7 +1,24 @@
 {
   "name": "openvisi",
   "version": "0.1.0",
-  "description": "Open-source AI visibility analytics for the LLM search era.",
+  "description": "CLI for OpenVisi AI Visibility artifact pipeline and diagnostics.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonsaysss-blip/openvisi.git",
+    "directory": "apps/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/simonsaysss-blip/openvisi/issues"
+  },
+  "homepage": "https://github.com/simonsaysss-blip/openvisi#readme",
+  "keywords": [
+    "ai-visibility",
+    "llm-search",
+    "ai-search",
+    "observability",
+    "cli"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -24,6 +41,7 @@
   "dependencies": {
     "@openvisi/core": "0.1.0",
     "@openvisi/crawler": "0.1.0",
+    "@openvisi/evaluator": "0.1.0",
     "@openvisi/report": "0.1.0",
     "commander": "^12.1.0"
   }

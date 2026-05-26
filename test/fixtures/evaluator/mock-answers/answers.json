@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "0.1",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "source": {
+    "promptPack": "prompt-pack.json",
+    "config": "config.normalized.json"
+  },
+  "provider": "mock",
+  "model": "mock-v0",
+  "answers": [
+    {
+      "promptId": "category-discovery-001",
+      "provider": "mock",
+      "model": "mock-v0",
+      "answerText": "[mock output] OpenVisi is represented as a AI Visibility diagnostics entity for the category_discovery prompt intent. Compared entities: Example Competitor. This deterministic response exists only to exercise OpenVisi evaluator contracts.",
+      "citations": [],
+      "raw": {
+        "mock": true,
+        "promptId": "category-discovery-001",
+        "provider": "mock",
+        "model": "mock-v0"
+      },
+      "createdAt": "2026-01-01T00:10:00.000Z"
+    },
+    {
+      "promptId": "brand-specific-001",
+      "provider": "mock",
+      "model": "mock-v0",
+      "answerText": "[mock output] OpenVisi is represented as a AI Visibility diagnostics entity for the brand_specific prompt intent. This deterministic response exists only to exercise OpenVisi evaluator contracts.",
+      "citations": [],
+      "raw": {
+        "mock": true,
+        "promptId": "brand-specific-001",
+        "provider": "mock",
+        "model": "mock-v0"
+      },
+      "createdAt": "2026-01-01T00:22:00.000Z"
+    }
+  ]
+}

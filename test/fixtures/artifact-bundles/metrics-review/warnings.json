@@ -1,0 +1,5 @@
+[
+  "Metrics review blocked finalization because evaluator evidence is mock.",
+  "Final aiVisibilityScore is not computed in Stage 4B.",
+  "narrativeAccuracy requires real LLM evidence or human review."
+]

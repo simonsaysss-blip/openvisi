@@ -1,0 +1,5 @@
+[
+  "Metrics draft uses mock evaluator signals and is not real LLM evidence.",
+  "Final aiVisibilityScore is not computed in Stage 4A.",
+  "narrativeAccuracy is unavailable in Stage 4A without real LLM evidence or human review."
+]

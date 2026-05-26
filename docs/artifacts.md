@@ -323,6 +323,7 @@ test/fixtures/artifact-bundles/
   metrics-draft/
   metrics-review/
   metrics-finalization/
+  debug-report/
   invalid-missing-file/
   invalid-absolute-path/
 ```
@@ -341,12 +342,47 @@ The metrics-review fixture represents the review gate over draft metrics. It int
 
 The metrics-finalization fixture represents the finalization guard over metrics review output. It intentionally excludes final metrics, scan results, reports, and source payload files.
 
+The debug-report fixture represents a human-readable artifact pipeline summary. It intentionally excludes final metrics, scan results, final reports, raw answers, raw crawled pages, and source payload files.
+
 Downstream modules should validate artifact bundles before consuming them.
 
 ## Current Stage Limits
 
-Stage 4C does not compute final metrics.
+## debug-report.md
 
-Stage 4C does not call real LLM providers, generate separate citation artifacts, or create completed `scan-result.json` files.
+Stage 5A adds `debug-report.md` as a human-readable artifact pipeline summary.
 
-Stage 4C does not generate full reports from the artifact bundle. Existing report behavior remains separate.
+It is generated from existing artifact bundles and small summary artifacts. It does not load raw `answers.json` or raw `crawled-pages.json`.
+
+It intentionally excludes:
+
+- final `aiVisibilityScore`
+- `metrics.json`
+- completed `scan-result.json`
+- separate citation artifacts
+- final Markdown or HTML reports
+- raw answer payloads
+- raw crawl payloads
+
+`debug-report.md` is not a final AI Visibility report. It exists for local debugging, OSS demo clarity, and pipeline inspection.
+
+## Debug Report Artifact Bundle
+
+The debug-report stage writes:
+
+```text
+openvisi-debug-report/
+  debug-report.md
+  artifact-manifest.json
+  warnings.json
+```
+
+The bundle intentionally excludes `metrics.json`, `scan-result.json`, raw source artifacts, citations, and final reports.
+
+## Current Stage Limits
+
+Stage 5A does not compute final metrics.
+
+Stage 5A does not call real LLM providers, generate separate citation artifacts, or create completed `scan-result.json` files.
+
+Stage 5A does not generate final AI Visibility reports from the artifact bundle. Existing report behavior remains separate.

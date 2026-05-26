@@ -1,0 +1,38 @@
+{
+  "brandName": "OpenVisi",
+  "domain": "openvisi.dev",
+  "category": "AI Visibility diagnostics",
+  "competitors": [
+    {
+      "name": "Example Competitor",
+      "domain": "example.com",
+      "aliases": ["Example"]
+    }
+  ],
+  "promptPack": [
+    {
+      "id": "category-discovery-001",
+      "text": "What are the best AI Visibility diagnostics tools for B2B SaaS teams?",
+      "intent": "category_discovery",
+      "category": "AI Visibility diagnostics",
+      "expectedEntities": ["OpenVisi", "Example Competitor"]
+    },
+    {
+      "id": "brand-specific-001",
+      "text": "What does OpenVisi do?",
+      "intent": "brand_specific",
+      "category": "AI Visibility diagnostics",
+      "expectedEntities": ["OpenVisi"],
+      "targetEntity": "OpenVisi"
+    }
+  ],
+  "providers": [
+    {
+      "provider": "mock",
+      "model": "mock-v0",
+      "enabled": true
+    }
+  ],
+  "outputDir": "openvisi-report",
+  "includeExperimentalMetrics": false
+}

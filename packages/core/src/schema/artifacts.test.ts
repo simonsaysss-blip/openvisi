@@ -133,6 +133,19 @@ describe("OpenVisi artifact contracts", () => {
     expect(requiredArtifactsByStage["metrics-finalization"]).not.toContain("report");
     expect(requiredArtifactsByStage["metrics-finalization"]).not.toContain("citations");
   });
+
+  it("defines debug-report as an artifact type and stage", () => {
+    expect(artifactTypeDefinitions["debug-report"].description).toContain("debug report");
+    expect(requiredArtifactsByStage["debug-report"]).toEqual([
+      "debug-report",
+      "warnings",
+      "artifact-manifest"
+    ]);
+    expect(requiredArtifactsByStage["debug-report"]).not.toContain("metrics");
+    expect(requiredArtifactsByStage["debug-report"]).not.toContain("scan-result");
+    expect(requiredArtifactsByStage["debug-report"]).not.toContain("report");
+    expect(requiredArtifactsByStage["debug-report"]).not.toContain("citations");
+  });
 });
 
 function validManifest(): OpenVisiArtifactManifest {

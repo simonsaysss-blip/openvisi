@@ -1,6 +1,18 @@
 {
   "name": "@openvisi/providers",
   "version": "0.1.0",
+  "description": "Provider adapter placeholders for future OpenVisi AI Visibility evaluation.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonsaysss-blip/openvisi.git",
+    "directory": "packages/providers"
+  },
+  "keywords": [
+    "ai-visibility",
+    "llm-search",
+    "ai-search"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

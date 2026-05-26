@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.1",
+  "project": "OpenVisi",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "stage": "debug-report",
+  "artifacts": [
+    {
+      "id": "debug-report",
+      "type": "debug-report",
+      "path": "debug-report.md",
+      "description": "Human-readable artifact pipeline debug report.",
+      "generated": true,
+      "requiredFor": ["debugging"],
+      "stage": "stage-5a"
+    },
+    {
+      "id": "warnings",
+      "type": "warnings",
+      "path": "warnings.json",
+      "description": "Warnings produced by the current OpenVisi command.",
+      "generated": true,
+      "requiredFor": ["scan", "report"],
+      "stage": "stage-1c"
+    },
+    {
+      "id": "artifact-manifest",
+      "type": "unknown",
+      "path": "artifact-manifest.json",
+      "description": "Manifest of generated OpenVisi artifacts in this output directory.",
+      "generated": true,
+      "requiredFor": ["scan", "report", "dashboard"],
+      "stage": "stage-2c"
+    }
+  ],
+  "warnings": [
+    "debug-report.md is an artifact debug report, not a final AI Visibility report.",
+    "No final AI Visibility Score is computed in Stage 5A.",
+    "Mock evaluator evidence is not real LLM evidence.",
+    "Final metrics generation is blocked under current evidence."
+  ]
+}

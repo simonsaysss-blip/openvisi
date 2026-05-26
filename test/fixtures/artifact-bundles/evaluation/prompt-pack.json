@@ -1,0 +1,17 @@
+[
+  {
+    "id": "category-discovery-001",
+    "text": "What are the best AI Visibility diagnostics tools for B2B SaaS teams?",
+    "intent": "category_discovery",
+    "category": "AI Visibility diagnostics",
+    "expectedEntities": ["OpenVisi", "Example Competitor"]
+  },
+  {
+    "id": "brand-specific-001",
+    "text": "What does OpenVisi do?",
+    "intent": "brand_specific",
+    "category": "AI Visibility diagnostics",
+    "expectedEntities": ["OpenVisi"],
+    "targetEntity": "OpenVisi"
+  }
+]

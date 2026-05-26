@@ -1,0 +1,58 @@
+name: Artifact contract issue
+description: Report a schema, manifest, fixture, or artifact compatibility concern.
+title: "[Artifact Contract]: "
+labels: ["artifact-contract"]
+body:
+  - type: input
+    id: artifact-file
+    attributes:
+      label: Artifact file
+      placeholder: metrics-draft.json
+    validations:
+      required: true
+  - type: dropdown
+    id: artifact-stage
+    attributes:
+      label: Artifact stage
+      options:
+        - dry-run
+        - static-crawl
+        - evaluation
+        - measurement-inputs
+        - metrics-draft
+        - metrics-review
+        - metrics-finalization
+        - debug-report
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: schema
+    attributes:
+      label: Schema or contract affected
+      description: Name the type, validator, fixture, or manifest field.
+    validations:
+      required: true
+  - type: dropdown
+    id: breaking-risk
+    attributes:
+      label: Breaking change risk
+      options:
+        - low
+        - medium
+        - high
+        - unknown
+    validations:
+      required: true
+  - type: textarea
+    id: fixtures
+    attributes:
+      label: Fixture updates needed
+      description: Which golden fixtures should change?
+  - type: textarea
+    id: downstream
+    attributes:
+      label: Downstream impact
+      description: Explain impact on CLI, report, future metrics, storage, or dashboard consumers.
+    validations:
+      required: true

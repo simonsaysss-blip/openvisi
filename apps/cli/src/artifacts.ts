@@ -194,6 +194,15 @@ const artifactDefinitions: OpenVisiArtifact[] = [
     stage: "stage-4c"
   },
   {
+    id: "debug-report",
+    type: "debug-report",
+    path: "debug-report.md",
+    description: "Human-readable artifact pipeline debug report.",
+    generated: false,
+    requiredFor: ["debugging"],
+    stage: "stage-5a"
+  },
+  {
     id: "citations",
     type: "citations",
     path: "citations.json",

@@ -73,6 +73,7 @@ const forbiddenOutputFileNames = [
   "metrics-finalization.json",
   "citations.json",
   "scan-result.json",
+  "debug-report.md",
   "report.md",
   "report.html"
 ];

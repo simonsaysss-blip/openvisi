@@ -12,6 +12,7 @@ export type OpenVisiArtifactType =
   | "metrics-draft"
   | "metrics-review"
   | "metrics-finalization"
+  | "debug-report"
   | "metrics"
   | "answers"
   | "citations"
@@ -26,6 +27,7 @@ export type ArtifactBundleStage =
   | "metrics-draft"
   | "metrics-review"
   | "metrics-finalization"
+  | "debug-report"
   | "full-scan"
   | "report"
   | "unknown";
@@ -101,6 +103,9 @@ export const artifactTypeDefinitions: Record<OpenVisiArtifactType, { description
   "metrics-finalization": {
     description: "Finalization guard artifact for future metrics generation permission."
   },
+  "debug-report": {
+    description: "Human-readable artifact pipeline debug report."
+  },
   metrics: { description: "Computed metrics artifact." },
   answers: { description: "LLM answer artifact." },
   citations: { description: "Citation artifact." },
@@ -130,6 +135,7 @@ export const requiredArtifactsByStage = {
   "metrics-draft": ["metrics-draft", "warnings", "artifact-manifest"],
   "metrics-review": ["metrics-review", "warnings", "artifact-manifest"],
   "metrics-finalization": ["metrics-finalization", "warnings", "artifact-manifest"],
+  "debug-report": ["debug-report", "warnings", "artifact-manifest"],
   "full-scan": ["scan-result", "metrics", "answers", "crawled-pages", "artifact-manifest"],
   report: ["report", "artifact-manifest"],
   unknown: []
@@ -361,6 +367,7 @@ function validateStage(value: unknown, fieldName: string, errors: string[]): voi
     value !== "metrics-draft" &&
     value !== "metrics-review" &&
     value !== "metrics-finalization" &&
+    value !== "debug-report" &&
     value !== "full-scan" &&
     value !== "report" &&
     value !== "unknown"

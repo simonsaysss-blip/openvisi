@@ -1,0 +1,85 @@
+[
+  {
+    "url": "https://openvisi.dev/",
+    "title": "OpenVisi",
+    "textContent": "OpenVisi is an open-source AI Visibility diagnostics toolkit for machine-readable visibility structure.",
+    "meta": {
+      "description": "Open-source AI Visibility diagnostics.",
+      "canonical": "https://openvisi.dev/",
+      "author": "OpenVisi maintainers",
+      "dateModified": "2026-01-01"
+    },
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "OpenVisi",
+        "url": "https://openvisi.dev/"
+      }
+    ],
+    "headings": {
+      "h1": ["OpenVisi"],
+      "h2": ["AI-readable Structure", "Machine-readable Trust"],
+      "h3": []
+    },
+    "links": {
+      "internal": ["https://openvisi.dev/docs"],
+      "external": ["https://schema.org/Organization"]
+    },
+    "fetchedAt": "2026-01-01T00:00:00.000Z",
+    "renderMode": "static",
+    "diagnostics": {
+      "hasJsonLd": true,
+      "hasOrganizationSchema": true,
+      "hasProductSchema": false,
+      "hasFAQSchema": false,
+      "canonicalPresent": true,
+      "httpsEnabled": true,
+      "hasClearH1": true,
+      "hasDocsLikeStructure": true,
+      "hasFAQSection": false,
+      "hasComparisonPageSignals": false,
+      "contentDepthEstimate": 12
+    }
+  },
+  {
+    "url": "https://openvisi.dev/docs/faq",
+    "title": "OpenVisi FAQ",
+    "textContent": "Frequently asked questions explain how OpenVisi validates artifact bundles and AI-readable structure.",
+    "meta": {
+      "description": "OpenVisi FAQ.",
+      "canonical": "https://openvisi.dev/docs/faq"
+    },
+    "jsonLd": [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": []
+      }
+    ],
+    "headings": {
+      "h1": ["OpenVisi FAQ"],
+      "h2": ["Frequently Asked Questions"],
+      "h3": []
+    },
+    "links": {
+      "internal": ["https://openvisi.dev/"],
+      "external": []
+    },
+    "fetchedAt": "2026-01-01T00:00:00.000Z",
+    "renderMode": "static",
+    "diagnostics": {
+      "hasJsonLd": true,
+      "hasOrganizationSchema": false,
+      "hasProductSchema": false,
+      "hasFAQSchema": true,
+      "canonicalPresent": true,
+      "httpsEnabled": true,
+      "hasClearH1": true,
+      "hasDocsLikeStructure": true,
+      "hasFAQSection": true,
+      "hasComparisonPageSignals": false,
+      "contentDepthEstimate": 11
+    }
+  }
+]

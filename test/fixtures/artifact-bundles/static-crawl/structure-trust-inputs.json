@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "0.1",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "sourceArtifacts": {
+    "crawledPages": "crawled-pages.json",
+    "crawlerSummary": "crawler-summary.json"
+  },
+  "pageCount": 2,
+  "aiReadableStructureSignals": {
+    "pagesWithClearH1": 2,
+    "pagesWithDocsLikeStructure": 2,
+    "pagesWithFAQSection": 1,
+    "pagesWithComparisonSignals": 0,
+    "averageContentDepthEstimate": 12
+  },
+  "machineReadableTrustSignals": {
+    "pagesWithJsonLd": 2,
+    "pagesWithOrganizationSchema": 1,
+    "pagesWithProductSchema": 0,
+    "pagesWithFAQSchema": 1,
+    "pagesWithAuthorMetadata": 0,
+    "pagesWithLastModifiedMetadata": 0,
+    "pagesWithCanonical": 2,
+    "httpsPages": 2
+  },
+  "aiCitationSignalInputs": {
+    "hasOfficialStructuredData": true,
+    "hasDocumentationLikeSources": true,
+    "hasFAQLikeSources": true,
+    "hasComparisonLikeSources": false,
+    "preferredSourceDomains": ["openvisi.dev"]
+  },
+  "sourceGapCandidates": [
+    {
+      "id": "missing-organization-schema",
+      "type": "missing_organization_schema",
+      "severity": "medium",
+      "description": "No Organization-like schema detected on crawled pages.",
+      "evidence": ["crawled-pages.json", "crawler-summary.json"]
+    },
+    {
+      "id": "missing-product-schema",
+      "type": "missing_product_schema",
+      "severity": "medium",
+      "description": "No Product, Service, or SoftwareApplication schema detected on crawled pages.",
+      "evidence": ["crawled-pages.json", "crawler-summary.json"]
+    },
+    {
+      "id": "missing-faq-schema",
+      "type": "missing_faq_schema",
+      "severity": "medium",
+      "description": "No FAQPage schema detected on crawled pages.",
+      "evidence": ["crawled-pages.json", "crawler-summary.json"]
+    },
+    {
+      "id": "missing-author-metadata",
+      "type": "missing_author_metadata",
+      "severity": "low",
+      "description": "No author metadata detected on crawled pages.",
+      "evidence": ["crawled-pages.json", "crawler-summary.json"]
+    },
+    {
+      "id": "missing-last-modified-metadata",
+      "type": "missing_last_modified_metadata",
+      "severity": "low",
+      "description": "No last-modified metadata detected on crawled pages.",
+      "evidence": ["crawled-pages.json", "crawler-summary.json"]
+    },
+    {
+      "id": "missing-comparison-content",
+      "type": "missing_comparison_content",
+      "severity": "low",
+      "description": "Comparison-like source structure was not detected.",
+      "evidence": ["crawled-pages.json", "crawler-summary.json"]
+    },
+    {
+      "id": "thin-content",
+      "type": "thin_content",
+      "severity": "medium",
+      "description": "Average crawled page content depth is low.",
+      "evidence": ["crawled-pages.json", "crawler-summary.json"]
+    }
+  ],
+  "limitations": [
+    "Derived from static crawler output only.",
+    "Does not include LLM-generated answers or citation behavior."
+  ]
+}

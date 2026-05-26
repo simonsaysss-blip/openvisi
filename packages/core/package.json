@@ -1,6 +1,19 @@
 {
   "name": "@openvisi/core",
   "version": "0.1.0",
+  "description": "Core AI Visibility contracts, schemas, and artifact validation for OpenVisi.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonsaysss-blip/openvisi.git",
+    "directory": "packages/core"
+  },
+  "keywords": [
+    "ai-visibility",
+    "llm-search",
+    "ai-search",
+    "observability"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

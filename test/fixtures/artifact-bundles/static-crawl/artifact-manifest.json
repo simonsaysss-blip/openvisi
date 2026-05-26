@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "0.1",
+  "project": "OpenVisi",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "stage": "static-crawl",
+  "artifacts": [
+    {
+      "id": "crawled-pages",
+      "type": "crawled-pages",
+      "path": "crawled-pages.json",
+      "description": "Canonical CrawledPageSnapshot[] static crawler artifact.",
+      "generated": true,
+      "requiredFor": ["report", "evaluator", "metrics"],
+      "stage": "stage-2b"
+    },
+    {
+      "id": "crawler-summary",
+      "type": "crawler-summary",
+      "path": "crawler-summary.json",
+      "description": "Aggregated static crawler diagnostics summary.",
+      "generated": true,
+      "requiredFor": ["report", "metrics"],
+      "stage": "stage-2b"
+    },
+    {
+      "id": "structure-trust-inputs",
+      "type": "structure-trust-inputs",
+      "path": "structure-trust-inputs.json",
+      "description": "Crawler-derived Structure and Trust input artifact for downstream modules.",
+      "generated": true,
+      "requiredFor": ["report", "metrics"],
+      "stage": "stage-2f"
+    },
+    {
+      "id": "warnings",
+      "type": "warnings",
+      "path": "warnings.json",
+      "description": "Static crawl warnings.",
+      "generated": true,
+      "requiredFor": ["scan", "report"],
+      "stage": "stage-2b"
+    },
+    {
+      "id": "report-references",
+      "type": "report-reference",
+      "path": "report-references.json",
+      "description": "Mapping from generated artifacts to future report sections.",
+      "generated": true,
+      "requiredFor": ["report"],
+      "stage": "stage-2c"
+    },
+    {
+      "id": "artifact-manifest",
+      "type": "unknown",
+      "path": "artifact-manifest.json",
+      "description": "Manifest of generated OpenVisi artifacts in this fixture bundle.",
+      "generated": true,
+      "requiredFor": ["scan", "report"],
+      "stage": "stage-2c"
+    }
+  ],
+  "warnings": [
+    "Crawler artifacts are static-only in Stage 2B.",
+    "Diagnostics may be incomplete when source pages omit machine-readable metadata."
+  ]
+}

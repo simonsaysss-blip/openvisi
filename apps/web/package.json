@@ -2,6 +2,8 @@
   "name": "@openvisi/web",
   "version": "0.1.0",
   "private": true,
+  "description": "Minimal web scaffold for future OpenVisi artifact viewing experiments.",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "build": "next build",

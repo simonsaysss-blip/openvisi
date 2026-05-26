@@ -25,7 +25,7 @@ export function registerArtifactsCommand(program: Command): void {
     .option("-o, --output <directory>", "OpenVisi artifact output directory", "openvisi-report")
     .option(
       "--stage <stage>",
-      "Expected stage: dry-run, static-crawl, evaluation, measurement-inputs, metrics-draft, metrics-review, metrics-finalization, full-scan, report, or unknown"
+      "Expected stage: dry-run, static-crawl, evaluation, measurement-inputs, metrics-draft, metrics-review, metrics-finalization, debug-report, full-scan, report, or unknown"
     )
     .action(async (options: ArtifactsInspectOptions) => {
       try {
@@ -95,6 +95,7 @@ function parseStage(stage: string | undefined): ArtifactBundleStage | undefined 
     stage === "metrics-draft" ||
     stage === "metrics-review" ||
     stage === "metrics-finalization" ||
+    stage === "debug-report" ||
     stage === "full-scan" ||
     stage === "report" ||
     stage === "unknown"

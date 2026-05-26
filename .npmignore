@@ -1,0 +1,24 @@
+# Root package is private. Publishable workspace packages use package `files`.
+
+.github/
+.npm-cache/
+.openvisi-release/
+.openvisi-demo/
+node_modules/
+dist/
+.next/
+coverage/
+reports/
+openvisi-report/
+openvisi-crawl/
+openvisi-eval/
+openvisi-measurement/
+openvisi-metrics-draft/
+openvisi-metrics-review/
+openvisi-metrics-finalization/
+openvisi-debug-report/
+openvisi.config.json
+.env
+.env.*
+*.log
+.DS_Store

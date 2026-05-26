@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.1",
+  "project": "OpenVisi",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "stage": "dry-run",
+  "artifacts": [
+    {
+      "id": "scan-plan",
+      "type": "scan-plan",
+      "path": "/tmp/scan-plan.json",
+      "description": "Absolute paths are intentionally invalid.",
+      "generated": true,
+      "requiredFor": ["scan"],
+      "stage": "stage-1c"
+    }
+  ],
+  "warnings": []
+}

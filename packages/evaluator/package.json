@@ -1,0 +1,35 @@
+{
+  "name": "@openvisi/evaluator",
+  "version": "0.1.0",
+  "description": "Provider-agnostic evaluator contracts and deterministic mock provider for OpenVisi.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simonsaysss-blip/openvisi.git",
+    "directory": "packages/evaluator"
+  },
+  "keywords": [
+    "ai-visibility",
+    "llm-search",
+    "ai-search",
+    "evaluation"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --target node22 --dts --clean --external package.json"
+  },
+  "dependencies": {
+    "@openvisi/core": "0.1.0"
+  }
+}

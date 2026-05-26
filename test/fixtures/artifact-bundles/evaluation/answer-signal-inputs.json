@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "0.1",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "sourceArtifacts": {
+    "answers": "answers.json",
+    "promptPack": "prompt-pack.json",
+    "config": "config.normalized.json"
+  },
+  "provider": "mock",
+  "model": "mock-v0",
+  "answerCount": 2,
+  "answerPresenceSignals": {
+    "targetBrandMentions": 2,
+    "answersWithTargetBrand": 2,
+    "answersWithoutTargetBrand": 0
+  },
+  "entityClaritySignals": {
+    "answersWithCategoryTerms": 2,
+    "answersWithDomainTerms": 2,
+    "answersWithAudienceTerms": 0,
+    "possibleAmbiguityCount": 0
+  },
+  "citationCoverageSignals": {
+    "answersWithCitations": 0,
+    "answersWithTargetDomainCitation": 0,
+    "totalCitationCount": 0,
+    "targetDomainCitationCount": 0
+  },
+  "competitorDisplacementSignals": {
+    "answersMentioningCompetitors": 1,
+    "answersMentioningCompetitorsWithoutTargetBrand": 0,
+    "competitorMentionCounts": {
+      "Example Competitor": 1
+    }
+  },
+  "narrativeAccuracySignals": {
+    "answersWithUnsupportedClaims": 0,
+    "answersMarkedAsMock": 2,
+    "requiresHumanReview": true
+  },
+  "promptResults": [
+    {
+      "promptId": "category-discovery-001",
+      "targetBrandMentioned": true,
+      "competitorsMentioned": ["Example Competitor"],
+      "citationCount": 0,
+      "targetDomainCited": false,
+      "mockAnswer": true
+    },
+    {
+      "promptId": "brand-specific-001",
+      "targetBrandMentioned": true,
+      "competitorsMentioned": [],
+      "citationCount": 0,
+      "targetDomainCited": false,
+      "mockAnswer": true
+    }
+  ],
+  "limitations": [
+    "Derived from evaluator answer artifacts only.",
+    "Does not compute final AI Visibility metrics.",
+    "Mock answers are not real LLM outputs."
+  ]
+}

@@ -85,6 +85,17 @@ describe("runArtifactsInspectCommand", () => {
     expect(result.missingArtifacts).toEqual([]);
   });
 
+  it("succeeds against the debug-report golden fixture", async () => {
+    const result = await runArtifactsInspectCommand({
+      output: path.join(fixtureRoot, "debug-report"),
+      stage: "debug-report"
+    });
+
+    expect(result.stage).toBe("debug-report");
+    expect(result.validation.valid).toBe(true);
+    expect(result.missingArtifacts).toEqual([]);
+  });
+
   it("reports validation errors for the missing-file negative fixture", async () => {
     const result = await runArtifactsInspectCommand({
       output: path.join(fixtureRoot, "invalid-missing-file"),

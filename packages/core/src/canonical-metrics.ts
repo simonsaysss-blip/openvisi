@@ -61,6 +61,20 @@ export function createCanonicalMetricsSnapshot(
       [],
       "Requires provider-backed answer collection across a prompt pack."
     ),
+    promptCoverage: detail(
+      "promptCoverage",
+      null,
+      "not-measured",
+      [],
+      "Requires a documented prompt pack and provider-backed answer collection."
+    ),
+    mentionRate: detail(
+      "mentionRate",
+      null,
+      "not-measured",
+      [],
+      "Requires provider-backed answer collection across a prompt pack."
+    ),
     entityClarity: detail(
       "entityClarity",
       entity,
@@ -68,44 +82,33 @@ export function createCanonicalMetricsSnapshot(
       source.scores.entityClarity.evidence,
       "Mapped from the current Entity Clarity analyzer."
     ),
-    citationCoverage: detail(
-      "citationCoverage",
-      citation,
-      "diagnostic-proxy",
-      source.scores.citationReadiness.evidence,
-      "Proxy based on citation-readiness evidence. The MVP does not inspect live answer citations."
-    ),
-    competitorDisplacement: detail(
-      "competitorDisplacement",
-      null,
-      "not-measured",
-      [],
-      "Requires competitor-aware answer collection across category and comparison prompt packs."
-    ),
-    machineReadableTrust: detail(
-      "machineReadableTrust",
-      average([structuredData, citation]),
-      "diagnostic-proxy",
-      [...source.scores.structuredData.evidence, ...source.scores.citationReadiness.evidence],
-      "Proxy based on structured data and citation-readiness evidence."
-    ),
-    aiCitationSignals: detail(
-      "aiCitationSignals",
-      average([technical, structuredData, citation]),
-      "diagnostic-proxy",
-      [
-        ...source.scores.technicalDiscoverability.evidence,
-        ...source.scores.structuredData.evidence,
-        ...source.scores.citationReadiness.evidence
-      ],
-      "Proxy based on discoverability, structured data, and citation-readiness evidence."
-    ),
     narrativeAccuracy: detail(
       "narrativeAccuracy",
       entity,
       "diagnostic-proxy",
       source.scores.entityClarity.evidence,
       "Proxy based on source clarity. Live narrative accuracy requires comparing generated answers to source evidence."
+    ),
+    positioningAccuracy: detail(
+      "positioningAccuracy",
+      entity,
+      "diagnostic-proxy",
+      source.scores.entityClarity.evidence,
+      "Proxy based on entity clarity. Provider-backed answer evaluation is required for measured positioning accuracy."
+    ),
+    productUnderstanding: detail(
+      "productUnderstanding",
+      average([entity, content]),
+      "diagnostic-proxy",
+      [...source.scores.entityClarity.evidence, ...source.scores.contentChunkability.evidence],
+      "Proxy based on entity clarity and content structure. Provider-backed answer evaluation is required for measured product understanding."
+    ),
+    citationCoverage: detail(
+      "citationCoverage",
+      citation,
+      "diagnostic-proxy",
+      source.scores.citationReadiness.evidence,
+      "Proxy based on citation-readiness evidence. The MVP does not inspect live answer citations."
     ),
     officialSourceCitationRate: detail(
       "officialSourceCitationRate",
@@ -121,12 +124,23 @@ export function createCanonicalMetricsSnapshot(
       [],
       "Requires live answer citations and source classification."
     ),
-    promptCoverage: detail(
-      "promptCoverage",
+    aiCitationSignals: detail(
+      "aiCitationSignals",
+      average([technical, structuredData, citation]),
+      "diagnostic-proxy",
+      [
+        ...source.scores.technicalDiscoverability.evidence,
+        ...source.scores.structuredData.evidence,
+        ...source.scores.citationReadiness.evidence
+      ],
+      "Proxy based on discoverability, structured data, and citation-readiness evidence."
+    ),
+    competitorDisplacement: detail(
+      "competitorDisplacement",
       null,
       "not-measured",
       [],
-      "Requires a documented prompt pack and provider-backed answer collection."
+      "Requires competitor-aware answer collection across category and comparison prompt packs."
     ),
     categoryShare: detail(
       "categoryShare",
@@ -148,6 +162,52 @@ export function createCanonicalMetricsSnapshot(
       "not-measured",
       [],
       "Requires comparison prompt packs and provider-backed answer collection."
+    ),
+    aiReadableStructure: detail(
+      "aiReadableStructure",
+      average([technical, structuredData, content]),
+      "diagnostic-proxy",
+      [
+        ...source.scores.technicalDiscoverability.evidence,
+        ...source.scores.structuredData.evidence,
+        ...source.scores.contentChunkability.evidence
+      ],
+      "Proxy based on crawlability, structured data, and content chunkability evidence."
+    ),
+    machineReadableTrust: detail(
+      "machineReadableTrust",
+      average([structuredData, citation]),
+      "diagnostic-proxy",
+      [...source.scores.structuredData.evidence, ...source.scores.citationReadiness.evidence],
+      "Proxy based on structured data and citation-readiness evidence."
+    ),
+    ragReadiness: detail(
+      "ragReadiness",
+      null,
+      "not-measured",
+      [],
+      "Experimental metric. Requires retrieval-oriented fixtures and benchmark methodology before measurement."
+    ),
+    ragRetrievalReadiness: detail(
+      "ragRetrievalReadiness",
+      null,
+      "not-measured",
+      [],
+      "Experimental metric. Requires retrieval-oriented fixtures and benchmark methodology before measurement."
+    ),
+    contextualDefensibility: detail(
+      "contextualDefensibility",
+      null,
+      "not-measured",
+      [],
+      "Experimental metric. Requires claim-level evidence mapping before measurement."
+    ),
+    entityRelationalStrength: detail(
+      "entityRelationalStrength",
+      null,
+      "not-measured",
+      [],
+      "Experimental metric. Requires entity relationship extraction before measurement."
     )
   };
 

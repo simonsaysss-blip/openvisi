@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "0.1",
+  "project": "OpenVisi",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "stage": "metrics-review",
+  "artifacts": [
+    {
+      "id": "metrics-review",
+      "type": "metrics-review",
+      "path": "metrics-review.json",
+      "description": "Review gate artifact for draft metrics finalization readiness.",
+      "generated": true,
+      "requiredFor": ["metrics"],
+      "stage": "stage-4b"
+    },
+    {
+      "id": "warnings",
+      "type": "warnings",
+      "path": "warnings.json",
+      "description": "Warnings produced by the metrics review command.",
+      "generated": true,
+      "requiredFor": ["metrics"],
+      "stage": "stage-4b"
+    },
+    {
+      "id": "artifact-manifest",
+      "type": "unknown",
+      "path": "artifact-manifest.json",
+      "description": "Manifest of generated OpenVisi artifacts in this fixture bundle.",
+      "generated": true,
+      "requiredFor": ["metrics"],
+      "stage": "stage-2c"
+    }
+  ],
+  "warnings": [
+    "Metrics review blocked finalization because evaluator evidence is mock.",
+    "Final aiVisibilityScore is not computed in Stage 4B.",
+    "narrativeAccuracy requires real LLM evidence or human review."
+  ]
+}
