@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.1",
+  "generatedAt": "2026-01-01T00:00:00.000Z",
+  "status": "blocked",
+  "sourceArtifacts": {
+    "metricsReview": "metrics-review.json"
+  },
+  "evidenceMode": "mock",
+  "readiness": {
+    "readyForFinalMetrics": false,
+    "readyForAiVisibilityScore": false,
+    "productionReady": false
+  },
+  "decision": {
+    "allowedToGenerateMetricsJson": false,
+    "allowedToComputeAiVisibilityScore": false,
+    "allowedToGenerateScanResult": false,
+    "reason": "Metrics review blocked finalization under mock evaluator evidence."
+  },
+  "blockingReasons": [
+    {
+      "code": "mock_evaluator_evidence",
+      "severity": "high",
+      "message": "Mock evaluator evidence is not real LLM evidence."
+    },
+    {
+      "code": "insufficient_evidence",
+      "severity": "high",
+      "message": "Metrics review readiness is insufficient for final metrics generation."
+    },
+    {
+      "code": "final_score_excluded",
+      "severity": "high",
+      "message": "Final AI Visibility Score is not allowed by the finalization guard."
+    },
+    {
+      "code": "unavailable_metric",
+      "severity": "medium",
+      "message": "One or more reviewed metrics are unavailable."
+    },
+    {
+      "code": "missing_metric_value",
+      "severity": "medium",
+      "message": "One or more reviewed metrics do not have a draft value."
+    },
+    {
+      "code": "narrative_accuracy_unavailable",
+      "severity": "high",
+      "message": "narrativeAccuracy requires real LLM evidence or human review."
+    }
+  ],
+  "requiredBeforeFinalization": [
+    "Run evaluator against real provider adapters.",
+    "Resolve narrativeAccuracy review requirements.",
+    "Ensure metrics review readiness is true."
+  ],
+  "limitations": [
+    "This artifact is a finalization guard only.",
+    "It does not produce metrics.json.",
+    "It does not compute aiVisibilityScore.",
+    "It does not produce scan-result.json."
+  ]
+}

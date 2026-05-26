@@ -1,0 +1,5 @@
+[
+  "Final metrics generation is blocked by the metrics review gate.",
+  "Mock evaluator evidence cannot produce production-ready final metrics.",
+  "Final aiVisibilityScore is not allowed by the finalization guard."
+]
