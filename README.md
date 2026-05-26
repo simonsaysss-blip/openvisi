@@ -2,227 +2,260 @@
 
 OpenVisi defines an open-source measurement layer for AI Visibility.
 
-AI Visibility is the measurable presence, accuracy, citation quality, and
-competitive position of an entity across AI-generated answers.
+AI Visibility is the measurable presence, accuracy, citation quality, and competitive position of an entity across AI-generated answers.
 
-OpenVisi provides canonical vocabulary, transparent methodology, schemas, and
-diagnostic reporting foundations for measuring how brands, products, websites,
-and entities appear across LLM-powered search and answer surfaces.
+OpenVisi is developer infrastructure for AI Visibility Diagnostics: typed schemas, reproducible artifact bundles, static crawl evidence, deterministic mock evaluation, review gates, and human-readable debug reports. It is not an AI SEO tool, a ranking optimizer, or a hosted dashboard.
 
-OpenVisi is developer infrastructure. It is not an AI SEO plugin, a ranking
-optimizer, a content farm workflow, or a wrapper around LLM APIs.
+## Why AI Visibility Needs a Measurement Layer
 
-## Why AI Visibility Matters
+LLM-powered answers combine entity mentions, source interpretation, citations, and competitor recommendations into a surface that is harder to inspect than traditional search results. Teams need a repeatable way to ask:
 
-Search is shifting from links to synthesized answers. Teams need to understand
-whether AI-generated answers mention the right entity, describe it accurately,
-cite reliable sources, and route users toward or away from competitors.
+- Was the target entity present in AI-generated answers?
+- Was the entity described with enough clarity?
+- Which source and citation signals were available?
+- Did answers route users toward competitors?
+- Which evidence is crawler-derived, evaluator-derived, draft, reviewed, or blocked?
 
-OpenVisi focuses on measurable, explainable, and reproducible diagnostics:
+OpenVisi keeps these questions explicit by producing artifact bundles instead of hiding the pipeline behind a single opaque score.
 
-- shared vocabulary for AI Visibility reports
-- transparent metrics and schema fields
-- repeatable prompt pack methodology
-- machine-readable website and source diagnostics
-- benchmark language that avoids unsupported ranking claims
+## Current Status
 
-## The OpenVisi AI Visibility Model
+OpenVisi currently provides a local, mock-only demo pipeline:
 
-OpenVisi organizes AI Visibility into four layers:
+- static crawler artifacts for AI-readable Structure and Machine-readable Trust evidence
+- deterministic mock evaluator artifacts for answer signal plumbing
+- composed measurement input artifacts
+- explainable metrics draft artifacts
+- review and finalization gates that block final scoring under mock evidence
+- `debug-report.md` for human-readable pipeline inspection
 
-- Presence Layer: Does AI mention the entity?
-- Accuracy Layer: Does AI describe the entity correctly?
-- Citation Layer: Which sources does AI use to understand the entity?
-- Competitive Layer: Does AI route the user toward competitors?
+Current limits are intentional:
 
-See [The OpenVisi AI Visibility Model](docs/methodology/measurement-model.md).
-
-## Canonical Metrics
-
-Core schema fields include:
-
-- `aiVisibilityScore`
-- `answerPresence`
-- `answerShare`
-- `entityClarity`
-- `citationCoverage`
-- `competitorDisplacement`
-- `machineReadableTrust`
-- `aiCitationSignals`
-
-Example canonical CLI JSON output:
-
-```json
-{
-  "aiVisibilityScore": 72,
-  "answerPresence": 0.64,
-  "answerShare": 0.41,
-  "entityClarity": 0.71,
-  "citationCoverage": 0.38,
-  "competitorDisplacement": 0.42,
-  "machineReadableTrust": 0.56,
-  "aiCitationSignals": 0.49
-}
-```
-
-The current MVP uses crawl-based diagnostics and does not yet run live
-provider-backed AI answer scans by default. Scores should be interpreted as
-directional methodology outputs, not as predictions for proprietary AI products.
-
-## Documentation
-
-- [OpenVisi Glossary](docs/glossary.md)
-- [Measurement Model](docs/methodology/measurement-model.md)
-- [Metrics](docs/methodology/metrics.md)
-- [Scoring](docs/methodology/scoring.md)
-- [Prompt Packs](docs/methodology/prompt-packs.md)
-- [Limitations](docs/methodology/limitations.md)
-- [Demo Report Template](examples/demo-report.md)
-
-## Latest Scan Note
-
-- [Popular Does Not Mean AI-readable](docs/articles/popular-websites-ai-readable.html)
-  explains what OpenVisi found when scanning Google, YouTube, Facebook,
-  Instagram, ChatGPT, and Wikipedia with the crawl-diagnostic v0.1 measurement
-  layer.
-
-## Current MVP Features
-
-- CLI scanner for public websites
-- Markdown, JSON, and HTML report generation
-- Machine-readable visibility diagnostics
-- Entity clarity and source-structure analysis
-- Analyzer maturity labels for transparent methodology status
-- Fixture-based directional tests
-- npm-first development and CI workflow
-
-## Public Demo
-
-The first static GitHub Pages demo is available at:
-
-- [OpenVisi Public Demo](https://simonsaysss-blip.github.io/openvisi/demo/)
-
-The demo is a static snapshot built from the current HTML reporting system. It
-shows report format, visual language, and CLI workflow; it is not a live hosted
-scanner.
+- Mock evaluator evidence is not real LLM evidence.
+- Final metrics generation is blocked by design.
+- No final AI Visibility Score is computed.
+- `metrics.json`, `scan-result.json`, final `report.md`, and final `report.html` are not generated by this pipeline.
 
 ## Quick Start
+
+Install and build locally:
 
 ```bash
 npm install
 npm run build
-node ./apps/cli/dist/index.js scan https://example.com
 ```
 
-The CLI writes reports to a site-specific folder under `reports/`.
+## Run the Local Mock Demo
+
+The fastest way to validate the OSS demo pipeline is:
+
+```bash
+npm run demo:mock
+```
+
+This starts a local fixture HTTP server, runs the full mock artifact pipeline, validates every bundle, and writes:
 
 ```text
-reports/example-com/report.md
-reports/example-com/report.json
-reports/example-com/report.html
+.openvisi-demo/openvisi-debug-report/debug-report.md
 ```
 
-`reports/` is runtime output and is intentionally ignored by git. Curated demo
-artifacts live under [examples/reports](examples/reports/).
+The demo uses deterministic mock evaluator evidence. It does not use external network access, does not require API keys, does not generate `metrics.json`, and does not compute a final AI Visibility Score.
 
-## Architecture
+Create a starter config:
+
+```bash
+npx openvisi init
+```
+
+Run the full demo artifact pipeline:
+
+```bash
+npx openvisi scan --dry-run --provider mock --output openvisi-report
+
+npx openvisi crawl --config openvisi.config.json --output openvisi-crawl --render-mode static
+
+npx openvisi eval --provider mock --output openvisi-eval
+
+npx openvisi inputs compose --crawl-output openvisi-crawl --eval-output openvisi-eval --output openvisi-measurement
+
+npx openvisi metrics draft --measurement-output openvisi-measurement --output openvisi-metrics-draft
+
+npx openvisi metrics review --metrics-draft-output openvisi-metrics-draft --output openvisi-metrics-review
+
+npx openvisi metrics guard --metrics-review-output openvisi-metrics-review --output openvisi-metrics-finalization
+
+npx openvisi debug report \
+  --dry-run-output openvisi-report \
+  --crawl-output openvisi-crawl \
+  --eval-output openvisi-eval \
+  --measurement-output openvisi-measurement \
+  --metrics-draft-output openvisi-metrics-draft \
+  --metrics-review-output openvisi-metrics-review \
+  --metrics-finalization-output openvisi-metrics-finalization \
+  --output openvisi-debug-report
+```
+
+Inspect any bundle:
+
+```bash
+npx openvisi artifacts inspect --output openvisi-debug-report --stage debug-report
+```
+
+Open the debug report:
+
+```bash
+open openvisi-debug-report/debug-report.md
+```
+
+## Artifact Pipeline
 
 ```mermaid
-flowchart LR
-  CLI["apps/cli"] --> Crawler["packages/crawler"]
-  CLI --> Core["packages/core"]
-  CLI --> Report["packages/report"]
-  Core --> Metrics["Canonical Metrics Schema"]
-  Core --> Entity["Entity Clarity"]
-  Core --> Citation["Citation Signals"]
-  Report --> Markdown["Markdown Report"]
-  Report --> JSON["JSON Report"]
-  Report --> HTML["HTML Report"]
-  Web["apps/web"] --> Core
+flowchart TD
+  A[Config + Prompt Pack] --> B[Dry-run Bundle]
+  A --> C[Static Crawl Bundle]
+  A --> D[Evaluation Bundle]
+  C --> E[Structure / Trust Inputs]
+  D --> F[Answer Signal Inputs]
+  E --> G[Measurement Inputs]
+  F --> G
+  G --> H[Metrics Draft]
+  H --> I[Metrics Review]
+  I --> J[Finalization Guard]
+  J --> K[Artifact Debug Report]
 ```
 
-Repository layout:
+## Example Output Bundles
+
+```text
+openvisi-report/
+  scan-plan.json
+  prompt-pack.json
+  config.normalized.json
+  artifact-manifest.json
+  warnings.json
+
+openvisi-crawl/
+  crawled-pages.json
+  crawler-summary.json
+  structure-trust-inputs.json
+  report-references.json
+  artifact-manifest.json
+  warnings.json
+
+openvisi-eval/
+  config.normalized.json
+  prompt-pack.json
+  answers.json
+  answer-signal-inputs.json
+  artifact-manifest.json
+  warnings.json
+
+openvisi-measurement/
+  measurement-inputs.json
+  artifact-manifest.json
+  warnings.json
+
+openvisi-metrics-draft/
+  metrics-draft.json
+  artifact-manifest.json
+  warnings.json
+
+openvisi-metrics-review/
+  metrics-review.json
+  artifact-manifest.json
+  warnings.json
+
+openvisi-metrics-finalization/
+  metrics-finalization.json
+  artifact-manifest.json
+  warnings.json
+
+openvisi-debug-report/
+  debug-report.md
+  artifact-manifest.json
+  warnings.json
+```
+
+Runtime output directories are ignored by git. Curated examples live under [`examples/`](examples/).
+
+## How to Read `debug-report.md`
+
+`debug-report.md` is an artifact debug report. It explains which pipeline stages ran, which artifact bundles validated, what evidence was available, which draft metrics were reviewable, and why final metrics remain blocked.
+
+It is not a final AI Visibility report. It does not compute a final AI Visibility Score. It is intended for OSS demo clarity, contributor onboarding, and local pipeline debugging.
+
+## Documentation
+
+- [Quickstart](docs/quickstart.md)
+- [Demo Pipeline](docs/demo-pipeline.md)
+- [Local Mock Demo Verification](docs/demo-verification.md)
+- [Artifact Debug Report](docs/debug-report.md)
+- [Artifacts](docs/artifacts.md)
+- [Metrics Draft](docs/metrics-draft.md)
+- [Metrics Review](docs/metrics-review.md)
+- [Metrics Finalization](docs/metrics-finalization.md)
+- [CLI Reference](docs/cli.md)
+- [Artifact Compatibility](docs/artifact-compatibility.md)
+- [Architecture](ARCHITECTURE.md)
+- [Roadmap](ROADMAP.md)
+- [Security](SECURITY.md)
+
+## Repository Layout
 
 ```text
 apps/
-  cli/        Command-line scanner
-  web/        Minimal web scaffold for future report viewing experiments
+  cli/        OpenVisi CLI commands
+  web/        Minimal web scaffold for future experiments
 packages/
-  core/       Shared types, scoring, and canonical metrics schema
-  crawler/    Website crawler and HTML extractor
-  report/     Markdown, JSON, and HTML report generation
-  providers/  Provider adapter interface placeholders
+  core/       Shared contracts, schemas, validators, metrics draft/review guards
+  crawler/    Static crawler and canonical snapshot adapters
+  evaluator/  Provider-agnostic evaluator contracts and deterministic mock provider
+  report/     Existing report generation package
+  providers/  Provider adapter placeholders
   analyzer/   Public analyzer package facade
-docs/
-  concepts/     Canonical concept docs
-  methodology/  Measurement model, metrics, scoring, prompt packs, limitations
-  glossary.md   Canonical vocabulary for AI Visibility
-benchmarks/
-  exploratory/  Methodology-oriented benchmark scaffolds without collected data
-fixtures/
-  */            Synthetic examples for directional analyzer validation
-examples/
-  demo-report.md  Canonical demo report template
-  reports/        Curated generated reports
+examples/     Curated examples for OSS visitors
+docs/         Methodology, CLI, artifact, and demo docs
 ```
-
-## Project Status
-
-OpenVisi is a working OSS MVP with a methodology-first roadmap.
-
-Current status:
-
-- CLI scan flow works locally after `npm run build`
-- Markdown, JSON, and HTML reports are generated
-- analyzer output includes evidence-oriented fields
-- methodology version is exposed in reports
-- canonical metrics schema has been added to `@openvisi/core`
-- fixture-based directional tests are in place
-
-Known limitations:
-
-- OpenVisi does not call commercial LLM provider APIs in the MVP.
-- Prompt simulation is currently scaffolded and diagnostic.
-- Scores are heuristic snapshots, not live ranking predictions.
-- The crawler is lightweight and may not fully represent JavaScript-heavy sites.
-- The package is not claimed as published; use repository scripts for local
-  development.
 
 ## Development
 
 ```bash
-npm install
 npm run typecheck
 npm test
 npm run lint
 npm run build
 ```
 
-CI runs the same npm-first validation path with `npm ci`.
+CI follows the same npm-first validation path.
 
-## GitHub Pages
+## Release Candidate Status
 
-The public demo lives under [docs/demo/index.html](docs/demo/index.html).
+OpenVisi v0.1.0 is a release candidate for the artifact-based mock pipeline. It is focused on shared contracts, deterministic local verification, staged artifacts, and review gates.
 
-GitHub Pages can be deployed from the repository's `/docs` directory. This
-repository also includes a GitHub Pages workflow that publishes the `docs/`
-folder as a static artifact:
+This release candidate is still mock-only. Real provider adapters, final `metrics.json`, final AI Visibility Score computation, production scoring, and final reports are future work.
 
-1. Enable GitHub Pages for the repository.
-2. Set the Pages source to GitHub Actions.
-3. Push to `main`.
-4. Confirm the `GitHub Pages` workflow completes successfully.
+Release resources:
 
-No framework build step is required for the demo page.
+- [Changelog](CHANGELOG.md)
+- [Release Checklist](docs/release-checklist.md)
+- [Release Rehearsal](docs/release-rehearsal.md)
+- [Versioning](docs/versioning.md)
+- [v0.1.0 Release Notes](docs/release-notes/v0.1.0.md)
+- [v0.1.0 RC Freeze Review](docs/release-notes/v0.1.0-rc-freeze-review.md)
 
 ## Contributing
 
-Contributions are welcome around vocabulary, methodology documentation,
-fixtures, report explainability, crawler reliability, and developer experience.
+Contributions are welcome around vocabulary, methodology documentation, artifact contracts, crawler reliability, evaluator boundaries, fixtures, and developer experience.
 
-Please keep changes small, observable, and grounded in public evidence.
+Please keep changes small, observable, and grounded in explicit evidence. Avoid adding final scoring, real provider calls, dashboards, or SaaS flows unless a future stage explicitly opens that scope.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+OSS project resources:
+
+- [Contributing Guide](CONTRIBUTING.md)
+- [Roadmap](ROADMAP.md)
+- [Architecture](ARCHITECTURE.md)
+- [Security Policy](SECURITY.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 
 ## License
 
