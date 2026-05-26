@@ -19,3 +19,4 @@ Rules:
 Preview:
 
 - [AI Visibility Benchmark Preview](ai-visibility-benchmark-preview/README.md)
+- [OpenVisi Field Tests v0.1](field-tests/v0.1/README.md)
