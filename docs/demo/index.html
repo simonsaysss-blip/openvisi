@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OpenVisi Public Demo</title>
+    <meta
+      name="description"
+      content="OpenVisi is an open-source AI visibility analytics toolkit for machine-readable website diagnostics."
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f5f7fa;
+        --surface: #ffffff;
+        --surface-muted: #f8fafc;
+        --text: #101418;
+        --muted: #5d6675;
+        --border: #d8dee8;
+        --accent: #2563eb;
+        --accent-strong: #1d4ed8;
+        --critical: #991b1b;
+        --critical-bg: #fee2e2;
+        --high: #9a3412;
+        --high-bg: #ffedd5;
+        --medium: #854d0e;
+        --medium-bg: #fef3c7;
+        --low: #334155;
+        --low-bg: #e2e8f0;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b0f14;
+          --surface: #111820;
+          --surface-muted: #151e28;
+          --text: #e5e7eb;
+          --muted: #9aa4b2;
+          --border: #263241;
+          --accent: #60a5fa;
+          --accent-strong: #93c5fd;
+          --critical: #fecaca;
+          --critical-bg: #5f161e;
+          --high: #fed7aa;
+          --high-bg: #4a2411;
+          --medium: #fde68a;
+          --medium-bg: #3f310b;
+          --low: #cbd5e1;
+          --low-bg: #263241;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 360px),
+          var(--bg);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 30px 20px 56px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 880px;
+        margin-bottom: 18px;
+        font-size: clamp(2.3rem, 6vw, 5.1rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-bottom: 16px;
+        font-size: 1.08rem;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin-bottom: 8px;
+        font-size: 0.96rem;
+      }
+
+      p {
+        color: var(--muted);
+      }
+
+      a {
+        color: var(--accent-strong);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 34px;
+      }
+
+      .brand {
+        font-weight: 760;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 8px 13px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        background: var(--surface);
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .button.primary {
+        border-color: var(--accent);
+        color: #ffffff;
+        background: var(--accent);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+        gap: 24px;
+        align-items: end;
+        padding: 28px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--surface), var(--surface-muted));
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        margin-bottom: 18px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 780;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero-copy {
+        max-width: 760px;
+        font-size: 1.08rem;
+      }
+
+      .terminal {
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #0b1220;
+        color: #e5e7eb;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.18);
+      }
+
+      .terminal-bar {
+        display: flex;
+        gap: 6px;
+        padding: 12px;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: #64748b;
+      }
+
+      .terminal pre {
+        margin: 0;
+        padding: 16px;
+        overflow-x: auto;
+        color: #dbeafe;
+        font-size: 0.82rem;
+        line-height: 1.6;
+      }
+
+      section {
+        margin-top: 18px;
+      }
+
+      .panel {
+        padding: 22px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--surface);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 14px;
+      }
+
+      .card {
+        grid-column: span 4;
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--surface);
+      }
+
+      .card.wide {
+        grid-column: span 8;
+      }
+
+      .card-title {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 760;
+        text-transform: uppercase;
+      }
+
+      .score {
+        display: flex;
+        align-items: baseline;
+        gap: 7px;
+        margin: 18px 0 10px;
+        color: var(--text);
+        font-size: 2.55rem;
+        font-weight: 780;
+        line-height: 1;
+      }
+
+      .score span {
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      .progress {
+        width: 100%;
+        height: 9px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: var(--low-bg);
+      }
+
+      .progress span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--accent), #22c55e);
+      }
+
+      .list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .list li {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 13px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface-muted);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        height: fit-content;
+        padding: 3px 8px;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 750;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .badge.high {
+        color: var(--high);
+        background: var(--high-bg);
+      }
+
+      .badge.medium {
+        color: var(--medium);
+        background: var(--medium-bg);
+      }
+
+      .badge.low {
+        color: var(--low);
+        background: var(--low-bg);
+      }
+
+      .architecture {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .node {
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface-muted);
+      }
+
+      .node strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      @media (max-width: 880px) {
+        main {
+          padding: 22px 14px 42px;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .card,
+        .card.wide {
+          grid-column: span 12;
+        }
+
+        .architecture {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .list li {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="nav" aria-label="Primary navigation">
+        <div class="brand">OpenVisi</div>
+        <div class="nav-links">
+          <a class="button" href="https://github.com/simonsaysss-blip/openvisi">GitHub</a>
+          <a class="button" href="https://github.com/simonsaysss-blip/openvisi#quick-start"
+            >Quick Start</a
+          >
+          <a class="button primary" href="#demo-report">View Demo Report</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div>
+          <div class="eyebrow">Open-source AI visibility diagnostics</div>
+          <h1>Machine-readable visibility analysis for the LLM search era.</h1>
+          <p class="hero-copy">
+            OpenVisi is a CLI-first toolkit for inspecting public website signals that help AI
+            search and LLM-powered discovery systems understand entity clarity, crawlability,
+            structured data, content chunkability, and citation readiness.
+          </p>
+        </div>
+        <div class="terminal" aria-label="OpenVisi command example">
+          <div class="terminal-bar">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <pre><code>npm install
+npm run build
+node ./apps/cli/dist/index.js scan https://mavisenglish.com</code></pre>
+        </div>
+      </section>
+
+      <section class="grid" id="demo-report">
+        <article class="card wide">
+          <div class="card-title">AI Visibility Score <span>snapshot</span></div>
+          <div class="score">54<span>/100</span></div>
+          <div class="progress" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="54">
+            <span style="width: 54%"></span>
+          </div>
+          <p>
+            Public demo scan for <strong>mavisenglish.com</strong>. Scores are heuristic diagnostic
+            signals, not predictions of rankings, citations, or answer inclusion in any specific AI
+            product.
+          </p>
+        </article>
+        <article class="card">
+          <div class="card-title">Entity Clarity</div>
+          <div class="score">77<span>/100</span></div>
+          <div class="progress"><span style="width: 77%"></span></div>
+        </article>
+        <article class="card">
+          <div class="card-title">Technical Discoverability</div>
+          <div class="score">66<span>/100</span></div>
+          <div class="progress"><span style="width: 66%"></span></div>
+        </article>
+        <article class="card">
+          <div class="card-title">Structured Data</div>
+          <div class="score">10<span>/100</span></div>
+          <div class="progress"><span style="width: 10%"></span></div>
+        </article>
+        <article class="card">
+          <div class="card-title">Content Chunkability</div>
+          <div class="score">55<span>/100</span></div>
+          <div class="progress"><span style="width: 55%"></span></div>
+        </article>
+        <article class="card">
+          <div class="card-title">Citation Readiness</div>
+          <div class="score">62<span>/100</span></div>
+          <div class="progress"><span style="width: 62%"></span></div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>Top Diagnostic Signals</h2>
+        <ol class="list">
+          <li><span>Organization-level schema is missing</span><span class="badge high">high</span></li>
+          <li><span>No key schema.org types were detected</span><span class="badge high">high</span></li>
+          <li><span>Entity schema is missing</span><span class="badge high">high</span></li>
+          <li><span>Business type is not explicit</span><span class="badge medium">medium</span></li>
+          <li><span>JSON-LD coverage is low</span><span class="badge medium">medium</span></li>
+          <li><span>llms.txt was not found</span><span class="badge low">low</span></li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2>Run Locally</h2>
+        <p>
+          The public demo is a static snapshot. To generate a fresh report, clone the repository and
+          run the CLI locally.
+        </p>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <pre><code>git clone https://github.com/simonsaysss-blip/openvisi.git
+cd openvisi
+npm install
+npm run build
+node ./apps/cli/dist/index.js scan https://example.com</code></pre>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Architecture Summary</h2>
+        <div class="architecture">
+          <div class="node">
+            <strong>CLI</strong>
+            <span class="muted">Runs scans and writes reports.</span>
+          </div>
+          <div class="node">
+            <strong>Crawler</strong>
+            <span class="muted">Collects public pages and site assets.</span>
+          </div>
+          <div class="node">
+            <strong>Core</strong>
+            <span class="muted">Scores analyzer categories.</span>
+          </div>
+          <div class="node">
+            <strong>Report</strong>
+            <span class="muted">Generates Markdown, JSON, and HTML.</span>
+          </div>
+          <div class="node">
+            <strong>Fixtures</strong>
+            <span class="muted">Support repeatable methodology tests.</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

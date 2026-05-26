@@ -48,6 +48,14 @@ OpenVisi focuses on measuring those public, machine-readable structures. It trea
 - Fixture-based directional tests for repeatable validation
 - npm-first development and CI workflow
 
+## Public Demo
+
+The first static GitHub Pages demo is available at:
+
+- [OpenVisi Public Demo](https://simonsaysss-blip.github.io/openvisi/demo/)
+
+The demo is a static snapshot built from the current HTML reporting system. It is intended to show the report format, visual language, and CLI workflow; it is not a live hosted scanner.
+
 ## Quick Start
 
 ```bash
@@ -209,6 +217,19 @@ npm run build
 ```
 
 CI runs the same npm-first validation path with `npm ci`.
+
+## GitHub Pages
+
+The public demo lives under [docs/demo/index.html](docs/demo/index.html).
+
+GitHub Pages can be deployed from the repository's `/docs` directory. This repository also includes a GitHub Pages workflow that publishes the `docs/` folder as a static artifact:
+
+1. Enable GitHub Pages for the repository.
+2. Set the Pages source to GitHub Actions.
+3. Push to `main`.
+4. Confirm the `GitHub Pages` workflow completes successfully.
+
+No framework build step is required for the demo page.
 
 ## Contributing
 
