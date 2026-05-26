@@ -81,7 +81,7 @@ Structured Data Score: 10/100
 Content Chunkability Score: 54/100
 Citation Readiness Score: 48/100
 
-Top 10 Issues:
+Top 10 Diagnostic Signals:
 1. [high] Organization-level schema is missing
 2. [high] sitemap.xml was not found
 3. [high] No key schema.org types were detected

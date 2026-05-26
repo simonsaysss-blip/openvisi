@@ -4,7 +4,7 @@
 
 - Target: https://example.com/
 - Domain: example.com
-- Generated at: 2026-05-26T00:01:33.656Z
+- Generated at: 2026-05-26T00:12:02.793Z
 - Methodology version: 0.1
 - Crawled pages: 7
 - Robots respected: yes

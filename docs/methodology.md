@@ -192,7 +192,7 @@ Fixtures are intentionally small and synthetic. They help validate analyzer cons
 OpenVisi does not currently claim to:
 
 - predict rankings in ChatGPT, Claude, Gemini, Perplexity, or any other AI product
-- guarantee citations, recommendations, or answer inclusion
+- promise citations, recommendations, or answer inclusion
 - measure private model behavior
 - manipulate AI search results
 - replace accessibility work, documentation review, content design, or technical site maintenance

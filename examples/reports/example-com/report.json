@@ -1,7 +1,7 @@
 {
   "projectName": "OpenVisi AI Visibility Audit",
   "methodologyVersion": "0.1",
-  "generatedAt": "2026-05-26T00:01:33.656Z",
+  "generatedAt": "2026-05-26T00:12:02.793Z",
   "target": {
     "inputUrl": "https://example.com",
     "normalizedUrl": "https://example.com/",
@@ -785,7 +785,7 @@
     "normalizedUrl": "https://example.com/",
     "origin": "https://example.com",
     "domain": "example.com",
-    "crawledAt": "2026-05-26T00:01:31.291Z",
+    "crawledAt": "2026-05-26T00:12:00.569Z",
     "maxPages": 30,
     "respectRobots": true,
     "assets": {
