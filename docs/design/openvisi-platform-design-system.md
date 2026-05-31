@@ -1,5 +1,11 @@
 # OpenVisi Platform Design System
 
+Status: Future Design Archive
+
+This document describes a possible future product surface. It is not the current v0.1.0 RC scope, not a pricing commitment, and not a production SaaS roadmap. The current RC truth is the CLI artifact pipeline, canonical vocabulary, benchmark schema, and schema-backed directional demo.
+
+Demo scores are directional unless provider-verified evidence is present. No ranking guarantees. No citation guarantees.
+
 OpenVisi is the Trust Layer for AI Visibility.
 
 This design system defines the product surface for a research-grade AI Visibility Platform covering benchmarks, brand analytics, LLM mention tracking, citation tracking, competitor comparison, prediction registry history, research reports, and enterprise dashboards.
@@ -943,4 +949,3 @@ Definition of done:
 - Every chart has date range and sample size.
 - Every report can be reproduced from stored inputs.
 - Every public claim maps back to measured or explicitly directional evidence.
-
