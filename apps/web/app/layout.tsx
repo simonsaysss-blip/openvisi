@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./styles.css";
 
 export const metadata: Metadata = {
-  title: "OpenVisi Dashboard",
-  description: "Dashboard-ready scaffold for OpenVisi AI visibility reports."
+  title: "OpenVisi | AI Visibility Platform",
+  description: "The Trust Layer for AI Visibility benchmarks, evidence, reports, and prediction registry workflows."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
