@@ -3,15 +3,21 @@
 AI Visibility is the measurable presence, accuracy, citation quality, and
 competitive position of an entity across AI-generated answers.
 
+This is a directional sample report based on OpenVisi's AI Visibility Benchmark
+schema. It is not a provider-verified benchmark result and does not represent a
+final AI Visibility Score.
+
 This template shows how OpenVisi reports should explain metrics as a category
 measurement language, not only as scanner output.
+
+All example values below are directional placeholders for the v0.1 schema.
 
 ## 1. AI Visibility Score
 
 Definition: A transparent composite score summarizing the entity's measurable AI
 Visibility signals.
 
-Example placeholder metrics: `aiVisibilityScore: 72`.
+Example directional placeholder metrics: `aiVisibilityScore: 72`.
 
 Example interpretation: The entity has useful visibility signals, but citation
 coverage and competitor displacement still limit the overall score.
