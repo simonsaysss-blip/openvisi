@@ -57,10 +57,12 @@ function createOpenAIProvider(): ProviderAdapter {
       }
 
       const timestamp = new Date().toISOString();
-      const response = await callOpenAIChatCompletions({ input, apiKey });
+      const response = await callOpenAIResponses({ input, apiKey });
       const text = extractOpenAIText(response);
       const usage = extractOpenAIUsage(response);
       const model = typeof response.model === "string" ? response.model : input.model.modelId;
+      const citations = extractOpenAICitations(response, text);
+      const webSearchCalls = extractOpenAIWebSearchCalls(response);
 
       return {
         promptId: input.prompt.id,
@@ -71,16 +73,20 @@ function createOpenAIProvider(): ProviderAdapter {
         sampleIndex: input.sampleIndex,
         timestamp,
         text,
-        citations: extractCitationsFromText(text),
+        citations,
         ...(usage ? { usage } : {}),
         rawProviderPayload: {
           provider: "openai",
-          endpoint: "chat.completions",
+          endpoint: "responses",
           id: typeof response.id === "string" ? response.id : undefined,
           model,
-          created: typeof response.created === "number" ? response.created : undefined,
+          createdAt: typeof response.created_at === "number" ? response.created_at : undefined,
+          status: response.status,
           usage: response.usage,
-          finishReason: response.choices?.[0]?.finish_reason,
+          groundedSearch: input.mode === "grounded",
+          toolChoice: input.mode === "grounded" ? "required" : "none",
+          webSearchCalls,
+          citations,
           promptId: input.prompt.id,
           targetId: input.target.id,
           mode: input.mode,
@@ -155,19 +161,46 @@ function createPlaceholderProvider(provider: string, apiKeyName: string): Provid
   };
 }
 
-interface OpenAIChatCompletionResponse {
+interface OpenAIResponseCitation {
+  url?: string;
+  title?: string;
+  domain?: string;
+}
+
+interface OpenAIResponsesResponse {
   id?: string;
   model?: string;
-  created?: number;
-  choices?: Array<{
-    message?: {
-      content?: string | null;
+  created_at?: number;
+  status?: string;
+  output_text?: string;
+  output?: Array<{
+    id?: string;
+    type?: string;
+    status?: string;
+    action?: {
+      type?: string;
+      query?: string;
+      queries?: string[];
+      sources?: Array<{
+        url?: string;
+        title?: string;
+      }>;
     };
-    finish_reason?: string | null;
+    content?: Array<{
+      type?: string;
+      text?: string;
+      annotations?: Array<{
+        type?: string;
+        url?: string;
+        title?: string;
+        start_index?: number;
+        end_index?: number;
+      }>;
+    }>;
   }>;
   usage?: {
-    prompt_tokens?: number;
-    completion_tokens?: number;
+    input_tokens?: number;
+    output_tokens?: number;
     total_tokens?: number;
   };
   error?: {
@@ -177,11 +210,12 @@ interface OpenAIChatCompletionResponse {
   };
 }
 
-async function callOpenAIChatCompletions(input: {
+async function callOpenAIResponses(input: {
   input: ProviderProbeInput;
   apiKey: string;
-}): Promise<OpenAIChatCompletionResponse> {
-  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+}): Promise<OpenAIResponsesResponse> {
+  const grounded = input.input.mode === "grounded";
+  const response = await fetch("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -189,7 +223,7 @@ async function callOpenAIChatCompletions(input: {
     },
     body: JSON.stringify({
       model: input.input.model.modelId,
-      messages: [
+      input: [
         {
           role: "system",
           content: createOpenAISystemPrompt(input.input.mode)
@@ -199,17 +233,20 @@ async function callOpenAIChatCompletions(input: {
           content: createOpenAIUserPrompt(input.input)
         }
       ],
-      temperature: 0.2,
-      max_tokens: 700
+      max_output_tokens: 700,
+      ...(grounded
+        ? {
+            tools: [{ type: "web_search", search_context_size: "low" }],
+            tool_choice: "required"
+          }
+        : {})
     })
   });
-  const parsed = (await response.json().catch(() => ({}))) as OpenAIChatCompletionResponse;
+  const parsed = (await response.json().catch(() => ({}))) as OpenAIResponsesResponse;
 
   if (!response.ok) {
     const providerMessage = parsed.error?.message ?? response.statusText;
-    throw new Error(
-      `OpenAI provider error (${response.status}): ${providerMessage}`
-    );
+    throw new Error(`OpenAI provider error (${response.status}): ${providerMessage}`);
   }
 
   return parsed;
@@ -245,11 +282,24 @@ function createOpenAIUserPrompt(input: ProviderProbeInput): string {
   ].join("\n");
 }
 
-function extractOpenAIText(response: OpenAIChatCompletionResponse): string {
-  return response.choices?.[0]?.message?.content ?? "";
+function extractOpenAIText(response: OpenAIResponsesResponse): string {
+  if (typeof response.output_text === "string") {
+    return response.output_text;
+  }
+
+  const chunks: string[] = [];
+  for (const item of response.output ?? []) {
+    for (const content of item.content ?? []) {
+      if (typeof content.text === "string") {
+        chunks.push(content.text);
+      }
+    }
+  }
+
+  return chunks.join("\n").trim();
 }
 
-function extractOpenAIUsage(response: OpenAIChatCompletionResponse):
+function extractOpenAIUsage(response: OpenAIResponsesResponse):
   | {
       inputTokens?: number;
       outputTokens?: number;
@@ -260,15 +310,57 @@ function extractOpenAIUsage(response: OpenAIChatCompletionResponse):
   if (!usage) return undefined;
 
   return {
-    ...(typeof usage.prompt_tokens === "number" ? { inputTokens: usage.prompt_tokens } : {}),
-    ...(typeof usage.completion_tokens === "number"
-      ? { outputTokens: usage.completion_tokens }
+    ...(typeof usage.input_tokens === "number" ? { inputTokens: usage.input_tokens } : {}),
+    ...(typeof usage.output_tokens === "number"
+      ? { outputTokens: usage.output_tokens }
       : {}),
     ...(typeof usage.total_tokens === "number" ? { totalTokens: usage.total_tokens } : {})
   };
 }
 
-function extractCitationsFromText(text: string): Array<{ url?: string; title?: string; domain?: string }> {
+function extractOpenAICitations(
+  response: OpenAIResponsesResponse,
+  text: string
+): OpenAIResponseCitation[] {
+  const citations: OpenAIResponseCitation[] = [];
+
+  for (const item of response.output ?? []) {
+    for (const content of item.content ?? []) {
+      for (const annotation of content.annotations ?? []) {
+        if (annotation.type === "url_citation" && annotation.url) {
+          citations.push(createCitation(annotation.url, annotation.title));
+        }
+      }
+    }
+
+    for (const source of item.action?.sources ?? []) {
+      if (source.url) {
+        citations.push(createCitation(source.url, source.title));
+      }
+    }
+  }
+
+  citations.push(...extractCitationsFromText(text));
+
+  return dedupeCitations(citations);
+}
+
+function extractOpenAIWebSearchCalls(response: OpenAIResponsesResponse) {
+  return (response.output ?? [])
+    .filter((item) => item.type === "web_search_call")
+    .map((item) => ({
+      id: item.id,
+      status: item.status,
+      actionType: item.action?.type,
+      query: item.action?.query,
+      queries: item.action?.queries,
+      sources: (item.action?.sources ?? []).map((source) =>
+        source.url ? createCitation(source.url, source.title) : { title: source.title }
+      )
+    }));
+}
+
+function extractCitationsFromText(text: string): OpenAIResponseCitation[] {
   const urls = [...text.matchAll(/https?:\/\/[^\s)\]]+/g)].map((match) =>
     match[0].replace(/[.,;:]+$/, "")
   );
@@ -281,6 +373,27 @@ function extractCitationsFromText(text: string): Array<{ url?: string; title?: s
       ...(domain ? { domain } : {})
     };
   });
+}
+
+function createCitation(url: string, title?: string): OpenAIResponseCitation {
+  const domain = extractDomain(url);
+  return {
+    url,
+    ...(title ? { title } : {}),
+    ...(domain ? { domain } : {})
+  };
+}
+
+function dedupeCitations(citations: OpenAIResponseCitation[]): OpenAIResponseCitation[] {
+  const byKey = new Map<string, OpenAIResponseCitation>();
+
+  for (const citation of citations) {
+    const key = citation.url ?? citation.domain ?? citation.title;
+    if (!key || byKey.has(key)) continue;
+    byKey.set(key, citation);
+  }
+
+  return [...byKey.values()];
 }
 
 function extractDomain(url: string): string | undefined {

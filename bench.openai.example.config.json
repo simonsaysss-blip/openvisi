@@ -1,0 +1,12 @@
+{
+  "models": [
+    {
+      "provider": "openai",
+      "modelId": "gpt-4.1-mini"
+    }
+  ],
+  "modes": ["grounded", "parametric"],
+  "samplesPerCell": 1,
+  "judgeModel": "not-used-v0.1",
+  "dateLabel": "Pharma / QMS AI Visibility Benchmark 2026"
+}
