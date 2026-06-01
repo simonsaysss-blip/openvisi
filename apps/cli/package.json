@@ -42,6 +42,7 @@
     "@openvisi/core": "0.1.0",
     "@openvisi/crawler": "0.1.0",
     "@openvisi/evaluator": "0.1.0",
+    "@openvisi/benchmark": "0.1.0",
     "@openvisi/report": "0.1.0",
     "commander": "^12.1.0"
   }

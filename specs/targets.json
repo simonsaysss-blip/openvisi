@@ -1,0 +1,23 @@
+[
+  {
+    "id": "mastercontrol",
+    "name": "MasterControl",
+    "category": "Pharma QMS",
+    "competitorGroup": "pharma-qms",
+    "officialDomains": ["mastercontrol.com"]
+  },
+  {
+    "id": "etq",
+    "name": "ETQ Reliance",
+    "category": "Pharma QMS",
+    "competitorGroup": "pharma-qms",
+    "officialDomains": ["etq.com"]
+  },
+  {
+    "id": "veeva-quality",
+    "name": "Veeva Quality",
+    "category": "Pharma QMS",
+    "competitorGroup": "pharma-qms",
+    "officialDomains": ["veeva.com"]
+  }
+]
