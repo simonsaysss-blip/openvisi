@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "0.1",
+  "currency": "USD",
+  "models": [
+    {
+      "provider": "mock",
+      "modelId": "mock-qms-v0",
+      "inputUsdPer1MTokens": 0,
+      "outputUsdPer1MTokens": 0
+    }
+  ]
+}

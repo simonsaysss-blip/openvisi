@@ -1,0 +1,12 @@
+{
+  "models": [
+    {
+      "provider": "mock",
+      "modelId": "mock-qms-v0"
+    }
+  ],
+  "modes": ["grounded", "parametric"],
+  "samplesPerCell": 2,
+  "judgeModel": "not-used-v0.1",
+  "dateLabel": "Pharma / QMS AI Visibility Benchmark 2026"
+}

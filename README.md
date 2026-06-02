@@ -70,6 +70,21 @@ This starts a local fixture HTTP server, runs the full mock artifact pipeline, v
 
 The demo uses deterministic mock evaluator evidence. It does not use external network access, does not require API keys, does not generate `metrics.json`, and does not compute a final AI Visibility Score.
 
+## Benchmark Harness v0.1
+
+OpenVisi also includes a CLI-first flat-file benchmark harness for reproducible benchmark runs. The default configuration uses the deterministic `mock` provider and writes benchmark data under `runs/{runId}/`.
+
+```bash
+npx openvisi run --config bench.config.json
+npx openvisi score --run pharma-qms-ai-visibility-benchmark-2026
+npx openvisi report --run pharma-qms-ai-visibility-benchmark-2026
+npx openvisi cost --run pharma-qms-ai-visibility-benchmark-2026
+```
+
+The benchmark report is a static Markdown file at `runs/{runId}/report/benchmark.md`. Benchmark `metrics.json` is benchmark harness output and is separate from the RC artifact pipeline final metrics, which remain blocked under mock evidence.
+
+For a controlled OpenAI provider pilot, copy [`bench.openai.example.config.json`](bench.openai.example.config.json), set `OPENAI_API_KEY`, and follow [`docs/benchmark-openai-pilot.md`](docs/benchmark-openai-pilot.md). The OpenAI pilot uses Responses API web search for `grounded` mode and no web search tools for `parametric` mode.
+
 Create a starter config:
 
 ```bash
@@ -205,6 +220,7 @@ It is not a final AI Visibility report. It does not compute a final AI Visibilit
 - [Metrics Finalization](docs/metrics-finalization.md)
 - [CLI Reference](docs/cli.md)
 - [Artifact Compatibility](docs/artifact-compatibility.md)
+- [OpenAI Benchmark Pilot](docs/benchmark-openai-pilot.md)
 - [Architecture](ARCHITECTURE.md)
 - [Roadmap](ROADMAP.md)
 - [Security](SECURITY.md)
@@ -241,7 +257,7 @@ CI follows the same npm-first validation path.
 
 OpenVisi v0.1.0 is a release candidate for the artifact-based mock pipeline. It is focused on shared contracts, deterministic local verification, staged artifacts, and review gates.
 
-This release candidate is still mock-only. Real provider adapters, final `metrics.json`, final AI Visibility Score computation, production scoring, and final reports are future work.
+The staged artifact pipeline remains mock-only. The benchmark harness can run an explicit OpenAI provider pilot when configured, but final AI Visibility Score computation, production scoring, and final reports are future work.
 
 Release resources:
 

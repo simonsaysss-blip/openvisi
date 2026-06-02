@@ -1,0 +1,30 @@
+[
+  {
+    "id": "presence-pharma-qms-platforms",
+    "text": "Which quality management software vendors are commonly considered for pharmaceutical QMS programs?",
+    "layer": "Presence",
+    "category": "pharma-qms",
+    "intentBuyer": "quality leader"
+  },
+  {
+    "id": "accuracy-validation-capabilities",
+    "text": "Explain what a pharma QMS platform should support for validation, audit readiness, document control, and CAPA workflows.",
+    "layer": "Accuracy",
+    "category": "pharma-qms",
+    "intentBuyer": "validation manager"
+  },
+  {
+    "id": "citation-official-sources",
+    "text": "Which official sources should a buyer inspect when evaluating a regulated life sciences QMS vendor?",
+    "layer": "Citation",
+    "category": "pharma-qms",
+    "intentBuyer": "procurement analyst"
+  },
+  {
+    "id": "competitive-shortlist",
+    "text": "Compare leading QMS vendors for a pharma company building a shortlist for regulated quality operations.",
+    "layer": "Competitive",
+    "category": "pharma-qms",
+    "intentBuyer": "quality executive"
+  }
+]

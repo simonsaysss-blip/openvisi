@@ -1,5 +1,6 @@
 import type { Command } from "commander";
 import { registerArtifactsCommand } from "./artifacts.js";
+import { registerBenchmarkCommands } from "./benchmark.js";
 import { registerCrawlCommand } from "./crawl.js";
 import { registerDebugCommand } from "./debug.js";
 import { registerEvalCommand } from "./eval.js";
@@ -11,6 +12,7 @@ import { registerScanCommand } from "./scan.js";
 export function registerCommands(program: Command): void {
   registerInitCommand(program);
   registerArtifactsCommand(program);
+  registerBenchmarkCommands(program);
   registerCrawlCommand(program);
   registerDebugCommand(program);
   registerEvalCommand(program);

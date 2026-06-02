@@ -8,6 +8,8 @@ coverage/
 reports/
 !examples/reports/
 !examples/reports/**
+# Benchmark harness runtime output.
+runs/
 openvisi-report/
 openvisi-crawl/
 openvisi-eval/
