@@ -22,7 +22,7 @@ type BenchmarkRow = {
 
 const summaryMetrics: SummaryMetric[] = [
   {
-    label: "AI Visibility Score",
+    label: "Directional AI Visibility Score Preview",
     value: "72",
     delta: "+4.8",
     state: "directional",
@@ -138,10 +138,21 @@ const researchItems = [
   ["Benchmark note", "Regulated SaaS and machine-readable trust"]
 ];
 
-const pricingItems = [
+const adoptionItems = [
   ["Open Source", "Local diagnostics and schemas"],
-  ["Team", "Tracked entities and scheduled reports"],
-  ["Enterprise", "Custom benchmarks and audit workflows"]
+  ["Design Partner", "Benchmark pilot with methodology review"],
+  ["Future Governance Readiness", "Custom prompt packs and governance workflows"]
+];
+
+const navItems = [
+  ["Overview", "#overview"],
+  ["Benchmarks", "#benchmarks"],
+  ["Dashboard", "#dashboard"],
+  ["Reports", "#reports"],
+  ["Predictions", "#predictions"],
+  ["Research", "#research"],
+  ["Adoption", "#adoption"],
+  ["Design Partners", "#design-partners"]
 ];
 
 function stateLabel(state: MetricState) {
@@ -151,7 +162,7 @@ function stateLabel(state: MetricState) {
 }
 
 function formatMetric(value: number | null, suffix = "") {
-  return value === null ? "null" : `${value}${suffix}`;
+  return value === null ? "N/A" : `${value}${suffix}`;
 }
 
 export default function HomePage() {
@@ -167,13 +178,11 @@ export default function HomePage() {
         </div>
 
         <nav className="nav-list" aria-label="Product sections">
-          {["Overview", "Benchmarks", "Dashboard", "Reports", "Predictions", "Research", "Pricing", "Enterprise"].map(
-            (item) => (
-              <a className={item === "Overview" ? "active" : ""} href={`#${item.toLowerCase()}`} key={item}>
-                {item}
-              </a>
-            )
-          )}
+          {navItems.map(([item, href]) => (
+            <a className={item === "Overview" ? "active" : ""} href={href} key={item}>
+              {item}
+            </a>
+          ))}
         </nav>
 
         <div className="workspace-card">
@@ -195,8 +204,9 @@ export default function HomePage() {
           </div>
           <div className="run-state" aria-label="Current benchmark state">
             <span>Benchmark state</span>
-            <strong>Sample diagnostic</strong>
-            <small>Provider-backed scoring pending review</small>
+            <strong>Directional sample</strong>
+            <small>Provider-backed verification pending</small>
+            <small>Final score blocked until provider evidence is verified</small>
           </div>
         </header>
 
@@ -223,15 +233,15 @@ export default function HomePage() {
             <div className="panel-heading">
               <div>
                 <p className="panel-kicker">AI Visibility Benchmark</p>
-                <h2>Entity Visibility Scores</h2>
+                <h2>Directional Benchmark Snapshot</h2>
               </div>
-              <span className="sample-badge">Sample data</span>
+              <span className="sample-badge">Directional sample</span>
             </div>
 
             <div className="benchmark-table" role="table" aria-label="AI Visibility benchmark comparison">
               <div className="benchmark-row benchmark-row--head" role="row">
                 <span>Entity</span>
-                <span>Score</span>
+                <span>AI Visibility Score Preview</span>
                 <span>Presence</span>
                 <span>Clarity</span>
                 <span>Citation</span>
@@ -336,15 +346,15 @@ export default function HomePage() {
             </div>
           </article>
 
-          <article className="panel" id="pricing">
+          <article className="panel" id="adoption">
             <div className="panel-heading">
               <div>
-                <p className="panel-kicker">Pricing</p>
-                <h2>Measurement Infrastructure Tiers</h2>
+                <p className="panel-kicker">Adoption Paths</p>
+                <h2>Open-source and Pilot Tracks</h2>
               </div>
             </div>
             <div className="compact-list">
-              {pricingItems.map(([tier, scope]) => (
+              {adoptionItems.map(([tier, scope]) => (
                 <div key={tier}>
                   <span>{tier}</span>
                   <strong>{scope}</strong>
@@ -353,16 +363,19 @@ export default function HomePage() {
             </div>
           </article>
 
-          <article className="panel enterprise-panel" id="enterprise">
+          <article className="panel enterprise-panel" id="design-partners">
             <div>
-              <p className="panel-kicker">Enterprise Contact</p>
+              <p className="panel-kicker">Design Partner Pilot</p>
               <h2>Custom AI Visibility Benchmarks</h2>
             </div>
-            <div className="enterprise-fields" aria-label="Enterprise qualification fields">
-              {["Company", "Target entities", "Competitors", "Benchmark cadence", "Security review"].map((field) => (
+            <div className="enterprise-fields" aria-label="Design partner pilot fields">
+              {["Company", "Target entities", "Competitors", "Benchmark cadence"].map((field) => (
                 <span key={field}>{field}</span>
               ))}
             </div>
+            <small className="pilot-note">
+              Pilot reports help validate OpenVisi's measurement model. No ranking guarantees.
+            </small>
           </article>
         </section>
       </section>
