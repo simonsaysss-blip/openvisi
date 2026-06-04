@@ -140,7 +140,6 @@ describe("benchmark OpenAI provider", () => {
             status: "completed",
             actionType: "search",
             query: "MasterControl pharma QMS official source",
-            queries: undefined,
             sources: [
               {
                 url: "https://www.mastercontrol.com/",
@@ -149,7 +148,13 @@ describe("benchmark OpenAI provider", () => {
               }
             ]
           }
-        ]
+        ],
+        evidenceGate: expect.objectContaining({
+          mode: "grounded",
+          passed: true,
+          providerCitationCount: 1,
+          webSearchCallCount: 1
+        })
       })
     );
   });
@@ -192,7 +197,12 @@ describe("benchmark OpenAI provider", () => {
       expect.objectContaining({
         endpoint: "responses",
         groundedSearch: false,
-        toolChoice: "none"
+        toolChoice: "none",
+        evidenceGate: expect.objectContaining({
+          mode: "parametric",
+          passed: true,
+          webSearchCallCount: 0
+        })
       })
     );
   });

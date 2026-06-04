@@ -36,3 +36,16 @@ export const defaultPromptSimulationQuestions: PromptSimulationQuestion[] = [
     prompt: "Would you recommend this business for its category?"
   }
 ];
+
+export {
+  createOpenAIResponsesProvider,
+  type EvidenceGateCheck,
+  type EvidenceGateResult,
+  type OpenAIProviderCitation,
+  type OpenAIProviderMode,
+  type OpenAIProviderProbeInput,
+  type OpenAIProviderProbeResult,
+  type OpenAIProviderUsage,
+  type OpenAIResponsesProvider,
+  type OpenAIResponsesProviderOptions
+} from "./openai.js";

@@ -24,3 +24,5 @@ openvisi.config.json
 !.env.example
 *.log
 .DS_Store
+.claude/
+.openvisi-runs/

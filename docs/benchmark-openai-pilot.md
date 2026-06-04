@@ -11,6 +11,7 @@ This is separate from the mock-only RC artifact pipeline. It does not create a S
 - Runs `grounded` mode with the Responses API `web_search` tool required.
 - Runs `parametric` mode without web search tools.
 - Saves raw response text, token usage when available, citations, web search call metadata, and raw provider metadata to `runs/{runId}/raw/responses.jsonl`.
+- Saves evidence gate metadata that records whether grounded probes observed web search calls and provider-backed citations.
 - Keeps grounded and parametric results separated during scoring.
 
 ## What It Does Not Do
@@ -58,5 +59,6 @@ Before publishing any benchmark result, review:
 - sample count
 - grounded versus parametric split
 - citation extraction quality
+- evidence gate status
 - cost report completeness
 - known provider limitations
