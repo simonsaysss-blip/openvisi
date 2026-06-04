@@ -21,9 +21,14 @@ const requiredFiles = [
   "docs/release-notes/v0.1.0-known-limitations.md",
   "docs/release-notes/v0.1.0-publish-plan.md"
 ];
-const runtimeDirs = [
+// These are explicitly documented local runtime output directories. They are
+// ignored by git and may exist while developers inspect demo or benchmark runs.
+// The release check should not delete user data or fail only because these
+// allowlisted local artifacts are present.
+const ignoredLocalRuntimeDirs = [
   ".openvisi-release",
   ".openvisi-demo",
+  "runs",
   "openvisi-report",
   "openvisi-crawl",
   "openvisi-eval",
@@ -48,9 +53,10 @@ for (const file of requiredFiles) {
   }
 }
 
-for (const dir of runtimeDirs) {
+const presentIgnoredRuntimeDirs = [];
+for (const dir of ignoredLocalRuntimeDirs) {
   if (await exists(path.join(repoRoot, dir))) {
-    errors.push(`Generated runtime directory must be removed before release check: ${dir}`);
+    presentIgnoredRuntimeDirs.push(dir);
   }
 }
 
@@ -63,6 +69,11 @@ if (errors.length > 0) {
 }
 
 console.log("Release artifact check passed.");
+if (presentIgnoredRuntimeDirs.length > 0) {
+  console.log(
+    `Ignored local runtime artifacts: ${presentIgnoredRuntimeDirs.join(", ")}`
+  );
+}
 
 async function checkExamplesForSecrets(directory) {
   if (!(await exists(directory))) return;
