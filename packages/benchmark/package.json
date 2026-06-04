@@ -30,6 +30,7 @@
     "build": "tsup src/index.ts --format esm --target node22 --dts --clean --external package.json"
   },
   "dependencies": {
+    "@openvisi/providers": "0.1.0",
     "zod": "^3.23.8"
   }
 }

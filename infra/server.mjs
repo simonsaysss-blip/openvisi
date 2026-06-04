@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* global console, process, URL */
 /**
  * OpenVisi Cloud Run HTTP Server
  *
@@ -15,8 +16,7 @@
 
 import { createServer } from "node:http";
 import { spawn } from "node:child_process";
-import { readdir, readFile, rm } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { rm } from "node:fs/promises";
 import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";

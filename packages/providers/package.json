@@ -1,7 +1,7 @@
 {
   "name": "@openvisi/providers",
   "version": "0.1.0",
-  "description": "Provider adapter placeholders for future OpenVisi AI Visibility evaluation.",
+  "description": "Provider adapters and evidence gates for OpenVisi AI Visibility measurement.",
   "license": "MIT",
   "repository": {
     "type": "git",
