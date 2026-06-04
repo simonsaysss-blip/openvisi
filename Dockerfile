@@ -12,6 +12,7 @@ COPY packages/report/package.json      ./packages/report/
 COPY packages/analyzer/package.json    ./packages/analyzer/
 COPY packages/providers/package.json   ./packages/providers/
 COPY apps/cli/package.json             ./apps/cli/
+COPY apps/web/package.json             ./apps/web/
 
 RUN npm ci --ignore-scripts
 
@@ -42,6 +43,8 @@ COPY --from=builder /app/packages/providers/package.json ./packages/providers/pa
 COPY --from=builder /app/apps/cli/dist           ./apps/cli/dist
 COPY --from=builder /app/apps/cli/package.json   ./apps/cli/package.json
 COPY --from=builder /app/package.json            ./package.json
+COPY --from=builder /app/bench.config.json       ./bench.config.json
+COPY --from=builder /app/specs                   ./specs
 
 # Cloud Run HTTP server
 COPY infra/server.mjs ./infra/server.mjs
