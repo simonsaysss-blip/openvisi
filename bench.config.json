@@ -1,8 +1,8 @@
 {
   "models": [
     {
-      "provider": "mock",
-      "modelId": "mock-qms-v0"
+      "provider": "openai",
+      "modelId": "gpt-4o-mini"
     }
   ],
   "modes": ["grounded", "parametric"],
