@@ -43,7 +43,7 @@ Current limits are intentional:
 - Legacy scan: compatibility diagnostic only.
 - Demo AI Visibility Score values are previews, not provider-verified final scores.
 
-See [Project Brief](PROJECT_BRIEF.md) and [Current Status](CURRENT_STATUS.md) for the repo-level scope guardrails.
+See [Project Brief](PROJECT_BRIEF.md), [Current Status](CURRENT_STATUS.md), [docs/STATUS.md](docs/STATUS.md), and [docs/DECISIONS.md](docs/DECISIONS.md) for the repo-level scope guardrails.
 
 ## Quick Start
 
@@ -72,18 +72,19 @@ The demo uses deterministic mock evaluator evidence. It does not use external ne
 
 ## Benchmark Harness v0.1
 
-OpenVisi also includes a CLI-first flat-file benchmark harness for reproducible benchmark runs. The default configuration uses the deterministic `mock` provider and writes benchmark data under `runs/{runId}/`.
+OpenVisi also includes a CLI-first flat-file benchmark harness for reproducible benchmark runs. The current default benchmark configuration is a controlled OpenAI provider pilot using `gpt-4o-mini`; it requires `OPENAI_API_KEY` and writes benchmark data under `runs/{runId}/`.
 
 ```bash
+export OPENAI_API_KEY="..."
 npx openvisi run --config bench.config.json
 npx openvisi score --run pharma-qms-ai-visibility-benchmark-2026
 npx openvisi report --run pharma-qms-ai-visibility-benchmark-2026
 npx openvisi cost --run pharma-qms-ai-visibility-benchmark-2026
 ```
 
-The benchmark report is a static Markdown file at `runs/{runId}/report/benchmark.md`. Benchmark `metrics.json` is benchmark harness output and is separate from the RC artifact pipeline final metrics, which remain blocked under mock evidence.
+The no-key local reviewer path remains `npm run demo:mock`. The benchmark report is a static Markdown file at `runs/{runId}/report/benchmark.md`. Benchmark `metrics.json` is benchmark harness output and is separate from the RC artifact pipeline final metrics, which remain blocked under mock evidence.
 
-For a controlled OpenAI provider pilot, copy [`bench.openai.example.config.json`](bench.openai.example.config.json), set `OPENAI_API_KEY`, and follow [`docs/benchmark-openai-pilot.md`](docs/benchmark-openai-pilot.md). The OpenAI pilot uses Responses API web search for `grounded` mode and no web search tools for `parametric` mode.
+For OpenAI provider details, see [`docs/benchmark-openai-pilot.md`](docs/benchmark-openai-pilot.md). The OpenAI pilot uses Responses API web search for `grounded` mode and no web search tools for `parametric` mode.
 
 Create a starter config:
 

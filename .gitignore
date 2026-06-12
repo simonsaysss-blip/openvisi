@@ -26,3 +26,5 @@ openvisi.config.json
 .DS_Store
 .claude/
 .openvisi-runs/
+# Local deployment secrets. Do not commit API keys or cloud credentials.
+.env.deploy

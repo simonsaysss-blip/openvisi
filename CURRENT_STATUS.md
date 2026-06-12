@@ -10,7 +10,7 @@
 - `packages/benchmark`: flat-file benchmark harness for runs, rule-based scoring, Markdown report generation, and cost estimates.
 - `packages/report`: legacy static diagnostic report generation.
 - `packages/analyzer`: analyzer facade for legacy diagnostics.
-- `packages/providers`: provider adapter placeholder package.
+- `packages/providers`: provider adapters and evidence gates for controlled provider-backed benchmark pilots.
 
 ## Current RC Truth
 
@@ -25,6 +25,8 @@
 - Report section schema
 - Demo benchmark fixture
 - Benchmark artifact commands
+- OpenAI benchmark provider pilot
+- Cloud Run benchmark trigger and GCS artifact upload
 - Reviewer docs
 - Vocabulary guard
 - Docs navigation checks
@@ -35,7 +37,8 @@
 - Future design/product docs can read like SaaS promises.
 - Design partner language should remain pilot / future-facing.
 - Docs overlap between RC, benchmark, legacy scan, and future design.
+- The mock-only artifact pipeline and provider-backed benchmark harness can be confused if docs do not keep them separate.
 
 ## Next Recommended PR
 
-Prepare local CLI demo path only after public RC positioning is consolidated.
+Keep deployment hygiene and status docs synchronized before adding any new product surface.
