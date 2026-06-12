@@ -1,13 +1,13 @@
 # OpenVisi — GCP Infrastructure
 
-本目錄包含將 OpenVisi artifact pipeline 部署至 Google Cloud Run 的所有設定。
+本目錄包含將 OpenVisi benchmark harness 部署至 Google Cloud Run 的所有設定。
 
 ## 架構
 
 ```
 POST /run  →  Cloud Run (infra/server.mjs)
                   │
-                  ├─ openvisi CLI pipeline (mock or real providers)
+                  ├─ openvisi benchmark CLI (run → score → report → cost)
                   │
                   └─ Cloud Storage  gs://openvisi-artifacts-*/runs/<runId>/
 ```
@@ -32,14 +32,17 @@ POST /run  →  Cloud Run (infra/server.mjs)
 在 repo 根目錄執行：
 
 ```bash
+printf 'OPENAI_API_KEY=sk-...\n' > .env.deploy
 bash infra/setup.sh
 ```
 
 腳本會自動完成：
 - 啟用 Cloud Run、Cloud Storage、Cloud Build APIs
 - 建立 `openvisi-artifacts-*` bucket（asia-east1，90 天 lifecycle）
+- 建立或更新 Secret Manager secret：`openvisi-openai-api-key`
 - 用 Cloud Build 建構 Docker image
 - 部署 Cloud Run service（`asia-east1`，0~5 instances，scale to zero）
+- 將 `OPENAI_API_KEY` 透過 Cloud Run secret mount 注入，不使用 plain `--set-env-vars`
 
 ## 測試 API
 
@@ -52,7 +55,7 @@ SERVICE_URL=$(gcloud run services describe openvisi-api \
 # Health check
 curl -H "Authorization: Bearer $TOKEN" $SERVICE_URL/health
 
-# 執行掃描
+# 執行 benchmark
 curl -X POST \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
@@ -96,16 +99,15 @@ gsutil -m cp -r gs://openvisi-artifacts-gen-lang-client-0631649736/runs/<runId>/
 | 變數 | 說明 | 必填 |
 |------|------|------|
 | `GCS_BUCKET` | artifact 上傳目標 bucket | ✅ |
-| `OPENAI_API_KEY` | OpenAI real provider | 選填 |
-| `ANTHROPIC_API_KEY` | Anthropic real provider | 選填 |
-| `GEMINI_API_KEY` | Gemini real provider | 選填 |
+| `OPENAI_API_KEY` | Secret Manager 注入的 OpenAI provider key | ✅ for provider-backed benchmark |
 
-新增 API key：
+更新 API key：
 ```bash
-gcloud run services update openvisi-api \
-  --region asia-east1 \
-  --update-env-vars OPENAI_API_KEY=sk-xxx
+printf 'OPENAI_API_KEY=sk-...\n' > .env.deploy
+bash infra/setup.sh
 ```
+
+Do not commit `.env.deploy`. It is ignored by git and should only be used as a local deployment secret source.
 
 ## 相關資源
 
