@@ -1,5 +1,9 @@
 # OpenVisi Roadmap
 
+> **STOPPED_BY_OWNER / ARCHIVED — 2026-10-02**
+> 專案擁有者已明確決定終止 OpenVisi／VisiFix。本機封存保留程式、既有變更、測試與歷史成果；停止新開發、研究與週報，除非擁有者日後重新明確授權。以下既有內容為歷史紀錄，任何 next step、roadmap、貢獻或執行指令均不代表目前授權。雲端服務與排程是否實際停止另見 [結案紀錄](docs/CLOSURE_2026-10-02.md)，不能由此標記推定。
+
+
 OpenVisi is an early-stage open-source measurement layer for AI Visibility.
 
 AI Visibility is the measurable presence, accuracy, citation quality, and competitive position of an entity across AI-generated answers.
